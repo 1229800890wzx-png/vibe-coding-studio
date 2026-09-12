@@ -1,0 +1,123 @@
+.game-experience { width:100%; min-width:0; font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
+.game-experience *, .game-experience *::before, .game-experience *::after { box-sizing:border-box; }
+.game-experience button { font:inherit; cursor:pointer; touch-action:manipulation; }
+.game-experience button:disabled { cursor:default; opacity:.45; }
+.game-experience button:focus-visible, .game-experience input:focus-visible { outline:3px solid #74b3ff; outline-offset:3px; }
+.game-experience [hidden] { display:none!important; }
+.game-experience .ex-game-surface { width:100%; height:640px; overflow:hidden; position:relative; border-radius:10px; border:1px solid #151b2220; background:#fff; }
+.game-experience .ex-game-note { padding:15px 3px 1px; color:#627083; font-size:12px; line-height:1.75; margin:0; }
+.game-experience .ex-minecraft { display:grid; grid-template-columns:276px minmax(0,1fr); background:#101a19; color:#eff6ef; }
+.game-experience .ex-mods { padding:27px 22px; background:#17221f; overflow:auto; scrollbar-width:thin; scrollbar-color:#607464 #17221f; }
+.game-experience .ex-mod-brand { font-weight:750; font-size:17px; letter-spacing:.02em; margin-bottom:22px; }
+.game-experience .ex-mod-brand span { font-weight:400; font-size:10px; display:block; color:#a8beb2; letter-spacing:.12em; margin-top:7px; }
+.game-experience .ex-small { font-size:10px; color:#a8beb2; }
+.game-experience .ex-mods h2 { color:#eff6ef; font-size:26px; font-weight:650; line-height:1.45; letter-spacing:-1px; margin:12px 0 22px; }
+.game-experience .ex-mods-label { font-size:12px; color:#d4e1d7; display:flex; justify-content:space-between; margin-bottom:12px; }
+.game-experience .ex-mods-label span { font-size:10px; color:#b5cfb6; }
+.game-experience .ex-mod-list label { display:flex; gap:9px; align-items:center; padding:15px 0; border-bottom:1px solid #ffffff10; cursor:pointer; }
+.game-experience .ex-mod-icon { background:#293d32; border:1px solid #405547; border-radius:6px; width:30px; height:33px; flex-shrink:0; display:grid; place-items:center; font-family:monospace; font-size:11px; color:#bfd7ad; }
+.game-experience .ex-mod-description { min-width:0; }
+.game-experience .ex-mod-list b { font-size:12px; font-weight:550; display:block; line-height:1.5; }
+.game-experience .ex-mod-list small { display:block; color:#a9bcb0; font-size:10px; margin-top:5px; line-height:1.5; }
+.game-experience .ex-mod-list input { margin-left:auto; accent-color:#b0d382; width:19px; height:19px; flex-shrink:0; cursor:pointer; }
+.game-experience .ex-add-mod { width:100%; min-height:44px; border:1px dashed #738875; color:#c0d3bd; background:transparent; padding:12px; border-radius:6px; font-size:12px; margin-top:18px; }
+.game-experience .ex-mod-library { padding:6px 12px; background:#273b31; border-radius:8px; font-size:11px; margin-top:10px; }
+.game-experience .ex-mod-library p { color:#bbccb9; margin:8px 0; font-size:11px; line-height:1.6; }
+.game-experience .ex-mod-library button { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:44px; background:none; color:#e6f0df; border:0; border-top:1px solid #ffffff10; padding:10px 0; text-align:left; font-size:12px; }
+.game-experience .ex-mod-library button span { font-size:10px; }
+.game-experience .ex-mod-code { margin-top:22px; border-left:2px solid #99b879; padding-left:13px; }
+.game-experience .ex-mod-code>span { font-size:10px; color:#acc6b0; }
+.game-experience .ex-mod-code code { display:block; color:#c1dbaa; font-size:11px; line-height:1.8; margin-top:8px; }
+.game-experience .ex-export-mods { width:100%; border:1px solid #45664e; background:#263d2d; color:#dbebd2; border-radius:6px; padding:11px 13px; margin-top:20px; font-size:12px; min-height:44px; text-align:left; display:flex; justify-content:space-between; align-items:center; }
+.game-experience .ex-export-mods:hover { background:#304c38; }
+.game-experience .ex-download-status { min-height:18px; margin:6px 0 0; color:#bfd7ad; font-size:10px; line-height:1.8; }
+.game-experience .ex-world { position:relative; overflow:hidden; min-width:0; }
+.game-experience .ex-world>img { width:100%; max-width:none; height:100%; object-fit:cover; object-position:57% center; display:block; }
+.game-experience .ex-world-top { position:absolute; left:20px; right:20px; top:22px; display:flex; justify-content:space-between; gap:12px; font-size:10px; }
+.game-experience .ex-world-top span { padding:8px 12px; background:#102718c4; border:1px solid #ffffff38; border-radius:5px; backdrop-filter:blur(9px); }
+.game-experience .ex-world-bottom { position:absolute; bottom:0; left:0; right:0; padding:70px 28px 27px; background:linear-gradient(transparent,#092011ed); }
+.game-experience .ex-world-bottom>b { font-size:27px; font-weight:550; letter-spacing:-1px; line-height:1.45; }
+.game-experience .ex-world-bottom div { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.game-experience .ex-world-bottom div span { border:1px solid #ccdfad60; border-radius:4px; padding:5px 10px; font-size:11px; background:#183320b8; }
+.game-experience .ex-story { color:#f5eee0; background:#101a27; }
+.game-experience .ex-story>img { width:100%; max-width:none; height:100%; object-fit:cover; object-position:center 42%; display:block; }
+.game-experience .ex-story-top { position:absolute; top:26px; left:30px; right:30px; display:flex; justify-content:space-between; align-items:center; gap:15px; z-index:2; }
+.game-experience .ex-story-top>span { font-family:Georgia,serif; font-size:13px; letter-spacing:.18em; color:#f3dcaa; text-shadow:0 2px 9px #000; }
+.game-experience .ex-story-top button, .game-experience .ex-story-status button { border:1px solid #c9b78f99; background:#122130e6; color:#eee3cc; border-radius:4px; padding:8px 13px; font-size:11px; min-height:40px; flex-shrink:0; }
+.game-experience .ex-story-map { position:absolute; top:82px; left:30px; right:30px; z-index:3; padding:15px 18px; background:#111e2af5; border:1px solid #e2c99270; border-radius:6px; display:flex; align-items:center; justify-content:space-between; gap:14px; color:#adb9c7; font-size:11px; line-height:1.6; }
+.game-experience .ex-story-map>span, .game-experience .ex-story-map-branches>span { padding:6px 9px; border:1px solid transparent; border-radius:4px; }
+.game-experience .ex-story-map-branches { display:flex; gap:14px; }
+.game-experience .ex-story-map span.is-current { color:#f5d38e; border-color:#ddba715e; background:#cbb68014; }
+.game-experience .ex-story-map span.is-visited { color:#d4c7a9; }
+.game-experience .ex-story-dialog { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,#0b1625ed 25%,#0b1625fc); padding:80px 48px 26px; }
+.game-experience .ex-story-chapter { font-size:10px; letter-spacing:.14em; color:#dec58f; }
+.game-experience .ex-story-dialog h2 { color:#f5eee0; font-size:30px; line-height:1.45; letter-spacing:1px; font-family:Georgia,"Songti SC",SimSun,serif; font-weight:500; margin:12px 0; }
+.game-experience .ex-story-dialog h2:focus { outline:none; }
+.game-experience .ex-story-dialog p { font-size:12px; line-height:1.9; color:#d1d5dc; margin:0 0 21px; max-width:760px; }
+.game-experience .ex-story-choices { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.game-experience .ex-story-choices button { border:1px solid #cbb68099; border-radius:5px; background:#cbb6800e; color:#f7f0e2; text-align:left; font-size:12px; padding:14px 17px; min-height:48px; display:flex; align-items:center; gap:13px; }
+.game-experience .ex-story-choices button:hover { background:#bfa37024; border-color:#c8a761; }
+.game-experience .ex-story-choices button span { font-family:Georgia,serif; color:#dec48f; font-size:13px; }
+.game-experience .ex-story-choices button b { margin-left:auto; }
+.game-experience .ex-story-branch-end { font-size:12px; color:#d0ba8a; line-height:1.8; padding:13px 16px; min-height:48px; border:1px solid #cbb68052; background:#cbb6800a; border-radius:5px; }
+.game-experience .ex-story-status { display:flex; align-items:center; justify-content:space-between; gap:14px; font-size:11px; line-height:1.8; color:#b6c6d4; margin-top:17px; }
+.game-experience .ex-story-status button { font-size:10px; padding:6px 11px; }
+.game-experience .ex-tower>img { height:100%; width:100%; max-width:none; object-fit:cover; display:block; }
+.game-experience .ex-tower-hud { position:absolute; top:18px; left:24px; right:24px; border:1px solid #ffffff70; background:#203e1eed; color:#fff4d5; padding:13px 19px; border-radius:9px; display:flex; align-items:center; gap:24px; box-shadow:0 5px 18px #10220c30; }
+.game-experience .ex-tower-hud strong { font-size:24px; letter-spacing:2px; }
+.game-experience .ex-tower-hud>span { font-size:12px; }
+.game-experience .ex-tower-hud>b { font-size:10px; font-weight:400; margin-left:auto; background:#ffffff18; padding:6px 10px; border-radius:4px; }
+.game-experience .ex-tower-units { display:flex; position:absolute; top:88px; left:25px; gap:9px; }
+.game-experience .ex-tower-units button { padding:11px 13px; border:2px solid #365a2a; background:#fff6d8f5; border-radius:7px; min-width:114px; text-align:left; box-shadow:0 4px 10px #22331122; }
+.game-experience .ex-tower-units button[aria-pressed=true] { border-color:#f3bf40; background:#fff4ca; box-shadow:0 0 0 2px #fff0b077; }
+.game-experience .ex-tower-units b { display:block; color:#294428; font-size:13px; }
+.game-experience .ex-tower-units span { font-size:10px; color:#556641; display:block; margin-top:5px; }
+.game-experience .ex-tower-rule { position:absolute; right:25px; bottom:23px; background:#fffae8f7; border:1px solid #aeb789; border-radius:9px; width:310px; padding:19px 22px; color:#2e4429; box-shadow:0 8px 30px #1e331f28; }
+.game-experience .ex-tower-rule>span { font-size:10px; color:#5d6844; }
+.game-experience .ex-tower-rule h2 { color:#2e4429; font-size:21px; font-weight:650; line-height:1.4; letter-spacing:0; margin:8px 0; }
+.game-experience .ex-tower-rule p { color:#405439; font-size:12px; line-height:1.7; margin:0 0 14px; }
+.game-experience .ex-tower-rule small { font-size:10px; color:#5d6b46; line-height:1.7; display:block; }
+@media (max-width:800px) {
+  .game-experience .ex-game-surface { height:auto; min-height:0; }
+  .game-experience .ex-minecraft { grid-template-columns:minmax(0,1fr); }
+  .game-experience .ex-mods { order:2; padding:20px; overflow:visible; }
+  .game-experience .ex-mods h2, .game-experience .ex-mod-brand, .game-experience .ex-mod-code { display:none; }
+  .game-experience .ex-mods-label { margin-top:12px; }
+  .game-experience .ex-mod-list label { padding:11px 0; min-height:60px; }
+  .game-experience .ex-mod-list b { font-size:14px; }
+  .game-experience .ex-mod-list small { font-size:11px; }
+  .game-experience .ex-mod-list input { width:22px; height:22px; }
+  .game-experience .ex-world { order:1; height:360px; }
+  .game-experience .ex-world-bottom { padding:70px 20px 23px; }
+  .game-experience .ex-world-bottom>b { font-size:23px; }
+  .game-experience .ex-world-top span:last-child { display:none; }
+  .game-experience .ex-story { display:flex; flex-direction:column; }
+  .game-experience .ex-story>img { height:420px; flex-shrink:0; object-position:52% center; }
+  .game-experience .ex-story-dialog { position:relative; margin-top:-105px; padding:90px 20px 24px; background:linear-gradient(transparent,#0b1625f7 100px,#0b1625); }
+  .game-experience .ex-story-top { left:18px; right:18px; top:18px; }
+  .game-experience .ex-story-top>span { font-size:10px; line-height:1.6; }
+  .game-experience .ex-story-top button { font-size:10px; min-height:44px; padding:9px 10px; }
+  .game-experience .ex-story-dialog h2 { font-size:25px; }
+  .game-experience .ex-story-dialog p { font-size:13px; }
+  .game-experience .ex-story-choices { grid-template-columns:1fr; gap:9px; }
+  .game-experience .ex-story-choices button { font-size:13px; min-height:50px; padding:14px; }
+  .game-experience .ex-story-map { left:15px; right:15px; top:80px; font-size:10px; gap:5px; padding:12px; }
+  .game-experience .ex-story-map-branches { flex-direction:column; gap:5px; }
+  .game-experience .ex-story-map>span, .game-experience .ex-story-map-branches>span { padding:6px; }
+  .game-experience .ex-story-status { align-items:flex-start; }
+  .game-experience .ex-story-status button { min-height:44px; font-size:11px; }
+  .game-experience .ex-tower { background:#edf2df; }
+  .game-experience .ex-tower>img { height:450px; object-position:38% center; }
+  .game-experience .ex-tower-hud { left:10px; right:10px; gap:10px; padding:12px; }
+  .game-experience .ex-tower-hud strong { font-size:18px; letter-spacing:1px; }
+  .game-experience .ex-tower-hud>span { display:none; }
+  .game-experience .ex-tower-hud>b { padding:5px 7px; font-size:9px; }
+  .game-experience .ex-tower-units { left:10px; right:10px; top:82px; gap:5px; }
+  .game-experience .ex-tower-units button { min-width:0; flex:1; padding:10px 8px; min-height:63px; }
+  .game-experience .ex-tower-units b { font-size:12px; }
+  .game-experience .ex-tower-units span { font-size:9px; }
+  .game-experience .ex-tower-rule { position:relative; right:auto; bottom:auto; margin:0; width:100%; border-radius:0; border:0; border-top:1px solid #aeb789; padding:22px; box-shadow:none; }
+  .game-experience .ex-tower-rule p { font-size:14px; }
+  .game-experience .ex-tower-rule small { font-size:12px; }
+  .game-experience .ex-game-note { padding-top:13px; font-size:11px; }
+}

@@ -1,0 +1,11 @@
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import path from 'node:path';
+import sharp from 'sharp';
+const base=path.resolve('output/design-review-2026-09-11/examples');
+const dest=path.resolve('public/art/showcase');
+await mkdir(dest,{recursive:true});
+const sources=[['minecraft-scene.png','minecraft'],['tower-scene.png','tower'],['museum-scene.png','museum'],['headphones.png','headphones'],['examples-minecraft-thumb.png','minecraft-thumb'],['examples-story-thumb.png','museum-thumb'],['examples-website-thumb.png','mono-thumb'],['examples-tool-thumb.png','notes-thumb'],['examples-tower-ui.png','tower-thumb']];
+for(const [file,name] of sources) await sharp(await readFile(path.join(base,file))).webp({lossless:true,effort:6}).toFile(path.join(dest,name+'.webp'));
+await sharp(await readFile(path.resolve('output/design-review-2026-09-11/hero-photographic-v1.png'))).webp({lossless:true,effort:6}).toFile(path.resolve('public/art/photo-hero.webp'));
+await writeFile(path.join(dest,'README.txt'),'These assets are generated concept artwork and native UI preview screenshots. Original prompts: output/design-review-2026-09-11/examples/. Lossless WebP encoding, no resizing or visual edits.\n');
+console.log('Prepared 10 lossless showcase assets.');

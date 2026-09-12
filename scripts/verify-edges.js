@@ -1,0 +1,62 @@
+async (page) => {
+  const checks = [];
+  const check = (name, pass) => checks.push({ name, pass: Boolean(pass) });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('http://127.0.0.1:4173/');
+  await page.locator('body').ariaSnapshot();
+  await page.getByRole('button', { name: '开始自动轮播', exact: true }).click();
+  await page.getByRole('button', { name: '下一个作品', exact: true }).focus();
+  const current = await page.locator('.slide').getAttribute('aria-label');
+  await page.waitForTimeout(7300);
+  check('键盘焦点进入屏幕时暂停自动推进', (await page.locator('.slide').getAttribute('aria-label')) === current);
+  await page.getByRole('button', { name: '暂停自动轮播', exact: true }).click();
+  await page.route('**/art/original.webp', route => route.abort());
+  await page.reload();
+  await page.locator('.desk-art .art-error').waitFor();
+  check('主图失败保留场景尺寸并提供重试', await page.locator('.desk-art').evaluate(el => el.clientHeight > 300));
+  await page.unroute('**/art/original.webp');
+  await page.locator('.desk-art').getByRole('button', { name: '重新加载', exact: true }).click();
+  await page.locator('.desk-art.is-loaded').waitFor();
+  check('图片失败可以恢复', await page.locator('.desk-art .art-error').count() === 0);
+  await page.goto('http://127.0.0.1:4173/');
+  await page.evaluate(() => localStorage.setItem('vibe-interest', '["invalid record"]'));
+  await page.locator('.nav-actions .button').click();
+  await page.locator('dialog[open]').waitFor();
+  check('无效本地记录回退为空表单', await page.getByLabel('家长称呼').inputValue() === '');
+  await page.getByRole('button', { name: '保存体验意向', exact: true }).click();
+  await page.getByRole('button', { name: '下载意向单', exact: true }).waitFor();
+  check('联系方式选填，空表单可以保存意向', await page.locator('.reservation-success').isVisible());
+  await page.getByRole('button', { name: '删除此浏览器中的意向记录', exact: true }).click();
+  await page.keyboard.press('Escape');
+  await page.locator('dialog[open]').waitFor({ state: 'detached' });
+  await page.goto('http://127.0.0.1:4173/projects?category=unknown');
+  await page.locator('body').ariaSnapshot();
+  check('无效分类回退全部', await page.locator('.project-card').count() === 6);
+  await page.goto('http://127.0.0.1:4173/projects?category=tool&project=plant');
+  await page.locator('dialog[open]').waitFor();
+  await page.reload();
+  await page.locator('dialog[open]').waitFor();
+  check('直接链接与刷新能打开作品详情', (await page.getByRole('dialog').textContent()).includes('植物照护提醒助手'));
+  await page.goto('http://127.0.0.1:4173/not-a-page');
+  await page.locator('h1').waitFor();
+  check('未知路径展示明确的返回入口', await page.getByRole('link', { name: '回到首页', exact: true }).isVisible());
+  const missing = await page.request.get('http://127.0.0.1:4173/missing.png');
+  check('不存在的静态资源返回 404', missing.status() === 404);
+  const method = await page.request.post('http://127.0.0.1:4173/');
+  check('本地预览不会接收虚构的预约 POST', method.status() === 405);
+  await page.goto('http://127.0.0.1:4173/');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('body').ariaSnapshot();
+  const first = await page.locator('.slide').getAttribute('aria-label');
+  await page.locator('.slide').evaluate(element => {
+    const start = new Touch({ identifier: 1, target: element, clientX: 250, clientY: 100 });
+    const end = new Touch({ identifier: 1, target: element, clientX: 90, clientY: 100 });
+    element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: [start] }));
+    element.dispatchEvent(new TouchEvent('touchend', { bubbles: true, changedTouches: [end] }));
+  });
+  await page.waitForFunction(() => document.querySelector('.slide').getAttribute('aria-label').includes('互动故事'));
+  check('触摸滑动可以切换屏幕', (await page.locator('.slide').getAttribute('aria-label')) !== first);
+  return { checks, passed: checks.filter(c => c.pass).length, total: checks.length };
+}
+
+
