@@ -24,6 +24,16 @@ if (!existsSync(path.join(root, "index.html"))) {
 }
 http
   .createServer((req, res) => {
+    if (req.url?.startsWith('/app-api/education/')) {
+      const upstream = http.request({hostname:'127.0.0.1',port:48080,path:req.url,method:req.method,headers:{'content-type':'application/json','accept':'application/json'}}, response=>{
+        res.writeHead(response.statusCode,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
+        response.pipe(res);
+      });
+      upstream.setTimeout(15000,()=>upstream.destroy());
+      upstream.on('error',()=>{if(!res.headersSent)res.writeHead(503,{'Content-Type':'application/json'});res.end(JSON.stringify({code:503,msg:'服务暂时不可用，请稍后重试。'}));});
+      req.pipe(upstream);
+      return;
+    }
     if (!["GET", "HEAD"].includes(req.method)) {
       res.writeHead(405, { Allow: "GET, HEAD" });
       return res.end("Method not allowed");

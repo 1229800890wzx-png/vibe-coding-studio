@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Header, Reservation, ReservationContext } from "./components";
-import { Courses, Home, Mentors, Method, NotFound, Projects } from "./pages";
+import { Courses, Mentors, Method, NotFound, Projects } from "./pages";
+import EducationHome from './education-home';
+import CourseCatalog from './course-catalog';
+import InquiryForm from './inquiry-form';
 
 const titles = {
   "/": "首页",
@@ -15,7 +18,7 @@ export default function App() {
   const location = useLocation();
   const previousPath = useRef(null);
   useEffect(() => {
-    document.title = `${titles[location.pathname] || "页面未找到"} · VIBE CODING 少儿创造力实验室`;
+    document.title = `${titles[location.pathname] || (location.pathname.startsWith('/courses/') ? '课程详情' : '页面未找到')} · VIBE CODING 少儿创造力实验室`;
     if (location.hash) {
       requestAnimationFrame(() =>
         document
@@ -35,15 +38,16 @@ export default function App() {
       <Header />
       <main id="main-content" tabIndex={-1}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/" element={<EducationHome />} />
+          <Route path="/courses" element={<CourseCatalog />} />
+          <Route path="/courses/:id" element={<CourseCatalog />} />
           <Route path="/method" element={<Method />} />
           <Route path="/mentors" element={<Mentors />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {reservation && <Reservation onClose={() => setReservation(false)} />}
+      {reservation && <InquiryForm onClose={() => setReservation(false)} />}
     </ReservationContext.Provider>
   );
 }

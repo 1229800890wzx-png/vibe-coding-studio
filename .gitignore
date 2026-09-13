@@ -7,3 +7,7 @@ dist/
 output/
 .playwright-cli/
 *.log
+platform/vendor/
+platform/downloads/
+platform/__pycache__/
+!platform/overlays/yudao-ui-admin-vue3-master/.env.education

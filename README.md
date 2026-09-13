@@ -1,6 +1,8 @@
 # VIBE CODING · 少儿创造力实验室
 
-根据已确认的五张蓝白效果图完成的 React 网站。保留原首页两行主标题、白色书桌、银色平板和摆件；图片负责摄影与插画，文字、卡片、图标、流程、日历和交互由真实组件组成。
+当前首期为橙色教育官网与真实课程咨询后台：课程从数据库读取，芋道管理端支持课程发布/下架、咨询查看和跟进。保留 React 互动作品展示，暂不启用在线购课。
+
+完整安装见 [platform/README.md](platform/README.md)，当前验收和限制见 [docs/FIRST_RELEASE.md](docs/FIRST_RELEASE.md)。下文原蓝白设计及纯前端交互说明属于早期记录；与上述文档冲突时以首期说明为准。
 
 ## 本地打开
 
@@ -90,5 +92,4 @@ npx --package @playwright/cli playwright-cli -s=vibe run-code --filename scripts
 ## 静态托管
 
 构建输出是 `dist/`，没有后端依赖。托管服务需要将不存在的页面路径回退到 `index.html`，同时保留真实静态资源的 404。`scripts/serve.mjs` 已实现本地预览所需的页面回退；公网发布应使用正式托管服务和 HTTPS。
-
 
