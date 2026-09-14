@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-09-13T16:20:35.335Z",
+  "checks": [
+    "Home trial CTA applies TRIAL condition to actual public course API",
+    "Filter cancellation retains original values; explicit apply queries selected learning level",
+    "Zero result offers recovery and clearing filters restores real courses",
+    "An older zero-result response deliberately arrives last and cannot replace the newer course list",
+    "Network failure is shown inline and retry returns actual API results"
+  ],
+  "status": "PASSED"
+}

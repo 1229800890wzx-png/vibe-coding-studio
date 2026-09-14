@@ -1,0 +1,197 @@
+{
+  "startedAt": "2026-09-13T15:36:23.556Z",
+  "environment": "Local MySQL 8.4; original foundation mock payment provider only",
+  "faultInjection": "None: original member cancellation leaves its unexpired original pay order waiting, so a delayed submit can be exercised through existing APIs.",
+  "checks": [
+    {
+      "name": "Original cancellation expires enrollment and releases stock before delayed payment",
+      "orderId": 21,
+      "payOrderId": 21
+    },
+    {
+      "name": "Delayed original mock payment reacquires one seat and restores the original enrollment",
+      "orderItemId": 25,
+      "enrollmentId": 26,
+      "paidTrialCount": 1,
+      "notificationIds": [
+        114
+      ]
+    },
+    {
+      "name": "Repeated validated paid callbacks do not deduct, activate, notify or refund again",
+      "originalPaymentNotificationTask": {
+        "id": 18,
+        "type": 1,
+        "dataId": 21,
+        "merchantOrderId": "21",
+        "merchantRefundId": null,
+        "status": 10,
+        "notifyTimes": 1
+      }
+    },
+    {
+      "name": "No-capacity late payment uses one original durable refund and confirms without granting enrollment",
+      "orderId": 22,
+      "payOrderId": 22,
+      "originalRefund": {
+        "id": 11,
+        "payOrderId": 22,
+        "merchantOrderId": "22",
+        "merchantRefundId": "order-22",
+        "status": 10,
+        "refundPrice": 1200,
+        "channelRefundNo": "MOCK-R-R202609132336251"
+      },
+      "originalRefundNotificationTask": {
+        "id": 20,
+        "type": 2,
+        "dataId": 11,
+        "merchantOrderId": "22",
+        "merchantRefundId": "order-22",
+        "status": 10,
+        "notifyTimes": 1
+      },
+      "notificationIds": [
+        116
+      ]
+    },
+    {
+      "name": "Persisted REFUND_PENDING intent observed before original refund callback confirmation"
+    },
+    {
+      "name": "Repeated validated paid/refund callbacks preserve one refund, no seat change and one guardian notice"
+    },
+    {
+      "name": "Disposable competitor hold released through original cancellation without altering refunded order"
+    }
+  ],
+  "fixtures": {
+    "courseId": 21,
+    "students": [
+      32,
+      33,
+      34
+    ],
+    "cohorts": {
+      "available": 50,
+      "unavailable": 51
+    },
+    "recoverable": {
+      "id": 21,
+      "payOrderId": 21
+    },
+    "refundable": {
+      "id": 22,
+      "payOrderId": 22
+    },
+    "competitor": {
+      "id": 23,
+      "payOrderId": 23
+    },
+    "originalRefund": {
+      "id": 11,
+      "payOrderId": 22,
+      "merchantOrderId": "22",
+      "merchantRefundId": "order-22",
+      "status": 10,
+      "refundPrice": 1200,
+      "channelRefundNo": "MOCK-R-R202609132336251"
+    }
+  },
+  "observations": {
+    "restored": {
+      "orderId": 21,
+      "payOrderId": 21,
+      "orderStatus": 10,
+      "paid": 1,
+      "refundStatus": 0,
+      "refundPrice": 0,
+      "orderItemId": 25,
+      "enrollmentId": 26,
+      "enrollmentStatus": "ACTIVE",
+      "enrollmentVersion": 3,
+      "enrollmentSource": "ORDER",
+      "freeTrialSourceId": null,
+      "holdId": 22,
+      "holdStatus": "CONSUMED",
+      "paymentStatus": 10,
+      "stock": 0,
+      "cohortId": 50,
+      "skuId": 10051
+    },
+    "refundTransitions": [
+      {
+        "observedAt": "2026-09-13T15:36:24.983Z",
+        "state": {
+          "orderId": 22,
+          "payOrderId": 22,
+          "orderStatus": 40,
+          "paid": 0,
+          "refundStatus": 0,
+          "refundPrice": 0,
+          "orderItemId": 26,
+          "enrollmentId": 27,
+          "enrollmentStatus": "EXPIRED",
+          "enrollmentVersion": 2,
+          "enrollmentSource": "ORDER",
+          "freeTrialSourceId": null,
+          "holdId": 23,
+          "holdStatus": "RELEASED",
+          "paymentStatus": 0,
+          "stock": 0,
+          "cohortId": 51,
+          "skuId": 10052
+        }
+      },
+      {
+        "observedAt": "2026-09-13T15:36:25.079Z",
+        "state": {
+          "orderId": 22,
+          "payOrderId": 22,
+          "orderStatus": 40,
+          "paid": 1,
+          "refundStatus": 0,
+          "refundPrice": 0,
+          "orderItemId": 26,
+          "enrollmentId": 27,
+          "enrollmentStatus": "EXPIRED",
+          "enrollmentVersion": 2,
+          "enrollmentSource": "ORDER",
+          "freeTrialSourceId": null,
+          "holdId": 23,
+          "holdStatus": "REFUND_PENDING",
+          "paymentStatus": 10,
+          "stock": 0,
+          "cohortId": 51,
+          "skuId": 10052
+        }
+      },
+      {
+        "observedAt": "2026-09-13T15:36:25.154Z",
+        "state": {
+          "orderId": 22,
+          "payOrderId": 22,
+          "orderStatus": 40,
+          "paid": 1,
+          "refundStatus": 20,
+          "refundPrice": 1200,
+          "orderItemId": 26,
+          "enrollmentId": 27,
+          "enrollmentStatus": "EXPIRED",
+          "enrollmentVersion": 2,
+          "enrollmentSource": "ORDER",
+          "freeTrialSourceId": null,
+          "holdId": 23,
+          "holdStatus": "REFUNDED",
+          "paymentStatus": 20,
+          "stock": 0,
+          "cohortId": 51,
+          "skuId": 10052
+        }
+      }
+    ]
+  },
+  "limitations": [],
+  "status": "PASSED",
+  "completedAt": "2026-09-13T15:36:25.358Z"
+}

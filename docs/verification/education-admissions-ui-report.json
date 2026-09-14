@@ -1,0 +1,73 @@
+{
+  "startedAt": "2026-09-13T16:35:04.344Z",
+  "session": "independent-admissions-acceptance",
+  "source": "Original admin/member form logins; no API interception or fabricated responses. TEST contact submission records consent only; no external messages sent.",
+  "checks": [
+    {
+      "name": "90500 admissions desk reads fixture 15 from the original owner-scoped clue API"
+    },
+    {
+      "name": "Original CRM detail and reused follow-up component display persisted follow-up 4"
+    },
+    {
+      "name": "90520 original CRM clue list resolves and displays the same consultation"
+    },
+    {
+      "name": "Native UniApp child picker changes and restores the captured child; trial picker selects its real owned booking and course"
+    },
+    {
+      "name": "Populated form remains disabled without explicit contact consent and sends no create request"
+    },
+    {
+      "name": "Consented submit persists a real original CRM clue with captured child/trial IDs and refreshes actual parent history",
+      "clueId": 16
+    },
+    {
+      "name": "New browser-created consultation appears in the original admin admissions list"
+    }
+  ],
+  "fixture": {
+    "clueId": 15,
+    "studentId": 59,
+    "courseId": 34,
+    "cohortId": 69,
+    "trialBookingId": 374,
+    "followUpId": 4,
+    "ownerUserId": 1,
+    "clueName": "TEST 家长mu00q9ly · TEST 咨询页面孩子mu00q9ly课程咨询"
+  },
+  "submissionFixture": {
+    "studentId": 60,
+    "name": "TEST 咨询学员61597",
+    "trialBookingId": 375,
+    "courseId": 34,
+    "cohortId": 69,
+    "contactName": "TEST 咨询家长61597",
+    "message": "TEST 浏览器咨询验收 61597，仅验证表单与原 CRM 记录，请勿外部联系。"
+  },
+  "createdClueId": 16,
+  "originalCreateResponse": {
+    "id": 16,
+    "studentId": 60,
+    "courseId": 34,
+    "trials": [
+      {
+        "id": 375,
+        "cohortId": 69,
+        "cohortName": "TEST 招生免费试听mu00q9ly",
+        "status": "CONFIRMED",
+        "orderItemId": null
+      }
+    ]
+  },
+  "status": "PASSED",
+  "completedAt": "2026-09-13T16:35:15.574Z",
+  "pageErrors": [],
+  "apiFailures": [],
+  "screenshots": [
+    "docs/screenshots/admission-admin-live.png",
+    "docs/screenshots/admission-followup-live.png",
+    "docs/screenshots/mini-consultation-live.png",
+    "docs/screenshots/mini-consultation-success.png"
+  ]
+}

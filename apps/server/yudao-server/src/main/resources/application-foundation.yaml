@@ -1,0 +1,100 @@
+# Local integration profile. Credentials are generated into ignored .runtime/foundation.env.
+server:
+  address: 127.0.0.1
+  port: 48080
+spring:
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 32MB
+  datasource:
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          name: vibe_edu
+          url: jdbc:mysql://127.0.0.1:13306/vibe_edu?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+          username: vibe_edu
+          password: ${VIBE_DB_PASSWORD}
+      druid:
+        initial-size: 1
+        min-idle: 1
+        max-active: 12
+    druid:
+      stat-view-servlet:
+        enabled: false
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 16379
+      database: 0
+  boot:
+    admin:
+      client:
+        enabled: false
+      context-path: /admin
+  quartz:
+    auto-startup: true
+    scheduler-name: vibeEduScheduler
+    job-store-type: jdbc
+    wait-for-jobs-to-complete-on-shutdown: true
+    jdbc:
+      initialize-schema: never
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceId: AUTO
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            isClustered: true
+          threadPool:
+            threadCount: 4
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+logging:
+  file:
+    name: ${VIBE_RUNTIME_DIR:.runtime}/backend.log
+yudao:
+  security:
+    mock-enable: false
+  captcha:
+    enable: false
+  demo: false
+  access-log:
+    enable: true
+  pay:
+    mock-enabled: true
+    order-notify-url: http://127.0.0.1:48080/admin-api/pay/notify/order
+    refund-notify-url: http://127.0.0.1:48080/admin-api/pay/notify/refund
+    transfer-notify-url: http://127.0.0.1:48080/admin-api/pay/notify/transfer
+  trade:
+    order:
+      status-sync-to-wxa-enable: false
+  tencent-lbs-key: ${TENCENT_LBS_KEY:local-unconfigured}
+wx:
+  mp:
+    app-id: ${WECHAT_MP_APP_ID:local-unconfigured}
+    secret: ${WECHAT_MP_SECRET:local-unconfigured}
+    config-storage:
+      type: RedisTemplate
+  miniapp:
+    appid: ${WECHAT_APP_ID:local-unconfigured}
+    secret: ${WECHAT_APP_SECRET:local-unconfigured}
+    config-storage:
+      type: RedisTemplate
+justauth:
+  enabled: true
+  type:
+    WECHAT_MINI_PROGRAM:
+      client-id: ${wx.miniapp.appid}
+      client-secret: ${wx.miniapp.secret}
+      ignore-check-redirect-uri: true
+      ignore-check-state: true
+  cache:
+    type: REDIS
+    prefix: 'social_auth_state:'
+    timeout: 24h

@@ -1,0 +1,68 @@
+{
+  "upstreamCommit": "8e43004cf68a405cd3485f98f8a539b97ca6544a",
+  "timestamp": "2026-09-13T15:09:38.600Z",
+  "checks": [
+    {
+      "check": "Original member authentication rejects anonymous requests"
+    },
+    {
+      "check": "Upstream authentication mock disabled"
+    },
+    {
+      "check": "Original system admin password login"
+    },
+    {
+      "check": "Original RBAC permission and menu retrieval"
+    },
+    {
+      "check": "Original member password login"
+    },
+    {
+      "check": "Original product SPU detail",
+      "details": {
+        "spuId": 10001
+      }
+    },
+    {
+      "check": "Original server price settlement",
+      "details": {
+        "payPrice": 9900
+      }
+    },
+    {
+      "check": "Original trade order and pay order creation",
+      "details": {
+        "id": 13,
+        "payOrderId": 13
+      }
+    },
+    {
+      "check": "Original local MockPayClient payment",
+      "details": {
+        "payOrderId": 13,
+        "status": 10
+      }
+    },
+    {
+      "check": "Original payment-state validation updates trade order"
+    },
+    {
+      "check": "Original after-sale refund request",
+      "details": {
+        "afterSaleId": 8
+      }
+    },
+    {
+      "check": "Original admin after-sale approval and local mock refund"
+    },
+    {
+      "check": "Original refund callback completes after-sale status 50"
+    }
+  ],
+  "afterSale": {
+    "id": 8,
+    "status": 50,
+    "payRefundId": 6
+  },
+  "status": "PASSED"
+}

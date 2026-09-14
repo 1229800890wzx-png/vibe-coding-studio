@@ -1,0 +1,243 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^s-(.*)": "@/sheep/components/s-$1/s-$1.vue",
+      "^su-(.*)": "@/sheep/ui/su-$1/su-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/tab/home",
+      "style": {
+        "navigationBarTitleText": "VIBE CODING",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/tab/courses",
+      "style": {
+        "navigationBarTitleText": "VIBE CODING",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/tab/learning",
+      "style": {
+        "navigationBarTitleText": "VIBE CODING",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/tab/me",
+      "style": {
+        "navigationBarTitleText": "VIBE CODING",
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "pages": [
+        {
+          "path": "login",
+          "style": {
+            "navigationBarTitleText": "家长登录",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "learning-list",
+          "style": {
+            "navigationBarTitleText": "学习空间",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "works",
+          "style": {
+            "navigationBarTitleText": "作品集",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "requests",
+          "style": {
+            "navigationBarTitleText": "调班申请",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "refunds",
+          "style": {
+            "navigationBarTitleText": "退款售后",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "cohort",
+          "style": {
+            "navigationBarTitleText": "班期与课表",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "assignment",
+          "style": {
+            "navigationBarTitleText": "作业提交",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "trials",
+          "style": {
+            "navigationBarTitleText": "体验课预约",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "session",
+          "style": {
+            "navigationBarTitleText": "上课信息",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "campuses",
+          "style": {
+            "navigationBarTitleText": "城市与校区",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "checkout",
+          "style": {
+            "navigationBarTitleText": "确认报名",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "course",
+          "style": {
+            "navigationBarTitleText": "课程详情",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "cart",
+          "style": {
+            "navigationBarTitleText": "选课袋",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "children",
+          "style": {
+            "navigationBarTitleText": "孩子档案",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "orders",
+          "style": {
+            "navigationBarTitleText": "课程订单",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "messages",
+          "style": {
+            "navigationBarTitleText": "消息中心"
+          }
+        },
+        {
+          "path": "one-to-one",
+          "style": {
+            "navigationBarTitleText": "一对一高级课",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "consultation",
+          "style": {
+            "navigationBarTitleText": "课程咨询"
+          }
+        }
+      ],
+      "root": "pages/edu"
+    },
+    {
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "收银台"
+          }
+        },
+        {
+          "path": "result",
+          "style": {
+            "navigationBarTitleText": "支付结果"
+          }
+        }
+      ],
+      "root": "pages/pay"
+    },
+    {
+      "pages": [
+        {
+          "path": "richtext",
+          "style": {
+            "navigationBarTitleText": "服务说明"
+          }
+        },
+        {
+          "path": "webview",
+          "style": {
+            "navigationBarTitleText": "服务页面"
+          }
+        },
+        {
+          "path": "error",
+          "style": {
+            "navigationBarTitleText": "暂不可用"
+          }
+        }
+      ],
+      "root": "pages/public"
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#F5F5F7",
+    "navigationBarTitleText": "VIBE CODING",
+    "backgroundColor": "#F5F5F7",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#6E6E73",
+    "height": "58px",
+    "backgroundColor": "#FFFFFF",
+    "selectedColor": "#C94B00",
+    "borderStyle": "white",
+    "fontSize": "12px",
+    "list": [
+      {
+        "pagePath": "pages/tab/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tab/courses",
+        "text": "选课"
+      },
+      {
+        "pagePath": "pages/tab/learning",
+        "text": "学习"
+      },
+      {
+        "pagePath": "pages/tab/me",
+        "text": "我的"
+      }
+    ]
+  }
+}

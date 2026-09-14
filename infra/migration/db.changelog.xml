@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.33.xsd" logicalFilePath="vibe/production/db.changelog.xml">
+  <preConditions onFail="HALT"><dbms type="mysql"/><sqlCheck expectedResult="1">SELECT IF(VERSION() LIKE '8.4.%',1,0)</sqlCheck></preConditions>
+  <changeSet id="001" author="vibe" runInTransaction="false">
+    <preConditions onFail="HALT"><sqlCheck expectedResult="0">SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND UPPER(table_name) NOT IN('DATABASECHANGELOG','DATABASECHANGELOGLOCK')</sqlCheck></preConditions>
+    <sqlFile path="sql/001-original-system-infra.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="002" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/002-original-business.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="003" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/003-education.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="004" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/004-original-quartz.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="005" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/005-original-navigation-dictionaries.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="006" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/006-production-bootstrap.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="007" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/007-education-navigation-notification.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="008" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/008-original-model-reconciliations.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,30 @@
+{
+  "environment": "actual local MySQL, original mock pay and Quartz",
+  "checks": [
+    {
+      "check": "Expired original pay order closes before Quartz releases education inventory",
+      "details": {
+        "orderId": 20,
+        "jobId": 12907
+      }
+    },
+    {
+      "check": "Concurrent original after-sale applications serialize one in-flight refund"
+    },
+    {
+      "check": "In-flight refund blocks transfer under shared enrollment state"
+    }
+  ],
+  "concurrentResults": [
+    {
+      "code": 0,
+      "afterSaleId": 12
+    },
+    {
+      "code": 1011000105,
+      "message": "订单项已申请售后，无法重复申请"
+    }
+  ],
+  "status": "PASSED",
+  "completedAt": "2026-09-13T15:31:24.988Z"
+}

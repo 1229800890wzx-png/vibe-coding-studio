@@ -1,0 +1,43 @@
+{
+  "startedAt": "2026-09-13T15:30:33.860Z",
+  "checks": [
+    {
+      "name": "Exact immutable version preview and files available only to owning guardian",
+      "status": "PASSED"
+    },
+    {
+      "name": "New submission version cannot change an existing work snapshot",
+      "status": "PASSED"
+    },
+    {
+      "name": "Consent, moderation and explicit publication jointly gate sanitized public content",
+      "status": "PASSED"
+    },
+    {
+      "name": "Anonymous HTML and ZIP downloads preserve bytes and force non-executing attachment responses",
+      "status": "PASSED"
+    },
+    {
+      "name": "Guessed private file IDs, out-of-version ordinals and unreviewed work cannot expose attachments",
+      "status": "PASSED"
+    },
+    {
+      "name": "Revocation blocks old public metadata/file requests; re-consent needs fresh review and publication",
+      "status": "PASSED"
+    }
+  ],
+  "fixtures": {
+    "studentId": 26,
+    "courseId": 19,
+    "cohortId": 46,
+    "sessionId": 55,
+    "assignmentId": 4,
+    "bookingId": 358,
+    "submissionId": 5,
+    "workId": 4,
+    "privateFileId": 2306
+  },
+  "environment": "Actual local API/MySQL/original FileService; TEST only",
+  "status": "PASSED",
+  "completedAt": "2026-09-13T15:30:35.466Z"
+}

@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-09-13T16:04:41.438Z",
+  "checks": [
+    {
+      "name": "Public discovery keeps published name, direction, age and level while admin edits a new draft"
+    },
+    {
+      "name": "Standalone trial and combined delivery filters return matching cohort count and original SKU price"
+    },
+    {
+      "name": "Inclusive calendar date boundaries, empty results and reversed date rejection verified",
+      "details": {
+        "date": "2027-05-19"
+      }
+    },
+    {
+      "name": "Publishing switches public discovery; existing cohort still presents its purchased curriculum version"
+    },
+    {
+      "name": "Schedule preview shows affected guardian notification and before/after without changing persisted data"
+    },
+    {
+      "name": "Conflicts block preview and authoritative save, and original member session cannot access staff preview"
+    }
+  ],
+  "fixtures": {
+    "courseId": 27,
+    "trial": {
+      "id": 60,
+      "sessionId": 69,
+      "t": 1810051481438
+    },
+    "regular": {
+      "id": 61,
+      "sessionId": 70,
+      "t": 1810656281438
+    },
+    "studentId": 45,
+    "bookingId": 366
+  },
+  "status": "PASSED"
+}

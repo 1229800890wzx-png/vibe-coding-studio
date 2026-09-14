@@ -7,3 +7,13 @@ dist/
 output/
 .playwright-cli/
 *.log
+.tools/
+.runtime/
+.superpowers/
+**/target/
+**/node_modules/
+**/dist/
+**/unpackage/
+**/.env.local
+**/.env.*.local
+**/.playwright-cli/

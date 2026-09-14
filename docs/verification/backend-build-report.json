@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-09-13T18:06:32.690Z",
+  "status": "PASSED",
+  "checkedJavaSources": 1140,
+  "monitoredModules": [
+    "yudao-module-edu",
+    "yudao-module-crm",
+    "yudao-module-infra",
+    "yudao-module-pay",
+    "yudao-module-mall/yudao-module-product",
+    "yudao-module-mall/yudao-module-trade",
+    "yudao-server"
+  ],
+  "excludedOptionalCrmBpmSources": [
+    "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/integration/bpm/CrmOriginalBpmBridge.java",
+    "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/service/contract/listener/CrmContractStatusListener.java",
+    "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/service/receivable/listener/CrmReceivableStatusListener.java",
+    "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/util/CrmAuditStatusUtils.java"
+  ],
+  "jarSha256": "6341ec2472e8eca087b73908c991c6a297fccf28f2dcc20a3d8fae4696604500",
+  "jarModified": "2026-09-13T18:05:41.512Z",
+  "stale": []
+}

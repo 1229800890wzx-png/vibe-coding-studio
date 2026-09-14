@@ -1,0 +1,295 @@
+{
+  "startedAt": "2026-09-13T15:45:48.465Z",
+  "scope": "Actual local original services and original mock pay only. SQL reads only; no production code/configuration changes or external messaging.",
+  "checks": [
+    {
+      "name": "Original coupon template and admin grant create one scoped flat coupon for the original member",
+      "couponId": 3,
+      "templateId": 3
+    },
+    {
+      "name": "Original settlement offers the eligible coupon and quotes both same-SKU children with 1001-fen discount",
+      "quotedPrice": {
+        "totalPrice": 10000,
+        "discountPrice": 0,
+        "deliveryPrice": 0,
+        "couponPrice": 1001,
+        "pointPrice": 0,
+        "vipPrice": 0,
+        "payPrice": 8999
+      }
+    },
+    {
+      "name": "Original order persists 500/501-fen line allocation without losing a child or a cent",
+      "orderId": 24,
+      "lines": [
+        {
+          "id": 28,
+          "studentId": 39,
+          "skuId": 10056,
+          "count": 1,
+          "price": 5000,
+          "couponPrice": 500,
+          "payPrice": 4500
+        },
+        {
+          "id": 29,
+          "studentId": 40,
+          "skuId": 10056,
+          "count": 1,
+          "price": 5000,
+          "couponPrice": 501,
+          "payPrice": 4499
+        }
+      ]
+    },
+    {
+      "name": "Unpaid cancellation restores the original coupon and both cohort seats"
+    },
+    {
+      "name": "Paid partial KEEP refund preserves the redeemed coupon and both active enrollments",
+      "orderId": 25,
+      "afterSaleId": 13,
+      "couponState": {
+        "status": 2,
+        "useOrderId": 25
+      },
+      "refundPrice": 100
+    },
+    {
+      "name": "Browser fixture retains one unused coupon and exactly two selected unbought child cart lines",
+      "couponId": 4,
+      "cartIds": [
+        10,
+        9
+      ],
+      "previousSelectionRetainedForRestore": [
+        7,
+        1,
+        8,
+        6,
+        5,
+        4,
+        3,
+        2
+      ]
+    }
+  ],
+  "fixtures": {
+    "course": {
+      "id": 24,
+      "name": "TEST 双孩子优惠券 mtzzkbe6"
+    },
+    "cohort": {
+      "id": 55,
+      "name": "TEST 双孩子券体验班 mtzzkbe6",
+      "skuId": 10056,
+      "spuId": 10016
+    },
+    "students": [
+      {
+        "id": 39,
+        "name": "TEST券验收Amtzzkbe6"
+      },
+      {
+        "id": 40,
+        "name": "TEST券验收Bmtzzkbe6"
+      }
+    ],
+    "createdTemplates": [
+      {
+        "id": 3,
+        "name": "TEST 生命周期券 减10.01元 mtzzkbe6"
+      },
+      {
+        "id": 4,
+        "name": "TEST 页面验收券 减10.01元 mtzzkbe6"
+      }
+    ],
+    "coupon": {
+      "id": 3,
+      "templateId": 3,
+      "name": "TEST 生命周期券 减10.01元 mtzzkbe6"
+    },
+    "initialCouponOptions": [
+      {
+        "id": 1,
+        "name": "TEST 生命周期券 减10.01元 mtzze7m0",
+        "usePrice": 0,
+        "validStartTime": 1789314064000,
+        "validEndTime": 1789918864000,
+        "discountType": 1,
+        "discountPercent": null,
+        "discountPrice": 1001,
+        "discountLimitPrice": null,
+        "match": false,
+        "mismatchReason": "优惠劵没有匹配的商品"
+      },
+      {
+        "id": 2,
+        "name": "TEST 生命周期券 减10.01元 mtzziftz",
+        "usePrice": 0,
+        "validStartTime": 1789314262000,
+        "validEndTime": 1789919062000,
+        "discountType": 1,
+        "discountPercent": null,
+        "discountPrice": 1001,
+        "discountLimitPrice": null,
+        "match": false,
+        "mismatchReason": "优惠劵没有匹配的商品"
+      },
+      {
+        "id": 3,
+        "name": "TEST 生命周期券 减10.01元 mtzzkbe6",
+        "usePrice": 0,
+        "validStartTime": 1789314349000,
+        "validEndTime": 1789919149000,
+        "discountType": 1,
+        "discountPercent": null,
+        "discountPrice": 1001,
+        "discountLimitPrice": null,
+        "match": true,
+        "mismatchReason": null
+      }
+    ],
+    "unpaidOrder": {
+      "id": 24,
+      "payOrderId": 24
+    },
+    "paidOrder": {
+      "id": 25,
+      "payOrderId": 25
+    },
+    "afterSaleId": 13
+  },
+  "browser": {
+    "memberId": 10001,
+    "students": [
+      {
+        "id": 41,
+        "name": "TEST券验收页面Cmtzzkbe6"
+      },
+      {
+        "id": 42,
+        "name": "TEST券验收页面Dmtzzkbe6"
+      }
+    ],
+    "coupon": {
+      "id": 4,
+      "templateId": 4,
+      "name": "TEST 页面验收券 减10.01元 mtzzkbe6"
+    },
+    "cohort": {
+      "id": 55,
+      "name": "TEST 双孩子券体验班 mtzzkbe6",
+      "skuId": 10056,
+      "spuId": 10016
+    },
+    "previouslySelectedCartIds": [
+      7,
+      1,
+      8,
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    "cartIds": [
+      10,
+      9
+    ],
+    "quote": {
+      "totalPrice": 10000,
+      "discountPrice": 0,
+      "deliveryPrice": 0,
+      "couponPrice": 1001,
+      "pointPrice": 0,
+      "vipPrice": 0,
+      "payPrice": 8999
+    },
+    "remainingStock": 4
+  },
+  "previousFailedAttempts": [
+    {
+      "startedAt": "2026-09-13T15:41:03.624Z",
+      "failure": "/admin-api/promotion/coupon/send: 1013004002 当前剩余数量不够领取",
+      "fixtures": {
+        "course": {
+          "id": 22,
+          "name": "TEST 双孩子优惠券 mtzze7m0"
+        },
+        "cohort": {
+          "id": 52,
+          "name": "TEST 双孩子券体验班 mtzze7m0",
+          "skuId": 10053,
+          "spuId": 10014
+        },
+        "students": [
+          {
+            "id": 35,
+            "name": "TEST券验收Amtzze7m0"
+          },
+          {
+            "id": 36,
+            "name": "TEST券验收Bmtzze7m0"
+          }
+        ]
+      }
+    },
+    {
+      "startedAt": "2026-09-13T15:44:20.903Z",
+      "failure": "The expression evaluated to a falsy value:\n\n  assert(before.coupons.some(value => value.id === usedCoupon.id && value.match === true))\n",
+      "fixtures": {
+        "course": {
+          "id": 23,
+          "name": "TEST 双孩子优惠券 mtzziftz"
+        },
+        "cohort": {
+          "id": 54,
+          "name": "TEST 双孩子券体验班 mtzziftz",
+          "skuId": 10055,
+          "spuId": 10015
+        },
+        "students": [
+          {
+            "id": 37,
+            "name": "TEST券验收Amtzziftz"
+          },
+          {
+            "id": 38,
+            "name": "TEST券验收Bmtzziftz"
+          }
+        ],
+        "createdTemplates": [
+          {
+            "id": 2,
+            "name": "TEST 生命周期券 减10.01元 mtzziftz"
+          }
+        ],
+        "coupon": {
+          "id": 2,
+          "templateId": 2,
+          "name": "TEST 生命周期券 减10.01元 mtzziftz"
+        }
+      }
+    }
+  ],
+  "publicSchemaReconciliation": {
+    "source": "infra/database/model-overrides.json and 21-public-model-reconciliations.sql",
+    "counterDefaults": [
+      {
+        "columnName": "take_count",
+        "defaultValue": "0",
+        "nullable": "NO"
+      },
+      {
+        "columnName": "use_count",
+        "defaultValue": "0",
+        "nullable": "NO"
+      }
+    ]
+  },
+  "status": "PASSED",
+  "completedAt": "2026-09-13T15:45:50.882Z"
+}

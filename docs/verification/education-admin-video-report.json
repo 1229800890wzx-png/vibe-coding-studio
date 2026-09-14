@@ -1,0 +1,73 @@
+{
+  "startedAt": "2026-09-13T16:54:46.064Z",
+  "status": "PASSED",
+  "identity": "original admin user 1",
+  "mode": "Actual API and MySQL; no interception or mocks; no external sending",
+  "checks": [
+    {
+      "name": "Open TEST submission, edit unpublished feedback, save revision 0 and show exact server updateTime",
+      "status": "PASSED",
+      "reviewId": 7,
+      "revision": 1,
+      "serverSavedAt": 1789318496874,
+      "remainsUnpublished": true
+    },
+    {
+      "name": "Actual month calendar, +30 minute candidate, affected learner/conflict preview, cancel without saving",
+      "status": "PASSED",
+      "canSave": true,
+      "affectedCount": 1,
+      "conflictTypes": [],
+      "scheduleUnchanged": true
+    }
+  ],
+  "fixtures": {
+    "assignmentId": 10,
+    "submissionId": 12,
+    "sessionId": 79,
+    "studentId": 46,
+    "cohortId": 63,
+    "marker": "TEST 教师录屏 mu0210p9"
+  },
+  "videos": [
+    {
+      "file": "docs/screenshots/flow-teacher-review.webm",
+      "sizeBytes": 811850,
+      "sha256": "b0bf0ccd770ff45d2e87e37f28d7a57ff9ce05ef244575d01d844384927611f0",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "authenticationExcluded": true,
+      "decodedMedia": {
+        "codec": "vp8",
+        "width": 1440,
+        "height": 1100,
+        "fps": "25/1",
+        "durationSeconds": 10.92,
+        "verification": "ffprobe decoded stream and format; captured frames visually checked"
+      }
+    },
+    {
+      "file": "docs/screenshots/flow-schedule-preview.webm",
+      "sizeBytes": 1443305,
+      "sha256": "35ae2c96302c7139bad77f1589d5651dfe1fdd2cd1e2c048c7897d434b5ba1d9",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "authenticationExcluded": true,
+      "decodedMedia": {
+        "codec": "vp8",
+        "width": 1440,
+        "height": 1100,
+        "fps": "25/1",
+        "durationSeconds": 12.96,
+        "verification": "ffprobe decoded stream and format; captured frames visually checked"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "apiFailures": [],
+  "completedAt": "2026-09-13T16:55:14.679Z"
+}

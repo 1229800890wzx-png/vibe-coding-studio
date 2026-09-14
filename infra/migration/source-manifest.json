@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "baseline": "initial-production-baseline-unreleased",
+  "upstreamCommit": "8e43004cf68a405cd3485f98f8a539b97ca6544a",
+  "migrationEngine": {
+    "name": "Liquibase OSS",
+    "version": "4.33.0",
+    "license": "Apache-2.0",
+    "licenseSource": "https://github.com/liquibase/liquibase/blob/v4.33.0/LICENSE.txt"
+  },
+  "sources": {
+    "system": {
+      "path": "apps/server/sql/mysql/ruoyi-vue-pro.sql",
+      "sha256": "496a78b098243558f573608a3309d85f24ae6205e785a480c3efc94c904a43be"
+    },
+    "business": {
+      "path": "infra/database/20-public-business-models.sql",
+      "sha256": "7b6fca0e6182280389ef5252d4c2a97ea2c7580e27f3a43cd63af46cb0b33861"
+    },
+    "education": {
+      "path": "infra/sql/education.sql",
+      "sha256": "762f7233fe533e7a1c42492ad64d9137ba4c713b1b803b5aa87d7d5ae0de9931"
+    },
+    "quartz": {
+      "path": "apps/server/sql/mysql/quartz.sql",
+      "sha256": "4d2753e7d5ad9c6bab343531cca372598fe09b860bc526e978a4d500636ee244"
+    },
+    "menus": {
+      "path": "infra/sql/education-menus.sql",
+      "sha256": "a952a4d3233018b6fffd615d80b6c0f87f9f1b1a4c666fece4fb1478891ac340"
+    },
+    "reconcile": {
+      "path": "infra/database/21-public-model-reconciliations.sql",
+      "sha256": "0b02cd39c1e2d83f1bc1f18b07563b14ffffbe7ce0a515c783873657c5022c12"
+    },
+    "overrides": {
+      "path": "infra/database/model-overrides.json",
+      "sha256": "b8fd9e679bc52e3ff40ba148d99d5ecdec6fb527eae626016c14b00080a2640f"
+    },
+    "sourceManifest": {
+      "path": "infra/database/source-manifest.json",
+      "sha256": "17e33908df145db65b9d60b6f02ef98132aff4b4d99a437f433b64e2c7e7f894"
+    }
+  },
+  "tableCounts": {
+    "systemInfra": 48,
+    "business": 95,
+    "education": 28,
+    "quartz": 11
+  },
+  "seedPolicy": "Only public dictionaries/menu definitions, original bootstrap admin/tenant/config, and education roles/menu/notification template; no members, courses, orders, mock channels, files or scheduler fixtures.",
+  "files": {
+    "sql/001-original-system-infra.sql": "b2a8f0cb6510ae26a40297930b0ed2f427967750f02ce65ba373045cee61ea83",
+    "sql/002-original-business.sql": "b0a193874c3a5a5957eacc205cf51e27632ad1e6945dff5abad2947bd1bd2bd2",
+    "sql/003-education.sql": "9cda93328a080da6995561cd54a0e2436041b9278d551d3d9f9867d11dea8954",
+    "sql/004-original-quartz.sql": "8dad81a70b7b085a4ff740ed24fc50e2b13e04d5796b61c3ad9dbd8297697f6b",
+    "sql/005-original-navigation-dictionaries.sql": "6884954dfaf8ae3341ad816d7ccd90ba8b64b3b707c39c226717e0e6ad25806c",
+    "sql/006-production-bootstrap.sql": "ff95710403f1ce77334829b6fe11fbb9307ee0b3feb1e26efcfaea3e90cbb9cc",
+    "sql/007-education-navigation-notification.sql": "2e7b0983f14c7e3dd83acb68a92e0106716a5767c5dfe050767482575b8e1bc7",
+    "sql/008-original-model-reconciliations.sql": "5de671bc1b39dd861ab069f562d7619aff2d627b6ab04b01e277069f63f39270",
+    "db.changelog.xml": "aab6c85f4995fc0f5b3c628d5ae6f6393c76c5457ac16b5801a8b7411779cabe",
+    "pom.xml": "0bc06b1caa67b4fb384806cb8a0bf27494de3597fb144a3cc6e2746503eb8519"
+  }
+}

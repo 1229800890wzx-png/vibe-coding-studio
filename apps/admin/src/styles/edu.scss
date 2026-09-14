@@ -1,0 +1,241 @@
+:root {
+  --edu-orange: #ff7a00;
+  --edu-ink: #1d1d1f;
+  --app-content-bg-color: #f5f5f7;
+  --el-font-size-base: 14px;
+}
+body {
+  color: #1d1d1f;
+}
+.el-button--primary:not(.is-link):not(.is-text):not(.is-plain) {
+  color: #1d1d1f;
+  font-weight: 650;
+}
+.el-button:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #b85500;
+  outline-offset: 3px;
+}
+.edu-page {
+  max-width: 1640px;
+  margin: 0 auto;
+}
+.edu-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 4px 0 28px;
+}
+.edu-eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  color: #995000;
+  text-transform: uppercase;
+}
+.edu-page h1 {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  font-weight: 750;
+}
+.edu-description {
+  color: #68686c;
+  margin: 0;
+  line-height: 1.65;
+  font-size: 14px;
+}
+.edu-header-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.edu-card {
+  background: white;
+  border: 1px solid #e8e8eb;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+.edu-card h2 {
+  margin: 0 0 20px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.edu-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.edu-filters .el-input {
+  max-width: 270px;
+}
+.edu-filters .el-select {
+  width: 170px;
+}
+.edu-page .el-table {
+  font-size: 14px;
+  --el-table-header-bg-color: #f8f8fa;
+  --el-table-row-hover-bg-color: #fff8f0;
+}
+.edu-page .el-table td.el-table__cell {
+  height: 48px;
+  padding: 8px 0;
+}
+.edu-page .el-table th.el-table__cell {
+  color: #626267;
+  font-size: 12px;
+  font-weight: 650;
+}
+.edu-page .el-pagination {
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+.edu-cell-title {
+  font-weight: 650;
+  color: #1d1d1f;
+}
+.edu-cell-meta {
+  color: #77777d;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.edu-error {
+  margin-bottom: 18px;
+}
+.edu-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+.edu-form-grid .is-wide {
+  grid-column: 1 / -1;
+}
+.edu-form-grid .el-select,
+.edu-form-grid .el-date-editor,
+.edu-form-grid .el-input-number {
+  width: 100%;
+}
+.edu-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.edu-stat {
+  background: #fff;
+  border: 1px solid #e8e8eb;
+  border-radius: 12px;
+  padding: 24px;
+}
+.edu-stat strong {
+  display: block;
+  font-size: 36px;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
+  margin: 12px 0;
+}
+.edu-stat span {
+  font-size: 13px;
+  color: #68686c;
+}
+.edu-stat:first-child {
+  border-top: 4px solid #ff7a00;
+  padding-top: 21px;
+}
+.edu-drawer-body {
+  padding: 0 8px 24px;
+}
+.edu-empty {
+  text-align: center;
+  padding: 28px;
+  color: #68686c;
+}
+.edu-inline-note {
+  color: #68686c;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 6px 0;
+}
+.edu-action-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #9b4900;
+  padding: 8px 0;
+  font-weight: 650;
+}
+.edu-review-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(330px, 1fr);
+  gap: 24px;
+}
+.edu-work-preview {
+  white-space: pre-wrap;
+  line-height: 1.8;
+  background: #f8f8fa;
+  padding: 24px;
+  border-radius: 10px;
+  min-height: 280px;
+  overflow-wrap: anywhere;
+}
+.edu-lesson {
+  border: 1px solid #e8e8eb;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.edu-lesson-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 10px;
+}
+.edu-lesson-heading strong {
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .edu-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .edu-review-grid {
+    grid-template-columns: 1fr;
+  }
+  .edu-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 560px) {
+  .edu-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .edu-card {
+    padding: 16px;
+  }
+  .edu-stat {
+    padding: 18px;
+  }
+  .edu-page h1 {
+    font-size: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.edu-page .el-button--primary.is-link,
+.edu-page .el-button--primary.is-text {
+  color: #9b4900;
+}

@@ -1,0 +1,143 @@
+{
+  "startedAt": "2026-09-14T00:01:30.883Z",
+  "scope": "Current worktree Git cached/unignored candidate files; no stage, commit, build, database changes or external directory traversal. Only this ignored report is written.",
+  "checks": [
+    {
+      "name": "Git delivery candidates enumerated without staging",
+      "status": "PASSED"
+    },
+    {
+      "name": "No local runtimes, dependencies, build outputs or foundation.env in candidates",
+      "status": "PASSED",
+      "files": []
+    },
+    {
+      "name": "Candidate reads stay inside regular worktree files",
+      "status": "PASSED",
+      "invalidFiles": [],
+      "missingFiles": []
+    },
+    {
+      "name": "Local foundation passwords/tokens absent from candidate bytes",
+      "status": "PASSED",
+      "privateSourceAvailable": true,
+      "comparedPrivateValueCount": 4,
+      "scannedFiles": 12343,
+      "scannedBytes": 132169076,
+      "files": []
+    },
+    {
+      "name": "Three fixed upstream locks and preserved MIT notices",
+      "status": "PASSED",
+      "repositories": [
+        {
+          "path": "apps/server",
+          "commit": "8e43004cf68a405cd3485f98f8a539b97ca6544a",
+          "lockMatches": true,
+          "licenseFile": "apps/server/LICENSE",
+          "licenseMatches": true,
+          "noNestedGit": true
+        },
+        {
+          "path": "apps/admin",
+          "commit": "aab14fb0e74720dd09e964ae066f8bbde9f9012e",
+          "lockMatches": true,
+          "licenseFile": "apps/admin/LICENSE",
+          "licenseMatches": true,
+          "noNestedGit": true
+        },
+        {
+          "path": "apps/miniapp",
+          "commit": "3c4bf3864415054a88fe616a414e098972329412",
+          "lockMatches": true,
+          "licenseFile": "apps/miniapp/LICENSE",
+          "licenseMatches": true,
+          "noNestedGit": true
+        }
+      ]
+    },
+    {
+      "name": "Key application and migration package manifests/locks are delivery candidates",
+      "status": "PASSED",
+      "checkedFiles": 19,
+      "files": []
+    },
+    {
+      "name": "Miniapp demo analytics explicitly disabled on all shipped platforms",
+      "status": "PASSED",
+      "platforms": [
+        {
+          "platform": "root",
+          "disabled": true
+        },
+        {
+          "platform": "h5",
+          "disabled": true
+        },
+        {
+          "platform": "mp-weixin",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Production migration assets match current fixed sources",
+      "status": "PASSED",
+      "command": "node tooling/bootstrap/generate-production-migrations.mjs --check",
+      "exitCode": 0
+    },
+    {
+      "name": "Education dictionary exactly matches generator and authoritative model/DDL",
+      "status": "PASSED",
+      "exitCode": 0,
+      "files": []
+    }
+  ],
+  "limitations": [
+    "Credential matching covers nonempty password/token/secret/key values in the named local foundation.env, including common encodings; it is not a general-purpose secret discovery scanner.",
+    "Frontend freshness compares local input/output modification times conservatively, not a content-addressed rebuild. Browser/API reports retain their own verification scope.",
+    "License fingerprints cover the three fixed imported project notices, not a replacement for the third-party dependency license inventory."
+  ],
+  "candidateCount": 12343,
+  "candidatePathListSha256": "a386073bc42e99f4bc732cda6f4d9ef6f20fc26955f80499ff2f20b73f3f4f12",
+  "buildFreshness": [
+    {
+      "application": "backend",
+      "status": "CURRENT",
+      "artifact": "apps/server/yudao-server/target/yudao-server.jar",
+      "checkedJavaSources": 1140,
+      "evidence": ".runtime/backend-build-report.json",
+      "evidenceTimestamp": "2026-09-13T18:06:32.690Z",
+      "staleSourceFiles": [],
+      "unexpectedOptionalClasses": [],
+      "packagedJarMatchesEvidence": true
+    },
+    {
+      "application": "admin production",
+      "status": "CURRENT",
+      "artifact": "apps/admin/dist-prod/.vite/manifest.json",
+      "artifactModified": "2026-09-13T18:03:19.682Z",
+      "checkedInputFiles": 2796,
+      "newerInputFiles": []
+    },
+    {
+      "application": "miniapp H5",
+      "status": "CURRENT",
+      "artifact": "apps/miniapp/dist/build/h5/index.html",
+      "artifactModified": "2026-09-13T23:51:51.824Z",
+      "checkedInputFiles": 535,
+      "newerInputFiles": []
+    },
+    {
+      "application": "miniapp WeChat",
+      "status": "CURRENT",
+      "artifact": "apps/miniapp/dist/build/mp-weixin/app.json",
+      "artifactModified": "2026-09-13T23:51:50.315Z",
+      "checkedInputFiles": 535,
+      "newerInputFiles": []
+    }
+  ],
+  "buildRefreshNeeded": false,
+  "completedAt": "2026-09-14T00:01:43.638Z",
+  "status": "PASSED"
+}

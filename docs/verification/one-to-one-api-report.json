@@ -1,0 +1,217 @@
+{
+  "startedAt": "2026-09-13T18:07:05.339Z",
+  "status": "PASSED",
+  "scope": "Actual local Java API and MySQL8.4. TEST fixtures only through original account, role, teacher, CRM and admission APIs. SQL SELECT reads and a temporary TEST-child row lock only. No external messages, payment, orders or seat reservations.",
+  "checks": [
+    {
+      "name": "Public directory separates explicitly enabled one-to-one teachers and never exposes original staff IDs",
+      "status": "PASSED",
+      "details": {
+        "teacherIds": [
+          16,
+          17
+        ]
+      }
+    },
+    {
+      "name": "Switch-off, unpublished or disabled staff, missing teacher, cross-parent child, consent, goal, future time and duration validations reject without creating leads",
+      "status": "PASSED",
+      "details": {
+        "rejectionCount": 14,
+        "rejections": [
+          {
+            "code": 1090000001,
+            "message": "该老师暂未开放一对一预约，请重新选择"
+          },
+          {
+            "code": 1090000001,
+            "message": "该老师暂未开放一对一预约，请重新选择"
+          },
+          {
+            "code": 1090000001,
+            "message": "该老师暂未开放一对一预约，请重新选择"
+          },
+          {
+            "code": 1090000001,
+            "message": "请选择一对一授课老师"
+          },
+          {
+            "code": 1090000001,
+            "message": "无权访问该孩子资料"
+          },
+          {
+            "code": 1090000001,
+            "message": "请阅读并同意本次咨询联系授权"
+          },
+          {
+            "code": 1090000001,
+            "message": "请阅读并同意本次咨询联系授权"
+          },
+          {
+            "code": 1090000001,
+            "message": "请填写孩子的学习目标，最多 1000 字"
+          },
+          {
+            "code": 1090000001,
+            "message": "请选择未来的期望上课时间"
+          },
+          {
+            "code": 1090000001,
+            "message": "期望时段应为 30—180 分钟"
+          },
+          {
+            "code": 1090000001,
+            "message": "期望时段应为 30—180 分钟"
+          },
+          {
+            "code": 1090000001,
+            "message": "请选择未来的期望上课时间"
+          },
+          {
+            "code": 1090000001,
+            "message": "日期时间格式无效"
+          },
+          {
+            "code": 1090000001,
+            "message": "一对一预约申请不能关联班课试听预约"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Same request under simultaneous transactions and a TEST-child lock gate creates exactly one original CRM clue",
+      "status": "PASSED",
+      "details": {
+        "clueId": 21,
+        "concurrentResponses": [
+          21,
+          21,
+          21
+        ],
+        "isolation": "REPEATABLE-READ"
+      }
+    },
+    {
+      "name": "Different teacher, time or child stays separate; original CRM owner/team is preserved and teaching role gains no CRM access",
+      "status": "PASSED",
+      "details": {
+        "clueId": 21,
+        "distinctClueIds": [
+          22,
+          23,
+          24
+        ],
+        "originalOwnerUserId": 1
+      }
+    },
+    {
+      "name": "Original CRM response/filter and immutable teacher snapshot work; generic editing cannot replace appointment facts; default and explicit COURSE consultation remain compatible",
+      "status": "PASSED",
+      "details": {
+        "clueId": 21,
+        "ordinaryCourseClueId": 25,
+        "frozenTeacherName": "TEST 一对一老师A mu04m06z"
+      }
+    },
+    {
+      "name": "Withdrawal is guardian-only and idempotent under concurrent calls; cancelled history stays readable and a new application creates a new lead",
+      "status": "PASSED",
+      "details": {
+        "cancelledClueId": 21,
+        "reappliedClueId": 26
+      }
+    }
+  ],
+  "fixtures": {
+    "teachers": [
+      {
+        "id": 16,
+        "userId": 276,
+        "name": "TEST 一对一老师A mu04m06z",
+        "username": "test1to1Amu04m06z",
+        "enabled": true
+      },
+      {
+        "id": 17,
+        "userId": 277,
+        "name": "TEST 一对一老师B mu04m06z",
+        "username": "test1to1Bmu04m06z",
+        "enabled": true
+      }
+    ],
+    "students": [
+      {
+        "id": 68,
+        "name": "TEST 一对一孩子A mu04m06z",
+        "owner": "primary-test-parent"
+      },
+      {
+        "id": 69,
+        "name": "TEST 一对一孩子B mu04m06z",
+        "owner": "primary-test-parent"
+      },
+      {
+        "id": 70,
+        "name": "TEST 一对一孩子他人 mu04m06z",
+        "owner": "other-test-parent"
+      }
+    ],
+    "clueIds": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ]
+  },
+  "mysql": {
+    "version": "8.4.11",
+    "isolation": "REPEATABLE-READ"
+  },
+  "browser": {
+    "route": "/pages/edu/one-to-one",
+    "parentMobile": "13900000001",
+    "teacherId": 16,
+    "teacherName": "TEST 一对一老师A mu04m06z",
+    "studentId": 68,
+    "studentName": "TEST 一对一孩子A mu04m06z",
+    "studentBId": 69,
+    "studentBName": "TEST 一对一孩子B mu04m06z",
+    "clueId": 26,
+    "cancelledClueId": 21,
+    "ordinaryCourseClueId": 25,
+    "preferredStartTime": "2026-09-21T02:08:00",
+    "preferredEndTime": "2026-09-21T03:08:00",
+    "ownerUserId": 1,
+    "account": "existing-local-test-parent",
+    "note": "All listed teachers/children/requests are TEST fixtures, not real staff or scheduled lessons."
+  },
+  "parallelResponses": [
+    {
+      "status": "fulfilled",
+      "clueId": 21
+    },
+    {
+      "status": "fulfilled",
+      "clueId": 21
+    },
+    {
+      "status": "fulfilled",
+      "clueId": 21
+    }
+  ],
+  "completedAt": "2026-09-13T18:07:09.742Z",
+  "configurationRestored": true,
+  "configurationRestoredTo": "1",
+  "previousFailedRunTeacherBookingsDisabled": [
+    12,
+    13,
+    14,
+    15
+  ],
+  "finalPublicTeacherIds": [
+    16,
+    17
+  ]
+}

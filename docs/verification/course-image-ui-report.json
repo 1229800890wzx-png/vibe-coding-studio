@@ -1,0 +1,659 @@
+{
+  "startedAt": "2026-09-13T17:30:51.621Z",
+  "provenance": "Independent Edge browser; guest session; live local education APIs. AI-generated course creation illustrations, not real students or photographs of actual teaching. Existing TEST course text and immutable API cover values are preserved.",
+  "normalScenario": "No interception; all screenshots use normal live API and asset requests.",
+  "checks": [
+    {
+      "name": "Desktop home: live course covers match their directions, load fully, and fit 1440px",
+      "status": "PASS",
+      "dimensions": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "cards": [
+        {
+          "name": "TEST 报名流程 mu0240tk",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 35,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00q9ly",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 34,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00pb5b",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 33,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00ok9v",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 32,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        }
+      ]
+    },
+    {
+      "name": "Mobile home: all covers load without horizontal overflow at 390px",
+      "status": "PASS",
+      "dimensions": {
+        "width": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "cards": [
+        {
+          "name": "TEST 报名流程 mu0240tk",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 35,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00q9ly",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 34,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00pb5b",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 33,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00ok9v",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 32,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        }
+      ]
+    },
+    {
+      "name": "Mobile detail opens the actual selected course and displays its fully loaded matching illustration",
+      "status": "PASS",
+      "courseId": 35,
+      "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp",
+      "detailImage": {
+        "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+        "width": 1672,
+        "height": 941
+      },
+      "dimensions": {
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "name": "Course selection: the complete first page uses direction-specific loaded covers at 390px",
+      "status": "PASS",
+      "dimensions": {
+        "width": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "cards": [
+        {
+          "name": "TEST 报名流程 mu0240tk",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 35,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00q9ly",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 34,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00pb5b",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 33,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00ok9v",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 32,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00nv2i",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 31,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00i09d",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 30,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00h682",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 29,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "本地验收课程1789315716364",
+          "src": "http://127.0.0.1:5174/static/edu/courses/ai.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 28,
+          "direction": "AI_CREATION",
+          "originalCoverUrl": "http://127.0.0.1:5173/assets/course-placeholder.svg"
+        },
+        {
+          "name": "TEST探索1789315481438B",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 27,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/course-story.svg"
+        },
+        {
+          "name": "TEST探索1789315433917B",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 26,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/course-story.svg"
+        },
+        {
+          "name": "TEST点评课程mu006tg6",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 25,
+          "direction": "TOOL",
+          "originalCoverUrl": "/assets/course-placeholder.svg"
+        },
+        {
+          "name": "TEST 双孩子优惠券 mtzzkbe6",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 24,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 双孩子优惠券 mtzziftz",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 23,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 双孩子优惠券 mtzze7m0",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 22,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST迟到付款 mtzz87ic",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 21,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "本地教育交易 mtzz14t4",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 20,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST作品课程mtzz0pok",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 19,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST作品课程mtzz05kn",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 18,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "本地验收课程1789313374788",
+          "src": "http://127.0.0.1:5174/static/edu/courses/ai.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 17,
+          "direction": "AI_CREATION",
+          "originalCoverUrl": "http://127.0.0.1:5173/assets/course-placeholder.svg"
+        },
+        {
+          "name": "本地教育交易 mtzyfiz9",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 356,
+          "height": 200.25,
+          "illustrationLabel": "创作示意",
+          "courseId": 16,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        }
+      ]
+    },
+    {
+      "name": "Course selection: loaded covers and 16:9 wrappers fit 1440px",
+      "status": "PASS",
+      "dimensions": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440
+      },
+      "cards": [
+        {
+          "name": "TEST 报名流程 mu0240tk",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 35,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00q9ly",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 34,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00pb5b",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 33,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00ok9v",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 32,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00nv2i",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 31,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00i09d",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 30,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 招生体验课mu00h682",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 29,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "本地验收课程1789315716364",
+          "src": "http://127.0.0.1:5174/static/edu/courses/ai.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 28,
+          "direction": "AI_CREATION",
+          "originalCoverUrl": "http://127.0.0.1:5173/assets/course-placeholder.svg"
+        },
+        {
+          "name": "TEST探索1789315481438B",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 27,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/course-story.svg"
+        },
+        {
+          "name": "TEST探索1789315433917B",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 26,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/course-story.svg"
+        },
+        {
+          "name": "TEST点评课程mu006tg6",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 25,
+          "direction": "TOOL",
+          "originalCoverUrl": "/assets/course-placeholder.svg"
+        },
+        {
+          "name": "TEST 双孩子优惠券 mtzzkbe6",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 24,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 双孩子优惠券 mtzziftz",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 23,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST 双孩子优惠券 mtzze7m0",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 22,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST迟到付款 mtzz87ic",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 21,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "本地教育交易 mtzz14t4",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 20,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST作品课程mtzz0pok",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 19,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "TEST作品课程mtzz05kn",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 18,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        },
+        {
+          "name": "本地验收课程1789313374788",
+          "src": "http://127.0.0.1:5174/static/edu/courses/ai.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 17,
+          "direction": "AI_CREATION",
+          "originalCoverUrl": "http://127.0.0.1:5173/assets/course-placeholder.svg"
+        },
+        {
+          "name": "本地教育交易 mtzyfiz9",
+          "src": "http://127.0.0.1:5174/static/edu/courses/tools.jpg",
+          "naturalWidth": 1672,
+          "naturalHeight": 941,
+          "width": 398,
+          "height": 223.875,
+          "illustrationLabel": "创作示意",
+          "courseId": 16,
+          "direction": "TOOL",
+          "originalCoverUrl": "http://127.0.0.1:5174/static/edu/mono.webp"
+        }
+      ]
+    },
+    {
+      "name": "Isolated injection: one aborted tools.jpg request falls back visibly without an image retry loop",
+      "status": "PASS",
+      "injectedFailure": true,
+      "normalScreenshotsUnaffected": true,
+      "aborted": 1,
+      "toolsRequests": 1,
+      "fallbackCount": 4
+    }
+  ],
+  "screenshots": [
+    "docs/screenshots/course-images-home-desktop.png",
+    "docs/screenshots/course-images-home-mobile.png",
+    "docs/screenshots/course-images-detail-mobile.png"
+  ],
+  "errors": [],
+  "status": "PASSED",
+  "completedAt": "2026-09-13T17:30:56.995Z"
+}

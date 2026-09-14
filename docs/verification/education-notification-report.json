@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-09-13T15:30:06.347Z",
+  "scope": "Local original-system in-app notifications only; no external channel",
+  "checks": [
+    {
+      "name": "Anonymous page denied",
+      "details": {
+        "code": 401
+      }
+    },
+    {
+      "name": "Anonymous unread count denied",
+      "details": {
+        "code": 401
+      }
+    },
+    {
+      "name": "Anonymous mutation denied",
+      "details": {
+        "code": 401
+      }
+    },
+    {
+      "name": "Administrator token cannot impersonate an app member",
+      "details": {
+        "code": 403
+      }
+    },
+    {
+      "name": "Each original member sees only their own minimal notification fields"
+    },
+    {
+      "name": "Client-supplied recipient and user type cannot override login identity"
+    },
+    {
+      "name": "Guessed cross-parent notification ID updates zero rows"
+    },
+    {
+      "name": "Own notification is marked read once and unread filter reflects persisted state"
+    },
+    {
+      "name": "Read all uses the original member-scoped update and count"
+    },
+    {
+      "name": "Empty read request rejected",
+      "details": {
+        "code": 400
+      }
+    },
+    {
+      "name": "Oversized read request rejected",
+      "details": {
+        "code": 400
+      }
+    }
+  ],
+  "fixtures": {
+    "first": {
+      "id": 103,
+      "title": "本地消息权限验收 1789313406347 A",
+      "userId": 10001
+    },
+    "second": {
+      "id": 104,
+      "title": "本地消息权限验收 1789313406347 B",
+      "userId": 10002
+    }
+  },
+  "skipped": [],
+  "status": "PASSED"
+}

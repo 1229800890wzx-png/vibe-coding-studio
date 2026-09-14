@@ -1,0 +1,446 @@
+{
+  "timestamp": "2026-09-13T18:19:23.223Z",
+  "status": "PASSED",
+  "productionManifestViews": 193,
+  "checkedBackendMenuComponents": 108,
+  "checked": [
+    {
+      "path": "course",
+      "component": "edu/course/index"
+    },
+    {
+      "path": "cohort",
+      "component": "edu/cohort/index"
+    },
+    {
+      "path": "session",
+      "component": "edu/session/index"
+    },
+    {
+      "path": "student",
+      "component": "edu/student/index"
+    },
+    {
+      "path": "enrollment",
+      "component": "edu/enrollment/index"
+    },
+    {
+      "path": "trial",
+      "component": "edu/trial/index"
+    },
+    {
+      "path": "assignment",
+      "component": "edu/assignment/index"
+    },
+    {
+      "path": "submission",
+      "component": "edu/submission/index"
+    },
+    {
+      "path": "growth-report",
+      "component": "edu/growth-report/index"
+    },
+    {
+      "path": "request",
+      "component": "edu/request/index"
+    },
+    {
+      "path": "work",
+      "component": "edu/work/index"
+    },
+    {
+      "path": "campus",
+      "component": "edu/campus/index"
+    },
+    {
+      "path": "room",
+      "component": "edu/room/index"
+    },
+    {
+      "path": "teacher",
+      "component": "edu/teacher/index"
+    },
+    {
+      "path": "settings",
+      "component": "edu/settings/index"
+    },
+    {
+      "path": "admission",
+      "component": "edu/admission/index"
+    },
+    {
+      "path": "admission-clues",
+      "component": "crm/clue/index"
+    },
+    {
+      "path": "list",
+      "component": "system/tenant/index"
+    },
+    {
+      "path": "package",
+      "component": "system/tenantPackage/index"
+    },
+    {
+      "path": "user",
+      "component": "system/user/index"
+    },
+    {
+      "path": "role",
+      "component": "system/role/index"
+    },
+    {
+      "path": "menu",
+      "component": "system/menu/index"
+    },
+    {
+      "path": "dept",
+      "component": "system/dept/index"
+    },
+    {
+      "path": "post",
+      "component": "system/post/index"
+    },
+    {
+      "path": "dict",
+      "component": "system/dict/index"
+    },
+    {
+      "path": "sms-channel",
+      "component": "system/sms/channel/index"
+    },
+    {
+      "path": "sms-template",
+      "component": "system/sms/template/index"
+    },
+    {
+      "path": "sms-log",
+      "component": "system/sms/log/index"
+    },
+    {
+      "path": "mail-account",
+      "component": "system/mail/account/index"
+    },
+    {
+      "path": "mail-template",
+      "component": "system/mail/template/index"
+    },
+    {
+      "path": "mail-log",
+      "component": "system/mail/log/index"
+    },
+    {
+      "path": "notify-template",
+      "component": "system/notify/template/index"
+    },
+    {
+      "path": "notify-message",
+      "component": "system/notify/message/index"
+    },
+    {
+      "path": "notice",
+      "component": "system/notice/index"
+    },
+    {
+      "path": "operate-log",
+      "component": "system/operatelog/index"
+    },
+    {
+      "path": "login-log",
+      "component": "system/loginlog/index"
+    },
+    {
+      "path": "oauth2/application",
+      "component": "system/oauth2/client/index"
+    },
+    {
+      "path": "token",
+      "component": "system/oauth2/token/index"
+    },
+    {
+      "path": "client",
+      "component": "system/social/client/index"
+    },
+    {
+      "path": "user",
+      "component": "system/social/user/index"
+    },
+    {
+      "path": "area",
+      "component": "system/area/index"
+    },
+    {
+      "path": "codegen",
+      "component": "infra/codegen/index"
+    },
+    {
+      "path": "data-source-config",
+      "component": "infra/dataSourceConfig/index"
+    },
+    {
+      "path": "build",
+      "component": "infra/build/index"
+    },
+    {
+      "path": "swagger",
+      "component": "infra/swagger/index"
+    },
+    {
+      "path": "api-access-log",
+      "component": "infra/apiAccessLog/index"
+    },
+    {
+      "path": "api-error-log",
+      "component": "infra/apiErrorLog/index"
+    },
+    {
+      "path": "websocket",
+      "component": "infra/webSocket/index"
+    },
+    {
+      "path": "file-config",
+      "component": "infra/fileConfig/index"
+    },
+    {
+      "path": "file",
+      "component": "infra/file/index"
+    },
+    {
+      "path": "job",
+      "component": "infra/job/index"
+    },
+    {
+      "path": "config",
+      "component": "infra/config/index"
+    },
+    {
+      "path": "druid",
+      "component": "infra/druid/index"
+    },
+    {
+      "path": "redis",
+      "component": "infra/redis/index"
+    },
+    {
+      "path": "admin-server",
+      "component": "infra/server/index"
+    },
+    {
+      "path": "skywalking",
+      "component": "infra/skywalking/index"
+    },
+    {
+      "path": "app",
+      "component": "pay/app/index"
+    },
+    {
+      "path": "order",
+      "component": "pay/order/index"
+    },
+    {
+      "path": "refund",
+      "component": "pay/refund/index"
+    },
+    {
+      "path": "transfer",
+      "component": "pay/transfer/index"
+    },
+    {
+      "path": "wallet-balance",
+      "component": "pay/wallet/balance/index"
+    },
+    {
+      "path": "wallet-recharge-package",
+      "component": "pay/wallet/rechargePackage/index"
+    },
+    {
+      "path": "notify",
+      "component": "pay/notify/index"
+    },
+    {
+      "path": "config",
+      "component": "member/config/index"
+    },
+    {
+      "path": "user",
+      "component": "member/user/index"
+    },
+    {
+      "path": "tag",
+      "component": "member/tag/index"
+    },
+    {
+      "path": "level",
+      "component": "member/level/index"
+    },
+    {
+      "path": "group",
+      "component": "member/group/index"
+    },
+    {
+      "path": "record",
+      "component": "member/point/record/index"
+    },
+    {
+      "path": "config",
+      "component": "member/signin/config/index"
+    },
+    {
+      "path": "record",
+      "component": "member/signin/record/index"
+    },
+    {
+      "path": "home",
+      "component": "mall/home/index"
+    },
+    {
+      "path": "spu",
+      "component": "mall/product/spu/index"
+    },
+    {
+      "path": "category",
+      "component": "mall/product/category/index"
+    },
+    {
+      "path": "brand",
+      "component": "mall/product/brand/index"
+    },
+    {
+      "path": "property",
+      "component": "mall/product/property/index"
+    },
+    {
+      "path": "comment",
+      "component": "mall/product/comment/index"
+    },
+    {
+      "path": "config",
+      "component": "mall/trade/config/index"
+    },
+    {
+      "path": "order",
+      "component": "mall/trade/order/index"
+    },
+    {
+      "path": "after-sale",
+      "component": "mall/trade/afterSale/index"
+    },
+    {
+      "path": "express",
+      "component": "mall/trade/delivery/express/index"
+    },
+    {
+      "path": "express-template",
+      "component": "mall/trade/delivery/expressTemplate/index"
+    },
+    {
+      "path": "pick-up-store",
+      "component": "mall/trade/delivery/pickUpStore/index"
+    },
+    {
+      "path": "pick-up-order",
+      "component": "mall/trade/delivery/pickUpOrder/index"
+    },
+    {
+      "path": "brokerage-user",
+      "component": "mall/trade/brokerage/user/index"
+    },
+    {
+      "path": "brokerage-record",
+      "component": "mall/trade/brokerage/record/index"
+    },
+    {
+      "path": "brokerage-withdraw",
+      "component": "mall/trade/brokerage/withdraw/index"
+    },
+    {
+      "path": "article/category",
+      "component": "mall/promotion/article/category/index"
+    },
+    {
+      "path": "article",
+      "component": "mall/promotion/article/index"
+    },
+    {
+      "path": "banner",
+      "component": "mall/promotion/banner/index"
+    },
+    {
+      "path": "template",
+      "component": "mall/promotion/coupon/template/index"
+    },
+    {
+      "path": "list",
+      "component": "mall/promotion/coupon/index"
+    },
+    {
+      "path": "config",
+      "component": "mall/promotion/seckill/config/index"
+    },
+    {
+      "path": "activity",
+      "component": "mall/promotion/seckill/activity/index"
+    },
+    {
+      "path": "acitivity",
+      "component": "mall/promotion/combination/activity/index"
+    },
+    {
+      "path": "record",
+      "component": "mall/promotion/combination/record/index"
+    },
+    {
+      "path": "activity",
+      "component": "mall/promotion/bargain/activity/index"
+    },
+    {
+      "path": "record",
+      "component": "mall/promotion/bargain/record/index"
+    },
+    {
+      "path": "point-activity",
+      "component": "mall/promotion/point/activity/index"
+    },
+    {
+      "path": "diy-template",
+      "component": "mall/promotion/diy/template/index"
+    },
+    {
+      "path": "diy-template",
+      "component": "mall/promotion/diy/template/index"
+    },
+    {
+      "path": "diy-page",
+      "component": "mall/promotion/diy/page/index"
+    },
+    {
+      "path": "discount-activity",
+      "component": "mall/promotion/discountActivity/index"
+    },
+    {
+      "path": "reward-activity",
+      "component": "mall/promotion/rewardActivity/index"
+    },
+    {
+      "path": "member",
+      "component": "mall/statistics/member/index"
+    },
+    {
+      "path": "product",
+      "component": "mall/statistics/product/index"
+    },
+    {
+      "path": "trade",
+      "component": "mall/statistics/trade/index"
+    },
+    {
+      "path": "kefu",
+      "component": "mall/promotion/kefu/index"
+    }
+  ],
+  "noInstalledDhtmlx": true,
+  "noDhtmlxLockEntry": true,
+  "noInactiveManifestViews": true,
+  "scannedJsCssAssets": 738,
+  "noDhtmlxDistributionMarkers": true,
+  "scope": "Actual original admin login/menu API plus production manifest and asset scan. Selective original CRM clue/followup/team views enabled. Does not replace every-page browser interaction."
+}

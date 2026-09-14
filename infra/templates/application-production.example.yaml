@@ -1,0 +1,130 @@
+# Copy to a private external config directory as application-production.yaml.
+# Launch with --spring.profiles.active=production --spring.config.additional-location=file:/etc/vibe/
+# Required placeholders intentionally have no sample passwords or fallback secrets.
+server:
+  address: ${VIBE_BIND_ADDRESS:127.0.0.1}
+  port: ${VIBE_API_PORT:48080}
+  # The API is reachable only through the trusted reverse proxy. Strip client-supplied forwarded headers there.
+  forward-headers-strategy: framework
+spring:
+  datasource:
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          name: ${VIBE_DB_NAME}
+          url: ${VIBE_DB_JDBC_URL}
+          username: ${VIBE_DB_USERNAME}
+          password: ${VIBE_DB_PASSWORD}
+      druid:
+        initial-size: 2
+        min-idle: 2
+        max-active: 20
+    druid:
+      stat-view-servlet:
+        enabled: false
+  data:
+    redis:
+      host: ${VIBE_REDIS_HOST}
+      port: ${VIBE_REDIS_PORT:6379}
+      username: ${VIBE_REDIS_USERNAME}
+      password: ${VIBE_REDIS_PASSWORD}
+      database: ${VIBE_REDIS_DATABASE:0}
+      ssl:
+        enabled: ${VIBE_REDIS_TLS:true}
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 32MB
+  quartz:
+    auto-startup: true
+    scheduler-name: ${VIBE_SCHEDULER_NAME:vibeEduScheduler}
+    job-store-type: jdbc
+    wait-for-jobs-to-complete-on-shutdown: true
+    jdbc:
+      initialize-schema: never
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceId: AUTO
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            isClustered: true
+          threadPool:
+            threadCount: 4
+  boot:
+    admin:
+      client:
+        enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+knife4j:
+  enable: false
+mybatis-plus:
+  encryptor:
+    password: ${VIBE_MYBATIS_PLUS_ENCRYPTOR_PASSWORD}
+logging:
+  file:
+    name: ${VIBE_LOG_FILE:/var/log/vibe/backend.log}
+yudao:
+  demo: false
+  security:
+    mock-enable: false
+  captcha:
+    enable: true
+  sms-code:
+    begin-code: 100000
+    end-code: 999999
+  access-log:
+    enable: true
+  pay:
+    # Never enable a mock channel in production. LocalMockPayClientPolicy also rejects non-foundation profiles.
+    mock-enabled: false
+    order-notify-url: ${VIBE_PUBLIC_API_ORIGIN}/admin-api/pay/notify/order
+    refund-notify-url: ${VIBE_PUBLIC_API_ORIGIN}/admin-api/pay/notify/refund
+    transfer-notify-url: ${VIBE_PUBLIC_API_ORIGIN}/admin-api/pay/notify/transfer
+  trade:
+    order:
+      pay-app-key: ${VIBE_PAY_APP_KEY}
+      pay-expire-time: 15m
+      # Education is service delivery; do not send retail shipping updates.
+      status-sync-to-wxa-enable: false
+  tencent-lbs-key: ${TENCENT_LBS_KEY}
+wx:
+  mp:
+    app-id: ${WECHAT_MP_APP_ID}
+    secret: ${WECHAT_MP_SECRET}
+    config-storage:
+      type: RedisTemplate
+  miniapp:
+    appid: ${WECHAT_APP_ID}
+    secret: ${WECHAT_APP_SECRET}
+    config-storage:
+      type: RedisTemplate
+justauth:
+  enabled: true
+  type:
+    WECHAT_MINI_PROGRAM:
+      client-id: ${WECHAT_APP_ID}
+      client-secret: ${WECHAT_APP_SECRET}
+      ignore-check-redirect-uri: true
+      ignore-check-state: true
+  cache:
+    type: REDIS
+    prefix: 'social_auth_state:'
+    timeout: 24h
+
+# COS and payment-channel credentials are configured through original infra/pay services,
+# not invented application properties. See docs/OPERATIONS.md for the exact JSON structure.

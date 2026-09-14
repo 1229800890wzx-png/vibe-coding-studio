@@ -1,0 +1,102 @@
+{
+  "before": {
+    "timestamp": "2026-09-12T15:58:02.775Z",
+    "job": {
+      "id": 12907,
+      "handlerName": "eduTradeMaintenanceJob",
+      "cronExpression": "0 * * * * ?",
+      "status": 1
+    },
+    "jobCount": 4,
+    "triggerCount": 4
+  },
+  "after": {
+    "timestamp": "2026-09-13T15:09:38.320Z",
+    "job": {
+      "id": 12907,
+      "handlerName": "eduTradeMaintenanceJob",
+      "cronExpression": "0 * * * * ?",
+      "status": 1
+    },
+    "jobCount": 4,
+    "triggerCount": 4,
+    "execution": {
+      "jobId": 12907,
+      "handlerName": "eduTradeMaintenanceJob",
+      "cronExpression": "0 * * * * ?",
+      "logId": 46909,
+      "status": 1,
+      "result": "{\"1\":\"Expired education orders: 0, retried late-payment refunds: 0\",\"121\":\"Expired education orders: 0, retried late-payment refunds: 0\",\"122\":\"Expired education orders: 0, retried late-payment refunds: 0\"}",
+      "timestamp": "2026-09-13T15:09:38.298Z",
+      "jobs": [
+        {
+          "jobId": 12907,
+          "handlerName": "eduTradeMaintenanceJob",
+          "cronExpression": "0 * * * * ?",
+          "logId": 46909,
+          "status": 1,
+          "result": "{\"1\":\"Expired education orders: 0, retried late-payment refunds: 0\",\"121\":\"Expired education orders: 0, retried late-payment refunds: 0\",\"122\":\"Expired education orders: 0, retried late-payment refunds: 0\"}"
+        },
+        {
+          "jobId": 12908,
+          "handlerName": "payNotifyJob",
+          "cronExpression": "0/5 * * * * ?",
+          "logId": 46910,
+          "status": 1,
+          "result": "{\"1\":\"执行支付通知 0 个\",\"121\":\"执行支付通知 0 个\",\"122\":\"执行支付通知 0 个\"}"
+        },
+        {
+          "jobId": 12909,
+          "handlerName": "payRefundSyncJob",
+          "cronExpression": "0 * * * * ?",
+          "logId": 46911,
+          "status": 1,
+          "result": "{\"1\":\"同步退款订单 0 个\",\"121\":\"同步退款订单 0 个\",\"122\":\"同步退款订单 0 个\"}"
+        },
+        {
+          "jobId": 12910,
+          "handlerName": "payOrderSyncJob",
+          "cronExpression": "0 * * * * ?",
+          "logId": 46912,
+          "status": 1,
+          "result": "{\"1\":\"同步支付订单 0 个\",\"121\":\"同步支付订单 0 个\",\"122\":\"同步支付订单 0 个\"}"
+        }
+      ]
+    },
+    "refundPoint": {
+      "definition": {
+        "defaultValue": "0",
+        "nullable": "NO"
+      },
+      "legacyNullBackfilled": true,
+      "newRowDefault": 0
+    },
+    "activeTenants": [
+      {
+        "id": 1,
+        "name": "VIBE CODING"
+      }
+    ],
+    "visibleRootMenus": [
+      {
+        "path": "/system"
+      },
+      {
+        "path": "/infra"
+      },
+      {
+        "path": "/pay"
+      },
+      {
+        "path": "/member"
+      },
+      {
+        "path": "/mall"
+      },
+      {
+        "path": "/edu"
+      }
+    ]
+  },
+  "status": "PASSED"
+}

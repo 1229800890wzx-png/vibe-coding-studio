@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-09-12T15:39:33.068Z",
+  "checks": [
+    {
+      "name": "Unassigned SELF teacher cannot read cohort",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Unassigned SELF teacher cannot read student",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Unassigned SELF teacher cannot read submission",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Unassigned SELF teacher lists contain no unrelated records"
+    },
+    {
+      "name": "Assigned SELF teacher can read related cohort"
+    },
+    {
+      "name": "Assigned SELF teacher can read related student"
+    },
+    {
+      "name": "Assigned SELF teacher can read related submission"
+    },
+    {
+      "name": "Assigned SELF teacher cannot read another cohort",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "SELF teacher cohort list is limited to the assigned cohort"
+    },
+    {
+      "name": "Original department-scoped coordinator can read its campus and cohort"
+    },
+    {
+      "name": "Department-scoped coordinator cannot read another campus",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Department-scoped coordinator cannot read another campus cohort",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Original department scope filters cohort list"
+    }
+  ],
+  "fixtures": {
+    "teacherUserId": 249,
+    "coordinatorUserId": 250,
+    "campuses": [
+      1,
+      2
+    ],
+    "cohorts": [
+      6,
+      7
+    ]
+  },
+  "status": "PASSED"
+}

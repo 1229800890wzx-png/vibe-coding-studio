@@ -1,0 +1,66 @@
+{
+  "status": "PASSED",
+  "completedAt": "2026-09-13T17:35:21.961Z",
+  "checks": [
+    {
+      "name": "All six packaged illustrations match manifest and compiled output",
+      "status": "PASSED",
+      "images": [
+        {
+          "asset": "apps/miniapp/static/edu/courses/tools.jpg",
+          "bytes": 132888,
+          "sha256": "e2a6f814c8666e714e22c3d8c3e042387e7e7c7042aecb32a7133b619b4dc066",
+          "compiledMatch": true
+        },
+        {
+          "asset": "apps/miniapp/static/edu/courses/game.jpg",
+          "bytes": 136008,
+          "sha256": "9b56b97a2ae17f58461169bb12ec656fdefe287fecdc7820ede49fac9fc3b698",
+          "compiledMatch": true
+        },
+        {
+          "asset": "apps/miniapp/static/edu/courses/story.jpg",
+          "bytes": 170366,
+          "sha256": "73ec49d8e16f5dddba2bfa03e285abfaccb11d813aa57f7355fe9ea2f5200aa8",
+          "compiledMatch": true
+        },
+        {
+          "asset": "apps/miniapp/static/edu/courses/web.jpg",
+          "bytes": 157060,
+          "sha256": "15e83d6dab6a30cd42499a88fda953ea79e423329cdef4b86a01ed46b51e8108",
+          "compiledMatch": true
+        },
+        {
+          "asset": "apps/miniapp/static/edu/courses/ai.jpg",
+          "bytes": 139200,
+          "sha256": "9af58c45985a34192d445a92635a881e68b6bf6735b0ba6cdd89d9daf6d6bbd1",
+          "compiledMatch": true
+        },
+        {
+          "asset": "apps/miniapp/static/edu/courses/product.jpg",
+          "bytes": 129073,
+          "sha256": "f2c34c03d425450e28c034db7845d11333be05a85f94eff67e94e6410913ef8f",
+          "compiledMatch": true
+        }
+      ]
+    },
+    {
+      "name": "Raw main package stays below local 2 MiB size target",
+      "status": "PASSED",
+      "bytes": 1983205,
+      "limitBytes": 2097152,
+      "remainingBytes": 113947
+    }
+  ],
+  "compiledFiles": 359,
+  "totalBytes": 2095590,
+  "packageBytes": {
+    "MAIN": 1983205,
+    "pages/edu": 103344,
+    "pages/pay": 5720,
+    "pages/public": 3321
+  },
+  "limitations": [
+    "This is a raw compiled file-size check, not WeChat developer-tools upload or real-device acceptance."
+  ]
+}

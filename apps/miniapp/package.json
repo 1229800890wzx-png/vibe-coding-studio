@@ -1,0 +1,120 @@
+{
+  "id": "shopro",
+  "name": "vibe-coding-miniapp",
+  "displayName": "VIBE CODING",
+  "version": "2026.08",
+  "description": "芋道商城，一套代码，同时发行到iOS、Android、H5、微信小程序多个平台，请使用手机扫码快速体验强大功能",
+  "scripts": {
+    "build:h5": "node tooling/uni.mjs build",
+    "dev:h5": "node tooling/uni.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 5175 --outDir dist/build/h5",
+    "dev:mp-weixin": "node tooling/uni.mjs -p mp-weixin",
+    "build:mp-weixin": "node tooling/uni.mjs build -p mp-weixin",
+    "test": "node --test tooling/settlement.test.cjs"
+  },
+  "repository": "https://github.com/sheepjs/shop.git",
+  "keywords": [
+    "商城",
+    "B2C",
+    "商城模板"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sheepjs/shop/issues"
+  },
+  "homepage": "https://github.com/dcloudio/hello-uniapp#readme",
+  "dcloudext": {
+    "category": [
+      "前端页面模板",
+      "uni-app前端项目模板"
+    ],
+    "sale": {
+      "regular": {
+        "price": "0.00"
+      },
+      "sourcecode": {
+        "price": "0.00"
+      }
+    },
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "npmurl": ""
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "u",
+        "aliyun": "u"
+      },
+      "client": {
+        "App": {
+          "app-vue": "y",
+          "app-nvue": "u"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "小程序": {
+          "微信": "y",
+          "阿里": "u",
+          "百度": "u",
+          "字节跳动": "u",
+          "QQ": "u",
+          "京东": "u"
+        },
+        "快应用": {
+          "华为": "u",
+          "联盟": "u"
+        },
+        "Vue": {
+          "vue2": "u",
+          "vue3": "y"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "dayjs": "^1.11.7",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "luch-request": "^3.0.8",
+    "pinia": "2.1.7",
+    "pinia-plugin-persist-uni": "^1.2.0",
+    "vue": "3.4.21",
+    "weixin-js-sdk": "^1.6.0",
+    "@dcloudio/uni-app": "3.0.0-5020420260813003",
+    "@dcloudio/uni-components": "3.0.0-5020420260813003",
+    "@dcloudio/uni-h5": "3.0.0-5020420260813003",
+    "@dcloudio/uni-mp-weixin": "3.0.0-5020420260813003",
+    "vue-i18n": "9.14.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.7",
+    "vconsole": "^3.15.0",
+    "@dcloudio/uni-cli-shared": "3.0.0-5020420260813003",
+    "@dcloudio/vite-plugin-uni": "3.0.0-5020420260813003",
+    "vite": "5.2.8",
+    "sass": "1.77.8",
+    "rollup": "4.14.3"
+  },
+  "private": true
+}

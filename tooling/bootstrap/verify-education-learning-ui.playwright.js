@@ -1,0 +1,115 @@
+// Run from repository root with Node. Uses the Playwright package already installed by the CLI.
+// Original member auth; no fixture API interception and no credential/token output.
+import fs from 'node:fs';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import assert from 'node:assert/strict';
+const require = createRequire(import.meta.url);
+const cache = path.join(process.env.LOCALAPPDATA, 'npm-cache', '_npx');
+const modulePath = process.env.PLAYWRIGHT_MODULE || fs.readdirSync(cache).map(name => path.join(cache, name, 'node_modules/playwright')).find(dir => fs.existsSync(path.join(dir, 'package.json')));
+if (!modulePath) throw new Error('Install the Playwright CLI first or set PLAYWRIGHT_MODULE to an existing package directory.');
+const { chromium } = require(modulePath);
+async function audit(page) {
+  const fs = require('node:fs');
+  const env = Object.fromEntries(fs.readFileSync('.runtime/foundation.env', 'utf8').trim().split(/\r?\n/).map(line => { const i = line.indexOf('='); return [line.slice(0, i), line.slice(i + 1)]; }));
+  const fixture = JSON.parse(fs.readFileSync('.runtime/education-flow-report.json', 'utf8')).fixtures;
+  const login = await page.request.post('http://127.0.0.1:48080/app-api/member/auth/login', { headers: { 'tenant-id': '1', terminal: '10' }, data: { mobile: '13900000001', password: env.VIBE_MEMBER_PASSWORD } });
+  const auth = (await login.json()).data;
+  const adminLogin = await page.request.post('http://127.0.0.1:48080/admin-api/system/auth/login', { headers: { 'tenant-id': '1' }, data: { username: 'admin', password: env.VIBE_ADMIN_PASSWORD } });
+  const admin = (await adminLogin.json()).data.accessToken;
+  const adminHeaders = { 'tenant-id': '1', Authorization: `Bearer ${admin}` };
+  const memberHeaders = { 'tenant-id': '1', Authorization: `Bearer ${auth.accessToken}` };
+  const report = { timestamp: new Date().toISOString(), checks: [], fixtures: {} };
+  const pass = name => { report.checks.push(name); console.log(`PASS: ${name}`); };
+  const api = async (route, body) => {
+    const response = await page.request.fetch('http://127.0.0.1:48080' + route, { method: body ? 'POST' : 'GET', headers: route.startsWith('/admin') ? adminHeaders : memberHeaders, ...(body ? { data: body } : {}) });
+    const result = await response.json();
+    assert.equal(result.code, 0, `${route}: ${result.msg}`);
+    return result.data;
+  };
+  const getAdmin = route => api('/admin-api/edu' + route);
+  const postAdmin = (route, body) => api('/admin-api/edu' + route, body);
+  await page.goto('http://127.0.0.1:5174/');
+  await page.evaluate(({ token, refreshToken, studentId }) => { uni.setStorageSync('token', token); uni.setStorageSync('refresh-token', refreshToken); uni.setStorageSync('edu-current-student', studentId); }, { token: auth.accessToken, refreshToken: auth.refreshToken, studentId: fixture.studentId });
+  await page.reload();
+  const navigate = url => page.evaluate(url => new Promise((resolve, reject) => uni.navigateTo({ url, success: resolve, fail: reject })), url);
+  await navigate(`/pages/edu/learning-list?type=calendar&studentId=${fixture.studentId}`);
+  await page.getByText('课程日历', { exact: true }).last().waitFor();
+  await navigate(`/pages/edu/learning-list?type=assignments&studentId=${fixture.studentId}`);
+  await page.getByText('我的作业', { exact: true }).last().waitFor();
+  await page.evaluate(() => new Promise((resolve, reject) => uni.navigateBack({ success: resolve, fail: reject })));
+  await page.getByText('课程日历', { exact: true }).last().waitFor();
+  pass('Real uni.navigateTo between list modes and navigateBack restore correct calendar/assignment titles');
+  await page.goto(`http://127.0.0.1:5174/#/pages/edu/learning-list?type=assignments&studentId=${fixture.studentId}`);
+  await page.getByText('我的作业', { exact: true }).last().waitFor();
+  pass('Hash navigation renders the expected title when awaited');
+  const marker = `TEST-LEARNING-UI-${Date.now()}`;
+  const session = await getAdmin(`/session/get?id=${fixture.trial.sessionIds[0]}`);
+  const originalMaterials = session.materials || [];
+  let transferId;
+  try {
+    const filename = `${marker}.txt`, contents = `TEST learning material bytes ${marker}\n`;
+    const uploadResponse = await page.request.post('http://127.0.0.1:48080/admin-api/edu/file/upload', { headers: adminHeaders, multipart: { cohortId: String(fixture.trial.id), file: { name: filename, mimeType: 'text/plain', buffer: Buffer.from(contents) } } });
+    const uploaded = await uploadResponse.json();
+    assert.equal(uploaded.code, 0, uploaded.msg);
+    await postAdmin('/session/update', { ...session, materials: [...originalMaterials, uploaded.data] });
+    await navigate(`/pages/edu/learning-list?type=materials&studentId=${fixture.studentId}`);
+    const material = page.locator('.card:visible').filter({ hasText: filename });
+    await material.waitFor();
+    assert.match(await material.textContent(), new RegExp(session.title));
+    const downloading = page.waitForEvent('download');
+    await material.click();
+    const download = await downloading;
+    assert.equal(download.suggestedFilename(), filename);
+    const target = '.runtime/learning-material-download.txt';
+    await download.saveAs(target);
+    assert.equal(fs.readFileSync(target, 'utf8'), contents);
+    pass('Material card shows original filename and session title; authenticated download returns exact bytes/name');
+    const growth = await api(`/app-api/edu/report/get?id=${fixture.reportId}&studentId=${fixture.studentId}`);
+    assert(growth.strengths && growth.nextSteps, 'Live growth fixture must have strengths and nextSteps');
+    await navigate(`/pages/edu/learning-list?type=reports&studentId=${fixture.studentId}`);
+    await page.locator('.card:visible').filter({ hasText: growth.title }).first().click();
+    await page.getByText(growth.strengths, { exact: true }).last().waitFor();
+    await page.getByText(growth.nextSteps, { exact: true }).last().waitFor();
+    await page.screenshot({ path: '.runtime/learning-report-live.png', fullPage: true });
+    pass('Actual published growth report renders strengths and nextSteps');
+    const source = await getAdmin(`/cohort/get?id=${fixture.trial.id}`);
+    let start = Number(session.startTime) + 6 * 3600000;
+    const targetId = await postAdmin('/cohort/create', { courseId: source.courseId, name: marker, kind: source.kind, mode: source.mode, teacherId: source.teacherId, capacity: 12, price: source.price, startDate: start, endDate: start + 5400000, terms: 'TEST only', refundPolicy: 'TEST only' });
+    await postAdmin('/session/create', { cohortId: targetId, title: `${marker} session`, teacherId: source.teacherId, startTime: start, endTime: start + 5400000, joinInfo: { instructions: 'TEST only' }, materials: [] });
+    await postAdmin('/cohort/publish', { id: targetId });
+    report.fixtures.targetCohortId = targetId;
+    await page.evaluate(() => new Promise((resolve, reject) => uni.switchTab({ url: '/pages/tab/learning', success: resolve, fail: reject })));
+    const enrolledCourse = page.locator('.card:visible').filter({ hasText: source.name });
+    await enrolledCourse.getByText('申请调班', { exact: true }).click();
+    await page.getByText(marker, { exact: true }).waitFor();
+    assert(page.url().includes(`enrollmentId=${fixture.enrollmentId}`));
+    assert(page.url().includes(`courseId=${fixture.courseId}`));
+    assert(page.url().includes(`studentId=${fixture.studentId}`));
+    assert.equal(await page.locator('.card:visible').filter({ hasText: source.name }).count(), 0, 'Current cohort cannot be selected');
+    const regular = await getAdmin(`/cohort/get?id=${fixture.regular.id}`);
+    assert.equal(await page.locator('.card:visible').filter({ hasText: regular.name }).count(), 0, 'Paid regular cohort cannot be selected for free trial transfer');
+    await page.getByText(marker, { exact: true }).click();
+    await page.locator('textarea:visible').fill(marker + ' reason');
+    await page.screenshot({ path: '.runtime/learning-transfer-live.png', fullPage: true });
+    const submitted = page.waitForResponse(r => r.url().endsWith('/edu/transfer/create') && r.request().method() === 'POST');
+    await page.getByText('提交调班申请', { exact: true }).click();
+    const response = await submitted;
+    assert.deepEqual(response.request().postDataJSON(), { enrollmentId: fixture.enrollmentId, targetCohortId: targetId, reason: marker + ' reason' });
+    const created = await response.json();
+    assert.equal(created.code, 0, created.msg);
+    transferId = typeof created.data === 'object' ? created.data.id : created.data;
+    assert(transferId);
+    await page.getByText(marker + ' reason', { exact: true }).waitFor();
+    pass('Enrolled-course entry carries course/enrollment/child; compatible trial target posts correct payload and appears in real request list');
+    report.status = 'PASSED';
+  } finally {
+    if (transferId) await postAdmin('/request/reject', { id: transferId, type: 'TRANSFER', reason: 'TEST UI audit cleanup' });
+    const latest = await getAdmin(`/session/get?id=${session.id}`);
+    await postAdmin('/session/update', { ...latest, materials: originalMaterials });
+    fs.writeFileSync('.runtime/education-learning-ui-report.json', JSON.stringify(report, null, 2) + '\n');
+  }
+}
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+try { await audit(await browser.newPage({ viewport: { width: 430, height: 932 }, acceptDownloads: true })); }
+finally { await browser.close(); }
