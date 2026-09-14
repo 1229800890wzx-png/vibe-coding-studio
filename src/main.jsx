@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./styles.css";
 import "./showcase.css";
+import './education.css';
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

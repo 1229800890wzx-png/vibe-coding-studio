@@ -208,7 +208,7 @@ export function ReserveButton({
       className={`button ${secondary ? "button-secondary" : "button-primary"} ${className}`}
       onClick={open}
     >
-      预约体验{arrow && <Icon name="ArrowRight" size={18} />}
+      咨询课程{arrow && <Icon name="ArrowRight" size={18} />}
     </button>
   );
 }
@@ -265,9 +265,9 @@ export function Header() {
           </NavLink>
           <NavLink to="/mentors">导师团队</NavLink>
           <NavLink to="/projects">作品展示</NavLink>
-          <Link className="mobile-method" to="/method">
+          <NavLink className="education-method-link" to="/method">
             教学方法
-          </Link>
+          </NavLink>
         </nav>
         <div className="nav-actions">
           <ReserveButton arrow={false} />
