@@ -1,0 +1,5 @@
+[
+  {"slug":"start","title":"创意启蒙","description":"把好奇变成清晰的想法","outline":"表达与提问\n图像与故事\n第一次互动作品","stage":1,"image":"minecraft","sortOrder":1,"published":true},
+  {"slug":"create","title":"AI 项目创作","description":"把想法做成可以运行的作品","outline":"拆解创作目标\n编程与调试\n项目展示与讲述","stage":2,"image":"museum","sortOrder":2,"published":true},
+  {"slug":"grow","title":"作品成长计划","description":"形成自己的创作方向","outline":"持续迭代作品\n整理个人作品集\n回顾与成长建议","stage":3,"image":"notes","sortOrder":3,"published":true}
+]

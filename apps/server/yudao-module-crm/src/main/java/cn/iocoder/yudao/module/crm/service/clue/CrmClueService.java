@@ -24,6 +24,11 @@ public interface CrmClueService {
      */
     Long createClue(@Valid CrmClueSaveReqVO createReqVO);
 
+    /** Internal anonymous intake path; caller owns consent and durable receipt transaction. */
+    Long createWebsiteClue(@Valid CrmClueSaveReqVO createReqVO);
+
+    void updateWebsiteAdmission(Long id, String status, String note);
+
     /**
      * 更新线索
      *

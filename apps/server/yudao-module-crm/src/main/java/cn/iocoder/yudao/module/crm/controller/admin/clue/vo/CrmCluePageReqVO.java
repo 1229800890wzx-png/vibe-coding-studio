@@ -21,6 +21,8 @@ public class CrmCluePageReqVO extends PageParam {
 
     /** Narrow the original permission-scoped query to consented education consultations. */
     private Boolean educationOnly;
+    @jakarta.validation.constraints.Pattern(regexp = "WEBSITE|MINIAPP")
+    private String educationOrigin;
     @jakarta.validation.constraints.Pattern(regexp = "COURSE|ONE_TO_ONE")
     private String educationServiceType;
 

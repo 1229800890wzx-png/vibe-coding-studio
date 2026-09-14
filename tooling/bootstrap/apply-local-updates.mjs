@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { applyWebsiteSchema, seedWebsiteContent } from './website-schema.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const require = createRequire(path.join(root, '.tools/package.json'));
 const mysql = require('mysql2/promise');
@@ -44,4 +45,6 @@ try {
   const [[{count}]]=await c.execute('SELECT COUNT(*) count FROM member_user WHERE mobile=? AND tenant_id=1',['13900000002']);
   if(!count) await c.execute("INSERT INTO member_user (mobile,password,nickname,status,register_ip,register_terminal,point,experience,avatar,tenant_id) VALUES (?,?,'本地隔离验证家长',0,'127.0.0.1',10,0,0,'',1)",['13900000002',await bcrypt.hash(env.VIBE_MEMBER_PASSWORD,10)]);
   console.log('Local additive migrations and original-account authorization fixture ready.');
+  await applyWebsiteSchema(c, root);
+  await seedWebsiteContent(c, root);
 } finally { await c.end(); }

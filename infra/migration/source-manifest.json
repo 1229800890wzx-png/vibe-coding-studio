@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "baseline": "initial-production-baseline-unreleased",
+  "bundle": "baseline-001-008-with-additive-migrations",
   "upstreamCommit": "8e43004cf68a405cd3485f98f8a539b97ca6544a",
   "migrationEngine": {
     "name": "Liquibase OSS",
@@ -46,8 +47,23 @@
     "systemInfra": 48,
     "business": 95,
     "education": 28,
-    "quartz": 11
+    "quartz": 11,
+    "additiveEducation": 2
   },
+  "additiveMigrations": [
+    {
+      "id": "009",
+      "file": "sql/009-website-admission.sql",
+      "purpose": "website admission receipt technical table",
+      "tables": 1
+    },
+    {
+      "id": "010",
+      "file": "sql/010-website-management.sql",
+      "purpose": "website offering content table and permissions",
+      "tables": 1
+    }
+  ],
   "seedPolicy": "Only public dictionaries/menu definitions, original bootstrap admin/tenant/config, and education roles/menu/notification template; no members, courses, orders, mock channels, files or scheduler fixtures.",
   "files": {
     "sql/001-original-system-infra.sql": "b2a8f0cb6510ae26a40297930b0ed2f427967750f02ce65ba373045cee61ea83",
@@ -58,7 +74,9 @@
     "sql/006-production-bootstrap.sql": "ff95710403f1ce77334829b6fe11fbb9307ee0b3feb1e26efcfaea3e90cbb9cc",
     "sql/007-education-navigation-notification.sql": "2e7b0983f14c7e3dd83acb68a92e0106716a5767c5dfe050767482575b8e1bc7",
     "sql/008-original-model-reconciliations.sql": "5de671bc1b39dd861ab069f562d7619aff2d627b6ab04b01e277069f63f39270",
-    "db.changelog.xml": "aab6c85f4995fc0f5b3c628d5ae6f6393c76c5457ac16b5801a8b7411779cabe",
-    "pom.xml": "0bc06b1caa67b4fb384806cb8a0bf27494de3597fb144a3cc6e2746503eb8519"
+    "pom.xml": "0bc06b1caa67b4fb384806cb8a0bf27494de3597fb144a3cc6e2746503eb8519",
+    "sql/009-website-admission.sql": "c0ba8a42caa8ed403a999827316486173d0c90718d44bdca40ac94ae428bafd3",
+    "sql/010-website-management.sql": "5f7d31761fef9b7fd496458e65d5a987334fd827b5e168df9e0c20280cc39de1",
+    "db.changelog.xml": "61e8c98ead78c7f3c20918cbd64d67bf04242f80c30c9fb0edf1443747e9e8b1"
   }
 }

@@ -33,6 +33,18 @@ public class CrmClueDO extends BaseDO {
     @TableId
     private Long id;
     /** Education origin references only; CRM owner and permission records remain authoritative. */
+    @TableField(updateStrategy = FieldStrategy.NEVER)
+    private String educationOrigin;
+    @TableField(updateStrategy = FieldStrategy.NEVER)
+    private String educationWebsiteStatus;
+    @TableField(updateStrategy = FieldStrategy.NEVER)
+    private String educationOperatorNote;
+    @TableField(updateStrategy = FieldStrategy.NEVER)
+    private String educationExperience;
+    @TableField(updateStrategy = FieldStrategy.NEVER)
+    private String educationInterest;
+    @TableField(updateStrategy = FieldStrategy.NEVER)
+    private String educationMessage;
     private Long educationMemberId;
     private Long educationStudentId;
     private Long educationCourseId;

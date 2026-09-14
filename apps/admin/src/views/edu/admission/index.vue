@@ -31,6 +31,16 @@
               value="COURSE"
               label="课程咨询" /></el-select
         ></el-form-item>
+        <el-form-item label="来源"
+          ><el-select
+            v-model="query.educationOrigin"
+            clearable
+            placeholder="全部来源"
+            style="width: 140px"
+            ><el-option value="WEBSITE" label="官网咨询" /><el-option
+              value="MINIAPP"
+              label="小程序" /></el-select
+        ></el-form-item>
         <el-button type="primary" @click="search">查询</el-button
         ><el-button @click="router.push('/edu/admission-clues')">原 CRM 线索</el-button>
       </el-form>
@@ -54,6 +64,9 @@
               row.educationServiceType === 'ONE_TO_ONE' ? '一对一高级课' : '课程咨询'
             }}</el-tag></template
           ></el-table-column
+        >
+        <el-table-column label="来源" width="105"
+          ><template #default="{ row }">{{ originLabel(row) }}</template></el-table-column
         >
         <el-table-column label="意向老师 / 期望时间" min-width="210"
           ><template #default="{ row }"
@@ -125,6 +138,7 @@
           class="appointment-note"
         />
         <el-descriptions :column="2" border>
+          <el-descriptions-item label="咨询来源">{{ originLabel(selected) }}</el-descriptions-item>
           <template v-if="selected.educationServiceType === 'ONE_TO_ONE'"
             ><el-descriptions-item label="意向老师">{{
               selected.educationTeacherName
@@ -137,7 +151,9 @@
               {{ formatDate(selected.educationPreferredEndTime) }}</el-descriptions-item
             ></template
           >
-          <el-descriptions-item label="联系手机">{{ selected.mobile }}</el-descriptions-item
+          <el-descriptions-item label="联系手机">{{
+            selected.mobile || '未填写'
+          }}</el-descriptions-item
           ><el-descriptions-item label="负责人">{{ selected.ownerUserName }}</el-descriptions-item>
           <el-descriptions-item label="联系授权">{{
             selected.educationConsentTime
@@ -158,14 +174,15 @@
             >完整 CRM 记录</el-button
           ></div
         >
-        <h3>关联试听</h3
-        ><el-table :data="linkedTrials" empty-text="家长尚未关联试听预约"
-          ><el-table-column label="班期" prop="cohortName" /><el-table-column label="预约状态"
-            ><template #default="{ row }">{{
-              trialStatuses[row.status] || row.status
-            }}</template></el-table-column
-          ></el-table
-        >
+        <template v-if="!isWebsiteGuest(selected)">
+          <h3>关联试听</h3>
+          <el-table :data="linkedTrials" empty-text="家长尚未关联试听预约">
+            <el-table-column label="班期" prop="cohortName" />
+            <el-table-column label="预约状态">
+              <template #default="{ row }">{{ trialStatuses[row.status] || row.status }}</template>
+            </el-table-column>
+          </el-table>
+        </template>
         <h3>跟进记录</h3
         ><FollowUpList :key="selected.id" :biz-id="selected.id" :biz-type="BizTypeEnum.CRM_CLUE" />
       </div>
@@ -213,11 +230,19 @@ const query = reactive({
   educationOnly: true,
   name: '',
   followUpStatus: undefined as boolean | undefined,
-  educationServiceType: undefined as string | undefined
+  educationServiceType: undefined as string | undefined,
+  educationOrigin: undefined as string | undefined
 })
 try {
   const saved = JSON.parse(sessionStorage.getItem(queryKey) || '{}')
-  for (const key of ['pageNo', 'pageSize', 'name', 'followUpStatus', 'educationServiceType'])
+  for (const key of [
+    'pageNo',
+    'pageSize',
+    'name',
+    'followUpStatus',
+    'educationServiceType',
+    'educationOrigin'
+  ])
     if (saved[key] !== undefined) query[key] = saved[key]
 } catch {
   /* Use defaults when local preferences are unavailable. */
@@ -238,6 +263,14 @@ const trialStatuses: Record<string, string> = {
   CONFIRMED: '已预约',
   CANCELLED: '已取消',
   COMPLETED: '已完成'
+}
+function isWebsiteGuest(row: any) {
+  return row?.educationOrigin === 'WEBSITE' && !row?.educationMemberId && !row?.educationStudentId
+}
+function originLabel(row: any) {
+  if (row?.educationOrigin === 'WEBSITE') return '官网咨询'
+  if (row?.educationOrigin === 'MINIAPP') return '小程序'
+  return '原 CRM'
 }
 async function load() {
   const sequence = ++loadSequence

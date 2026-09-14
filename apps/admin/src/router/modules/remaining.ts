@@ -33,6 +33,8 @@ const { t } = useI18n()
  }
  **/
 const remainingRouter: AppRouteRecordRaw[] = [
+  { path: '/education/manage', name: 'LegacyWebsiteManagement', redirect: '/edu/website', meta: { hidden: true } },
+  { path: '/education', name: 'LegacyEducationManagement', redirect: '/edu/website', meta: { hidden: true } },
   {
     path: '/crm', component: Layout, name: 'CrmAdmissionsDetailRoot', meta: { hidden: true },
     children: [{ path: 'clue/detail/:id', name: 'CrmClueDetail', component: () => import('@/views/crm/clue/detail/index.vue'),

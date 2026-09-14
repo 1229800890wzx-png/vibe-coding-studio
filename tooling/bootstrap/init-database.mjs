@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { applyWebsiteSchema, seedWebsiteContent } from './website-schema.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const require = createRequire(path.join(root, '.tools/package.json'));
 const mysql = require('mysql2/promise');
@@ -56,4 +57,6 @@ try {
   const report = { mysqlVersion: version, tables: count, upstreamCommit: '8e43004cf68a405cd3485f98f8a539b97ca6544a', adminUsername: 'admin', memberMobile: '13900000001', fixtureIds: { member: 10001, spu: 10001, sku: 10001, payApp: 10001, payChannel: 10001 }, credentials: '.runtime/foundation.env', localMockOnly: true };
   fs.writeFileSync(path.join(root, '.runtime/database-init-report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(`Initialized ${count} tables on MySQL ${version}; original admin/member and mall fixtures ready. Credentials remain in ignored .runtime/foundation.env.`);
+  await applyWebsiteSchema(connection, root);
+  await seedWebsiteContent(connection, root);
 } finally { await connection.end(); }

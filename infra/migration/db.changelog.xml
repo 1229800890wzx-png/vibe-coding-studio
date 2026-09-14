@@ -26,4 +26,10 @@
   <changeSet id="008" author="vibe" runInTransaction="false">
     <sqlFile path="sql/008-original-model-reconciliations.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
   </changeSet>
+  <changeSet id="009" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/009-website-admission.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
+  <changeSet id="010" author="vibe" runInTransaction="false">
+    <sqlFile path="sql/010-website-management.sql" relativeToChangelogFile="true" encoding="UTF-8" splitStatements="true" stripComments="false"/>
+  </changeSet>
 </databaseChangeLog>

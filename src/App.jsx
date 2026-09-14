@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Route, Routes, useLocation, useMatch } from "react-router-dom";
 import { Header, Reservation, ReservationContext } from "./components";
 import { Courses, Home, Mentors, Method, NotFound, Projects } from "./pages";
+import { WebsiteContentProvider, WebsiteServiceAnchor } from './website-content';
 
 const MotionPreview = lazy(() => import("./MotionPreview"));
 
@@ -32,6 +33,8 @@ export default function App() {
     setReservation(false);
   }, [location.pathname, location.hash, isMotionPreview]);
   return (
+    <WebsiteContentProvider>
+    <WebsiteServiceAnchor />
     <ReservationContext.Provider value={() => setReservation(true)}>
       <a className="skip-link" href="#main-content">
         跳转到主要内容
@@ -54,5 +57,6 @@ export default function App() {
       </main>
       {reservation && <Reservation onClose={() => setReservation(false)} />}
     </ReservationContext.Provider>
+    </WebsiteContentProvider>
   );
 }

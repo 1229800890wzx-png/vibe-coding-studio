@@ -35,16 +35,36 @@ public class EduCatalogService {
         return courseView(c,admin);
     }
     public Map<String,Object> courseView(EduCourseDO c,boolean admin) {
-        Map<String,Object> v=map(c);
-        if(!admin&&c.getVersion()!=null&&c.getVersion()>0) {
-            EduCourseVersionDO published=versions.selectOne(EduCourseVersionDO::getCourseId,c.getId(),EduCourseVersionDO::getVersion,c.getVersion());
-            if(published!=null) v.putAll(cn.iocoder.yudao.framework.common.util.json.JsonUtils.parseObject(published.getContentJson(),Map.class));
+        Map<String,Object> v;
+        if(admin) v=map(c);
+        else {
+            require(c.getVersion()!=null&&c.getVersion()>0,"课程发布版本缺失");
+            EduCourseVersionDO published=found(versions.selectOne(EduCourseVersionDO::getCourseId,c.getId(),EduCourseVersionDO::getVersion,c.getVersion()),"课程发布版本缺失");
+            Map<String,Object> snapshot=cn.iocoder.yudao.framework.common.util.json.JsonUtils.parseObject(published.getContentJson(),Map.class);
+            v=publicCourseSnapshot(c,snapshot);
         }
         v.put("spuId",c.getSpuId());v.put("revision",c.getRevision());
-        v.put("lessons",objects(String.valueOf(v.getOrDefault("lessonsJson","[]"))));v.remove("lessonsJson");
+        if(admin)v.put("lessons",objects(String.valueOf(v.getOrDefault("lessonsJson","[]"))));v.remove("lessonsJson");
         List<EduCohortDO> open=cohorts.selectList(new LambdaQueryWrapper<EduCohortDO>().eq(EduCohortDO::getCourseId,c.getId()).eq(EduCohortDO::getStatus,"OPEN").gt(EduCohortDO::getStartDate,LocalDateTime.now()));
         List<Integer> prices=open.stream().map(x->products.sku(x.getSkuId())).filter(Objects::nonNull).map(ProductSkuRespDTO::getPrice).toList();
         v.put("price",prices.stream().min(Integer::compareTo).orElse(null));v.put("cohortCount",open.size());return v;
+    }
+
+    /** Explicit public contract: never serialize a persistence object or arbitrary snapshot keys. */
+    static Map<String,Object> publicCourseSnapshot(EduCourseDO course,Map<String,Object> snapshot) {
+        Map<String,Object> result=new LinkedHashMap<>();
+        result.put("id",course.getId());result.put("spuId",course.getSpuId());
+        for(String key:List.of("name","code","description","coverUrl","ageMin","ageMax","direction","level","objectives","outcomes"))
+            result.put(key,snapshot.get(key));
+        result.put("status","PUBLISHED");result.put("version",course.getVersion());result.put("revision",course.getRevision());
+        List<Map<String,Object>> safeLessons=new ArrayList<>();
+        for(Map<String,Object> lesson:objects(String.valueOf(snapshot.getOrDefault("lessonsJson","[]")))) {
+            Map<String,Object> safe=new LinkedHashMap<>();
+            for(String key:List.of("title","durationMinutes","objectives","assignment"))safe.put(key,lesson.get(key));
+            safeLessons.add(safe);
+        }
+        result.put("lessons",safeLessons);
+        return result;
     }
     public Map<String,Object> coursePage(Map<String,Object> p,boolean admin) {
         if(admin) access.permission("course","query");

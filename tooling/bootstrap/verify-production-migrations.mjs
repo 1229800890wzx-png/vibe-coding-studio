@@ -45,10 +45,10 @@ try {
   assert.match(sql,/CREATE TABLE/);assert.match(sql,/DATABASECHANGELOG/);assert(!/^\s*(DROP TABLE|TRUNCATE|DELETE FROM)\b/im.test(sql));
   fs.copyFileSync(preview,path.join(directory,'initial-preview.sql'));
   pass('Liquibase renders a private SQL preview without applying business DDL or seeds',{mysqlVersion:version,validationMetadataTables:metadata.length,previewSha256:crypto.createHash('sha256').update(sql).digest('hex')});
-  await run('migrate');assert.equal(await tableCount(),184);
+  await run('migrate');assert.equal(await tableCount(),186);
   const [history]=await db.query('SELECT ID,AUTHOR,FILENAME,MD5SUM,EXECTYPE,DATEEXECUTED FROM DATABASECHANGELOG ORDER BY ORDEREXECUTED');
-  assert.equal(history.length,8);assert(history.every(row=>row.MD5SUM&&row.EXECTYPE==='EXECUTED'));assert.equal(Number((await db.query('SELECT COUNT(*) count FROM DATABASECHANGELOGLOCK WHERE LOCKED=1'))[0][0].count),0);
-  pass('Original Liquibase ledger and lock tables govern all eight applied changesets',{businessTables:182,metadataTables:2,changesets:8});
+  assert.equal(history.length,10);assert(history.every(row=>row.MD5SUM&&row.EXECTYPE==='EXECUTED'));assert.equal(Number((await db.query('SELECT COUNT(*) count FROM DATABASECHANGELOGLOCK WHERE LOCKED=1'))[0][0].count),0);
+  pass('Liquibase applies ten changesets including website CRM and content extensions',{businessTables:184,metadataTables:2,changesets:10});
   for(const table of['member_user','member_address','trade_cart','trade_order','trade_order_item','trade_after_sale','pay_order','pay_refund','pay_channel','pay_app','product_spu','product_sku','edu_student','edu_course','edu_course_version','edu_cohort','edu_trial_booking','edu_enrollment','edu_submission','edu_review','edu_work','infra_job','infra_job_log','infra_file','infra_file_config','infra_api_access_log','system_login_log','system_notify_message','system_oauth2_access_token']){
     const [[{count}]]=await db.query(`SELECT COUNT(*) count FROM \`${table}\``);assert.equal(Number(count),0,`${table} must contain no development fixtures`);
   }
@@ -70,7 +70,13 @@ try {
     'crm_clue.education_teacher_name':{nullable:'YES',dataType:'varchar',maxLength:80},
     'crm_clue.education_preferred_start_time':{nullable:'YES',dataType:'datetime'},
     'crm_clue.education_preferred_end_time':{nullable:'YES',dataType:'datetime'},
-    'crm_clue.education_appointment_status':{nullable:'YES',dataType:'varchar',maxLength:32}
+    'crm_clue.education_appointment_status':{nullable:'YES',dataType:'varchar',maxLength:32},
+    'crm_clue.education_origin':{nullable:'YES',dataType:'varchar',maxLength:16},
+    'crm_clue.education_website_status':{nullable:'YES',dataType:'varchar',maxLength:16},
+    'crm_clue.education_operator_note':{nullable:'YES',dataType:'varchar',maxLength:2000},
+    'crm_clue.education_experience':{nullable:'YES',dataType:'varchar',maxLength:200},
+    'crm_clue.education_interest':{nullable:'YES',dataType:'varchar',maxLength:200},
+    'crm_clue.education_message':{nullable:'YES',dataType:'varchar',maxLength:2000}
   };
   assert.deepEqual(columns.map(column=>`${column.tableName}.${column.columnName}`).sort(),Object.keys(expectedColumns).sort(),'Verify named education extension fields, not an outdated aggregate column count');
   for(const column of columns){

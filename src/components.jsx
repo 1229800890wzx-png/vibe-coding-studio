@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { getAdmissionOptions, submissionIdentity, submitAdmission } from './education-api';
 import {
   ArrowDown,
   ArrowRight,
@@ -542,36 +543,64 @@ export function Reservation({ onClose }) {
     }
   });
   const contactRef = useRef(null);
-  const timer = useRef(null);
-  useEffect(() => () => clearTimeout(timer.current), []);
+  const [options, setOptions] = useState(null);
+  const [receipt, setReceipt] = useState('');
+  const pendingRequest = useRef(null);
+  useEffect(() => {
+    const abort = new AbortController();
+    getAdmissionOptions({ signal: abort.signal }).then(setOptions).catch(error => {
+      if (error.name !== 'AbortError') setError(error.message);
+    });
+    return () => abort.abort();
+  }, []);
   const change = (e) => {
     setValues((v) => ({ ...v, [e.target.name]: e.target.value }));
     setError("");
   };
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
+    if (state === 'saving') return;
     const contact = values.contact.trim();
-    if (contact && !/^(1[3-9]\d{9}|[^\s@]+@[^\s@]+\.[^\s@]+)$/.test(contact)) {
-      setError("请填写有效的 11 位手机号或邮箱，也可以先留空。");
+    if (!/^(1[3-9]\d{9}|[^\s@]+@[^\s@]+\.[^\s@]+)$/.test(contact)) {
+      setError("请填写有效的 11 位手机号或邮箱，方便我们回复。");
       contactRef.current.focus();
       return;
     }
     setState("saving");
-    timer.current = setTimeout(() => {
-      try {
-        localStorage.setItem(
-          "vibe-interest",
-          JSON.stringify({ ...values, name: values.name.trim(), contact }),
-        );
-        setState("saved");
-      } catch {
-        setError("浏览器无法保存。填写内容已保留，你可以下载意向单。");
-        setState("editing");
+    setError('');
+    try {
+      // A failed attempt retains its exact payload/version and retry token.
+      const formFingerprint = JSON.stringify(values);
+      if (!pendingRequest.current || pendingRequest.current.formFingerprint !== formFingerprint) {
+        const current = await getAdmissionOptions();
+        if (!current.enabled) throw new Error('预约受理暂未开放，请稍后再试。');
+        if (options?.consentVersion !== current.consentVersion) {
+          setOptions(current);
+          throw new Error('联系授权说明已更新，请阅读后再次提交。');
+        }
+        const body = { contactName: values.name.trim() || '家长', contactType: contact.includes('@') ? 'EMAIL' : 'MOBILE', contact,
+          experience: values.experience, interest: values.interest, message: '', contactConsent: true, consentVersion: current.consentVersion };
+        const identity = await submissionIdentity(body);
+        pendingRequest.current = { formFingerprint, key: identity.key, body: { ...body, requestId: identity.requestId } };
       }
-    }, 350);
+      const accepted = await submitAdmission(pendingRequest.current.body);
+      setReceipt(accepted.receipt);
+      setState('saved');
+    } catch (error) {
+      if (error.code === 1090010001) {
+        // The server explicitly rejected consent; no receipt was committed for this request.
+        pendingRequest.current = null;
+        setOptions(null);
+        try { setOptions(await getAdmissionOptions()); } catch { /* next click reloads the notice before sending */ }
+        setError('联系授权说明已更新，请阅读后再次提交。');
+      } else {
+        setError(error.name === 'TimeoutError' ? '等待回复超时，请重试；同一提交不会重复创建咨询。' : error.message);
+      }
+      setState('editing');
+    }
   }
   function download() {
-    const data = `VIBE CODING · 体验意向单\n\n家长称呼：${values.name || "未填写"}\n联系方式：${values.contact || "未填写"}\n已有经验：${values.experience}\n感兴趣方向：${values.interest}\n\n此文件由你自行保存，尚未发送给机构。体验形式、年龄范围、费用和课程安排需正式沟通确认。`;
+    const data = `VIBE CODING · 体验意向单\n\n家长称呼：${values.name || "未填写"}\n联系方式：${values.contact || "未填写"}\n已有经验：${values.experience}\n感兴趣方向：${values.interest}\n\n${receipt ? `已提交，回执：${receipt}` : '尚未确认提交成功。'}体验形式、年龄范围、费用和课程安排需正式沟通确认。`;
     const url = URL.createObjectURL(
       new Blob([data], { type: "text/plain;charset=utf-8" }),
     );
@@ -592,9 +621,9 @@ export function Reservation({ onClose }) {
           <span className="success-icon">
             <Icon name="Check" size={30} />
           </span>
-          <h3>意向已保存在此浏览器</h3>
+          <h3>体验意向已提交</h3>
           <p>
-            尚未发送给机构。你可以下载意向单，待正式联系方式公布后用于沟通。
+            我们已收到你的意向，将通过所留联系方式沟通具体安排。你可以下载意向单留存。
           </p>
           <div className="button-row">
             <button
@@ -608,7 +637,12 @@ export function Reservation({ onClose }) {
             <button
               type="button"
               className="button button-secondary"
-              onClick={() => setState("editing")}
+              onClick={() => {
+                try { if (pendingRequest.current) sessionStorage.removeItem(pendingRequest.current.key); } catch {}
+                pendingRequest.current = null;
+                setReceipt('');
+                setState('editing');
+              }}
             >
               继续修改
             </button>
@@ -619,7 +653,10 @@ export function Reservation({ onClose }) {
             onClick={() => {
               try {
                 localStorage.removeItem("vibe-interest");
+                if (pendingRequest.current) sessionStorage.removeItem(pendingRequest.current.key);
               } catch {}
+              pendingRequest.current = null;
+              setReceipt('');
               setValues({
                 name: "",
                 contact: "",
@@ -640,7 +677,7 @@ export function Reservation({ onClose }) {
           <div className="reservation-notice">
             <Icon name="Info" size={20} />
             <p>
-              当前为体验预约的本地预览，尚未接入预约接收渠道。信息只保存在你的浏览器；体验形式、费用与安排待正式确认。
+              {options ? options.consentText : '正在获取预约联系说明…'}体验形式、费用与安排将在沟通后确认。
             </p>
           </div>
           <form onSubmit={submit} noValidate>
@@ -649,6 +686,7 @@ export function Reservation({ onClose }) {
                 家长称呼<span>选填</span>
                 <input
                   name="name"
+                  disabled={state === 'saving'}
                   value={values.name}
                   onChange={change}
                   autoComplete="name"
@@ -657,14 +695,15 @@ export function Reservation({ onClose }) {
                 />
               </label>
               <label>
-                手机号或邮箱<span>选填</span>
+                手机号或邮箱<span>必填</span>
                 <input
                   ref={contactRef}
                   name="contact"
+                  disabled={state === 'saving'}
                   value={values.contact}
                   onChange={change}
                   autoComplete="off"
-                  placeholder="便于之后自行联系"
+                  placeholder="便于我们与你联系"
                   maxLength={120}
                   aria-invalid={Boolean(error)}
                   aria-describedby={error ? "form-error" : undefined}
@@ -674,6 +713,7 @@ export function Reservation({ onClose }) {
                 孩子的已有经验
                 <select
                   name="experience"
+                  disabled={state === 'saving'}
                   value={values.experience}
                   onChange={change}
                 >
@@ -687,6 +727,7 @@ export function Reservation({ onClose }) {
                 感兴趣的方向
                 <select
                   name="interest"
+                  disabled={state === 'saving'}
                   value={values.interest}
                   onChange={change}
                 >
@@ -715,9 +756,9 @@ export function Reservation({ onClose }) {
             <button
               type="submit"
               className="button button-primary full-width"
-              disabled={state === "saving"}
+              disabled={state === "saving" || options?.enabled === false}
             >
-              {state === "saving" ? "正在保存…" : "保存体验意向"}
+              {state === "saving" ? "正在提交…" : options && !options.enabled ? '暂未开放预约' : "同意并提交体验意向"}
               <Icon
                 name={state === "saving" ? "LoaderCircle" : "ArrowRight"}
                 size={18}

@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS edu_website_offering (
+ id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ slug VARCHAR(80) NOT NULL,
+ title VARCHAR(80) NOT NULL,
+ description VARCHAR(600) NOT NULL,
+ outline VARCHAR(2000) NOT NULL,
+ stage INT NOT NULL,
+ image VARCHAR(32) NOT NULL,
+ sort_order INT NOT NULL DEFAULT 0,
+ published BIT(1) NOT NULL DEFAULT b'0',
+ course_id BIGINT NULL,
+ revision INT NOT NULL DEFAULT 1,
+ tenant_id BIGINT NOT NULL DEFAULT 1,
+ creator VARCHAR(64) NULL DEFAULT '', updater VARCHAR(64) NULL DEFAULT '',
+ create_time DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+ update_time DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+ deleted BIT(1) NOT NULL DEFAULT b'0',
+ UNIQUE KEY uk_website_offering_slug (tenant_id, slug),
+ KEY ix_website_offering_public (tenant_id, published, sort_order, slug),
+ KEY ix_website_offering_course (tenant_id, course_id),
+ CHECK (stage BETWEEN 1 AND 3), CHECK (sort_order BETWEEN 0 AND 999),
+ CHECK (image IN ('minecraft','museum','notes')), CHECK (revision >= 1)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

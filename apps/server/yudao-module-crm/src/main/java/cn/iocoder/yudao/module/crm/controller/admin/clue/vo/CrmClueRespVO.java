@@ -20,6 +20,12 @@ public class CrmClueRespVO {
     @Schema(description = "编号，主键自增", requiredMode = Schema.RequiredMode.REQUIRED, example = "10969")
     @ExcelProperty("编号")
     private Long id;
+    private String educationOrigin;
+    private String educationWebsiteStatus;
+    private String educationOperatorNote;
+    private String educationExperience;
+    private String educationInterest;
+    private String educationMessage;
     private Long educationMemberId;
     private Long educationStudentId;
     private Long educationCourseId;

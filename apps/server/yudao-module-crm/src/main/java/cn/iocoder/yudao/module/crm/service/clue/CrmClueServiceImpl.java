@@ -70,7 +70,18 @@ public class CrmClueServiceImpl implements CrmClueService {
     @LogRecord(type = CRM_CLUE_TYPE, subType = CRM_CLUE_CREATE_SUB_TYPE, bizNo = "{{#clue.id}}",
             success = CRM_CLUE_CREATE_SUCCESS)
     public Long createClue(CrmClueSaveReqVO createReqVO) {
-        // 1.1 校验关联数据
+        CrmClueDO clue = createClueCore(createReqVO);
+        LogRecordContext.putVariable("clue", clue);
+        return clue.getId();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Long createWebsiteClue(CrmClueSaveReqVO createReqVO) {
+        return createClueCore(createReqVO).getId();
+    }
+
+    private CrmClueDO createClueCore(CrmClueSaveReqVO createReqVO) {
         validateRelationDataExists(createReqVO);
         // 1.2 校验负责人是否存在
         adminUserApi.validateUser(createReqVO.getOwnerUserId());
@@ -84,9 +95,7 @@ public class CrmClueServiceImpl implements CrmClueService {
                 .setBizId(clue.getId()).setUserId(clue.getOwnerUserId()).setLevel(CrmPermissionLevelEnum.OWNER.getLevel());
         crmPermissionService.createPermission(createReqBO);
 
-        // 4. 记录操作日志上下文
-        LogRecordContext.putVariable("clue", clue);
-        return clue.getId();
+        return clue;
     }
 
     @Override
@@ -112,6 +121,25 @@ public class CrmClueServiceImpl implements CrmClueService {
         updateReqVO.setOwnerUserId(oldClue.getOwnerUserId()); // 避免操作日志出现“删除负责人”的情况
         LogRecordContext.putVariable(DiffParseFunction.OLD_OBJECT, BeanUtils.toBean(oldClue, CrmClueSaveReqVO.class));
         LogRecordContext.putVariable("clueName", oldClue.getName());
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    @CrmPermission(bizType = CrmBizTypeEnum.CRM_CLUE, bizId = "#id", level = CrmPermissionLevelEnum.WRITE)
+    @LogRecord(type = CRM_CLUE_TYPE, subType = "网站咨询跟进", bizNo = "{{#id}}",
+            success = "更新网站咨询【{{#clueName}}】状态为【{{#status}}】，内部备注【{{#note}}】")
+    public void updateWebsiteAdmission(Long id, String status, String note) {
+        CrmClueDO clue = validateClueExists(id);
+        if (!"WEBSITE".equals(clue.getEducationOrigin()) || status == null ||
+                !java.util.Set.of("NEW", "CONTACTED", "CLOSED").contains(status) || note == null || note.length() > 2000) {
+            throw new ServiceException(400, "网站咨询状态或备注无效");
+        }
+        clueMapper.update(null, new com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper<CrmClueDO>()
+                .eq(CrmClueDO::getId, id).eq(CrmClueDO::getEducationOrigin, "WEBSITE")
+                .set(CrmClueDO::getEducationWebsiteStatus, status).set(CrmClueDO::getEducationOperatorNote, note)
+                .set(CrmClueDO::getUpdater, String.valueOf(cn.iocoder.yudao.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId()))
+                .set(CrmClueDO::getUpdateTime, LocalDateTime.now()));
+        LogRecordContext.putVariable("clueName", clue.getName());
     }
 
     private void validateRelationDataExists(CrmClueSaveReqVO reqVO) {

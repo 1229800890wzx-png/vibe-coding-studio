@@ -24,8 +24,11 @@ public interface CrmClueMapper extends BaseMapperX<CrmClueDO> {
         CrmPermissionUtils.appendPermissionCondition(query, CrmBizTypeEnum.CRM_CLUE.getType(),
                 CrmClueDO::getId, userId, pageReqVO.getSceneType());
         // 拼接自身的查询条件
-        if (Boolean.TRUE.equals(pageReqVO.getEducationOnly())) query.isNotNull(CrmClueDO::getEducationMemberId);
-        if ("COURSE".equals(pageReqVO.getEducationServiceType())) query.isNotNull(CrmClueDO::getEducationMemberId)
+        query.eqIfPresent(CrmClueDO::getEducationOrigin, pageReqVO.getEducationOrigin());
+        if (Boolean.TRUE.equals(pageReqVO.getEducationOnly()) || "COURSE".equals(pageReqVO.getEducationServiceType()))
+            query.and(q -> q.in(CrmClueDO::getEducationOrigin, "WEBSITE", "MINIAPP")
+                    .or(r -> r.isNull(CrmClueDO::getEducationOrigin).isNotNull(CrmClueDO::getEducationMemberId)));
+        if ("COURSE".equals(pageReqVO.getEducationServiceType())) query
                 .and(q -> q.eq(CrmClueDO::getEducationServiceType, "COURSE").or().isNull(CrmClueDO::getEducationServiceType));
         else if (pageReqVO.getEducationServiceType() != null) query.eq(CrmClueDO::getEducationServiceType, pageReqVO.getEducationServiceType());
         query.selectAll(CrmClueDO.class)

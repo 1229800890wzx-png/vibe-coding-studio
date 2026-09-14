@@ -2,8 +2,9 @@ import http from "node:http";
 import { createReadStream, existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { websiteApiProxy } from './website-proxy.mjs';
 
-const root = path.resolve(
+const root = process.env.VIBE_WEB_ROOT ? path.resolve(process.env.VIBE_WEB_ROOT) : path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../dist",
 );
@@ -24,6 +25,12 @@ if (!existsSync(path.join(root, "index.html"))) {
 }
 http
   .createServer((req, res) => {
+    websiteApiProxy(req, res, () => serveStatic(req, res));
+  })
+  .listen(port, "127.0.0.1", () =>
+    console.log(`VIBE CODING: http://127.0.0.1:${port}`),
+  );
+function serveStatic(req, res) {
     if (!["GET", "HEAD"].includes(req.method)) {
       res.writeHead(405, { Allow: "GET, HEAD" });
       return res.end("Method not allowed");
@@ -66,7 +73,4 @@ http
     createReadStream(file)
       .on("error", () => res.destroy())
       .pipe(res);
-  })
-  .listen(port, "127.0.0.1", () =>
-    console.log(`VIBE CODING: http://127.0.0.1:${port}`),
-  );
+}

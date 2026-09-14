@@ -43,13 +43,17 @@ public class ApiAccessLogInterceptor implements HandlerInterceptor {
 
         // 打印 request 日志
         if (!SpringUtils.isProd()) {
-            Map<String, String> queryString = ServletUtils.getParamMap(request);
-            String requestBody = ServletUtils.getBody(request);
-            if (CollUtil.isEmpty(queryString) && StrUtil.isEmpty(requestBody)) {
-                log.info("[preHandle][开始请求 URL({}) 无参数]", request.getRequestURI());
+            if (isRequestLoggingDisabled(request)) {
+                log.info("[preHandle][开始请求 URL({}) 参数已隐藏]", request.getRequestURI());
             } else {
-                log.info("[preHandle][开始请求 URL({}) 参数({})]", request.getRequestURI(),
-                        StrUtil.blankToDefault(requestBody, queryString.toString()));
+                Map<String, String> queryString = ServletUtils.getParamMap(request);
+                String requestBody = ServletUtils.getBody(request);
+                if (CollUtil.isEmpty(queryString) && StrUtil.isEmpty(requestBody)) {
+                    log.info("[preHandle][开始请求 URL({}) 无参数]", request.getRequestURI());
+                } else {
+                    log.info("[preHandle][开始请求 URL({}) 参数({})]", request.getRequestURI(),
+                            StrUtil.blankToDefault(requestBody, queryString.toString()));
+                }
             }
             // 计时
             StopWatch stopWatch = new StopWatch();
@@ -59,6 +63,18 @@ public class ApiAccessLogInterceptor implements HandlerInterceptor {
             printHandlerMethodPosition(handlerMethod);
         }
         return true;
+    }
+
+    /** Reused by exception logging so explicit payload suppression has one meaning. */
+    public static boolean isRequestLoggingDisabled(HttpServletRequest request) {
+        if (request == null) return false;
+        Object handler = request.getAttribute(ATTRIBUTE_HANDLER_METHOD);
+        if (!(handler instanceof HandlerMethod)) {
+            handler = request.getAttribute(org.springframework.web.servlet.HandlerMapping.BEST_MATCHING_HANDLER_ATTRIBUTE);
+        }
+        if (!(handler instanceof HandlerMethod method)) return false;
+        var annotation = method.getMethodAnnotation(cn.iocoder.yudao.framework.apilog.core.annotation.ApiAccessLog.class);
+        return annotation != null && (!annotation.enable() || !annotation.requestEnable());
     }
 
     @Override

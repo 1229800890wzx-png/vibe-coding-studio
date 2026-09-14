@@ -5,7 +5,9 @@ server:
   address: ${VIBE_BIND_ADDRESS:127.0.0.1}
   port: ${VIBE_API_PORT:48080}
   # The API is reachable only through the trusted reverse proxy. Strip client-supplied forwarded headers there.
-  forward-headers-strategy: framework
+  # Preserve the actual transport peer for the website limiter's proxy allowlist.
+  # The gateway supplies X-Vibe-Client-IP; never accept caller-provided Forwarded/XFF as identity.
+  forward-headers-strategy: none
 spring:
   datasource:
     dynamic:
@@ -128,3 +130,12 @@ justauth:
 
 # COS and payment-channel credentials are configured through original infra/pay services,
 # not invented application properties. See docs/OPERATIONS.md for the exact JSON structure.
+edu:
+  website-admission:
+    tenant-id: ${VIBE_WEBSITE_TENANT_ID:1}
+    consent-version: website-contact-2026-09
+    # Only the actual reverse-proxy peers; never trust arbitrary internet clients.
+    trusted-proxies: ${VIBE_WEBSITE_TRUSTED_PROXIES:127.0.0.1,::1,0:0:0:0:0:0:0:1}
+    rate-window-seconds: 60
+    create-limit: 10
+    options-limit: 60

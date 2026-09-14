@@ -93,7 +93,7 @@ public class EduAdmissionService {
                     .educationCourseId(courseId).educationConsentTime(LocalDateTime.now()).educationConsentVersion(CONSENT_VERSION).build());
             // Protected origin fields use explicit updates; ordinary CRM editing cannot overwrite them.
             clueMapper.update(null, new LambdaUpdateWrapper<CrmClueDO>().eq(CrmClueDO::getId, id)
-                    .set(CrmClueDO::getEducationServiceType, type).set(CrmClueDO::getEducationTeacherId, teacherId)
+                    .set(CrmClueDO::getEducationOrigin, "MINIAPP").set(CrmClueDO::getEducationServiceType, type).set(CrmClueDO::getEducationTeacherId, teacherId)
                     .set(CrmClueDO::getEducationTeacherName, teacher == null ? null : teacher.getName())
                     .set(CrmClueDO::getEducationPreferredStartTime, start).set(CrmClueDO::getEducationPreferredEndTime, end)
                     .set(CrmClueDO::getEducationAppointmentStatus, oneToOne ? "REQUESTED" : null));
@@ -158,11 +158,12 @@ public class EduAdmissionService {
 
     public Map<String,Object> staffDetail(Long id) {
         CrmClueDO clue = found(clues.getClue(id), "线索不存在"); // Original @CrmPermission READ enforcement.
-        require(clue.getEducationMemberId() != null, "此线索不是教育咨询");
+        require(Set.of("WEBSITE", "MINIAPP").contains(Objects.requireNonNullElse(clue.getEducationOrigin(), "")) || (clue.getEducationOrigin() == null && clue.getEducationMemberId() != null), "此线索不是教育咨询");
         Map<String,Object> view = new LinkedHashMap<>(); view.put("clue", clue);
         view.put("trials", linkedTrials(clue)); return view;
     }
     private List<Map<String,Object>> linkedTrials(CrmClueDO clue) {
+        if (clue.getEducationStudentId() == null) return List.of();
         return trials.selectList(new LambdaQueryWrapper<EduTrialBookingDO>().eq(EduTrialBookingDO::getCrmClueId, clue.getId())
                 .eq(EduTrialBookingDO::getStudentId, clue.getEducationStudentId()).orderByDesc(EduTrialBookingDO::getId))
                 .stream().map(t -> { Map<String,Object> v = new LinkedHashMap<>(); var c = cohorts.selectById(t.getCohortId());
