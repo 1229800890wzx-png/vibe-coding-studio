@@ -1,5 +1,7 @@
 # 官网与小程序后端统一实施计划
 
+> 后续范围更新（2026-09-14）：用户明确“前端按照他的来”。朋友 PR #1 已合入 master；`codex/unified-platform` 保留其橙色首页、筛选搜索、`/courses/:id` 详情和咨询布局，连接本计划已完成的统一后端。下文的蓝白视觉与锚点说明仅记录前一阶段，不能覆盖用户最新要求。当前交付见 `docs/UNIFIED_BACKEND.md`。
+
 > **For agentic workers:** 实施时使用 `superpowers:subagent-driven-development` 或 `superpowers:executing-plans` 按任务交付。本计划已在 codex/unified-backend 实施；实际交付与验证见下表。
 
 **Goal:** 在官网现有视觉与操作流程保持原样的前提下，完整迁移官网管理后台，统一后端、数据库、课程数据与 CRM；官网前端仅做必要的 API 和字段适配。

@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from 'react';
+
 const prefix = '/app-api/edu';
 
 export async function educationRequest(path, { signal, body, ...options } = {}) {
@@ -32,4 +34,32 @@ export async function submissionIdentity(payload) {
   requestId ||= crypto.randomUUID();
   try { sessionStorage.setItem(key, requestId); } catch { /* the form also retains its current request */ }
   return { key, requestId };
+}
+
+/** Website slugs are navigation IDs; business course IDs are separate optional references. */
+export async function getCourses(options) {
+  const offerings = await getWebsiteOfferings(options);
+  return offerings.map(offering => ({ ...offering, id: offering.slug, offeringId: offering.id }));
+}
+
+export function useCourses() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [attempt, setAttempt] = useState(0);
+  const reload = useCallback(() => setAttempt(value => value + 1), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setError('');
+    getCourses({ signal: controller.signal }).then(courses => {
+      if (!controller.signal.aborted) setData(courses);
+    }).catch(() => {
+      if (!controller.signal.aborted) setError('课程暂时未能加载，请稍后重试。');
+    }).finally(() => {
+      if (!controller.signal.aborted) setLoading(false);
+    });
+    return () => controller.abort();
+  }, [attempt]);
+  return { data, loading, error, reload };
 }

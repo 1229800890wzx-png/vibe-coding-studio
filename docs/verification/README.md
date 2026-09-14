@@ -1,5 +1,7 @@
 # 本地验证报告
 
+当前官网版本：[朋友橙色前端与统一后台接入验收](2026-09-14-orange-unification.md)，包含本轮19项浏览器检查与12组像素对照。
+
 2026-09-14 新增：[官网与小程序后端统一验收](2026-09-14-unified-backend.md)。这是独立恢复环境的本轮证据；下表保留原小程序专项记录。
 
 导出时间：2026/9/14 08:01:43（Asia/Shanghai）。本目录是经过凭据检查的专项报告副本；原始运行数据留在被忽略的 .runtime。可重跑 `node tooling/bootstrap/export-verification.mjs`。

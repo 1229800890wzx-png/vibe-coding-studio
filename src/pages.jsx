@@ -27,8 +27,8 @@ import {
   homeSteps,
   methodSteps,
   projects,
+  services,
 } from "./content";
-import { useWebsiteServices, WebsiteServicesStatus } from './website-content';
 import { featuredProjects, legacyProjectIds, showcaseIds } from './showcase-content';
 import { ShowcaseImage } from './showcase';
 
@@ -77,7 +77,6 @@ function ServiceIllustration({ index }) {
 }
 
 export function Home() {
-  const services = useWebsiteServices();
   return (
     <>
       <section className="home-hero">
@@ -119,7 +118,7 @@ export function Home() {
                 <h3>{s.title}</h3>
                 <p>{s.subtitle}</p>
                 <div className="service-art">
-                  <ServiceIllustration index={s.illustrationIndex} />
+                  <ServiceIllustration index={i} />
                 </div>
                 <ul>
                   {s.points.map((p, n) => (
@@ -133,7 +132,6 @@ export function Home() {
               </article>
             ))}
           </div>
-          <WebsiteServicesStatus />
         </section>
         <section className="section learning-summary">
           <SectionHead
@@ -211,7 +209,6 @@ const aiTopics = [
 ];
 
 export function Courses() {
-  const services = useWebsiteServices();
   const [topic, setTopic] = useState(null);
   return (
     <>
@@ -325,13 +322,12 @@ export function Courses() {
                       "从表达与基础概念出发，用小实验建立理解。",
                       "将编程实践与 AI 基础结合，完成可以验证的项目。",
                       "在综合项目中反复应用知识，回顾方法并持续改进。",
-                    ][s.stage - 1]
+                    ][i]
                   }
                 </p>
               </article>
             ))}
           </div>
-          <WebsiteServicesStatus />
         </section>
       </div>
       <section className="section blue-band container-wide">

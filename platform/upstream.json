@@ -1,0 +1,12 @@
+{
+  "backend": {
+    "repository": "YunaiV/ruoyi-vue-pro",
+    "revision": "8e43004cf68a405cd3485f98f8a539b97ca6544a",
+    "directory": "ruoyi-vue-pro-8e43004cf68a405cd3485f98f8a539b97ca6544a"
+  },
+  "admin": {
+    "repository": "yudaocode/yudao-ui-admin-vue3",
+    "revision": "aab14fb0e74720dd09e964ae066f8bbde9f9012e",
+    "directory": "yudao-ui-admin-vue3-master"
+  }
+}

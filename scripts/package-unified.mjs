@@ -19,7 +19,8 @@ const entries=[
  ['apps/miniapp/LICENSE','licenses/apps-miniapp-LICENSE'],['apps/miniapp/UPSTREAM.md','licenses/apps-miniapp-UPSTREAM.md'],
  ['public/licenses','licenses/website'],['docs/UNIFIED_BACKEND.md','docs/UNIFIED_BACKEND.md'],['docs/OPERATIONS.md','docs/OPERATIONS.md'],
  ['docs/ADMIN.md','docs/ADMIN.md'],['docs/MINIAPP.md','docs/MINIAPP.md'],
- ['docs/verification/2026-09-14-unified-backend.md','docs/verification/2026-09-14-unified-backend.md']
+ ['docs/verification/2026-09-14-unified-backend.md','docs/verification/2026-09-14-unified-backend.md'],
+ ['docs/verification/2026-09-14-orange-unification.md','docs/verification/2026-09-14-orange-unification.md']
 ];
 const forbidden=/(^|\/)(?:\.runtime|\.tools|node_modules|backups?)(?:\/|$)|(?:^|\/)(?:private\.env|\.env(?:\..*)?|(?:secrets?|credentials?|passwords?)\.(?:env|json|ya?ml|txt))(?:$|\/)/i;
 const literal=value=>`'${value.replaceAll("'","''")}'`;

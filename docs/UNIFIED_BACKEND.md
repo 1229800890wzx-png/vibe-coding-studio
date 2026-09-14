@@ -1,5 +1,7 @@
 # 统一后端部署说明
 
+当前官网采用朋友 PR #1 的橙色首页、课程列表与详情、筛选搜索和咨询表单。PR #1 已合入 `master`；`codex/unified-platform` 将这套前端连接到本文件描述的统一后台。本轮19项浏览器检查与12组像素对照见[橙色官网接入验收](verification/2026-09-14-orange-unification.md)。
+
 ## 架构与入口
 
 官网、管理后台和少儿端共用一个 Spring Boot 后端与一套原业务模型。官网静态站由 `serve.mjs` 提供，`website-proxy.mjs` 仅转发公开 allowlist；管理后台使用原系统登录、菜单、角色和数据范围；少儿端继续使用原会员、课程、班期、订单、支付与学习接口。
@@ -17,6 +19,28 @@
 生产首次上线按顺序执行数据库迁移，再运行官网内容导入。`tooling/bootstrap/import-website-content.mjs` 通过统一管理 API 读取 `infra/website-content.json`，只依赖 Node.js 内置模块；通过 `VIBE_API_TARGET`、`VIBE_WEBSITE_TENANT_ID` 和 `VIBE_ADMIN_TOKEN` 指向已部署后端。默认仅预览，审核后使用 `--apply`：脚本只创建缺失 slug 并发布，任何状态的已有 slug 都完整保留；若创建后发布失败，草稿留给后台人工处理，不会被再次覆盖。内容文件保持官网首页的三个课程方向一致。
 
 ## 构建与发布
+
+本地开发使用仓库中的真实应用目录。Windows 官网保留 `npm.cmd` 命令：
+
+```powershell
+npm.cmd ci
+npm.cmd run dev
+
+npm.cmd --prefix apps/admin install
+npm.cmd --prefix apps/admin run dev-server
+
+npm.cmd --prefix apps/miniapp install
+npm.cmd --prefix apps/miniapp run dev:h5
+```
+
+后端需要 Java 17、Maven、私有数据库与 Redis 配置。开发时从 `apps/server` 构建 `yudao-server`，再用实际环境配置启动生成的 JAR：
+
+```powershell
+mvn.cmd -f apps/server/pom.xml -pl yudao-server -am package -DskipTests
+java -jar apps/server/yudao-server/target/yudao-server.jar
+```
+
+不要同时启动已退役的 `platform` 独立服务；官网开发代理、后台和少儿端必须指向同一个 `apps/server` 实例。
 
 `node scripts/package-unified.mjs` 只打包已经构建的官网、管理后台、后端 JAR、少儿端 H5/微信小程序、迁移资产、配置模板、许可证和部署文档。输出位于唯一的 `output/unified-release-<timestamp>`，并包含逐文件 SHA-256 清单和 ZIP。包中不含 `.runtime`、`.tools`、数据库备份、私有环境文件或 `node_modules`。
 
@@ -50,8 +74,8 @@ node website/scripts/serve.mjs
 
 应用回退时保留 `edu_website_admission_receipt` 和已经进入 `crm_clue` 的线索。先停止新官网流量或把官网切为维护页，再回退静态资源或应用 JAR；不要删除回执来“重试”咨询，也不要重新启动旧后端与新后端同时接收写请求。若需兼容旧版本，先写明确的前向兼容迁移并验证单写路径。
 
-## 已完成的隔离验收
+## 已完成的后端阶段隔离验收
 
-当前已有证据包括：43 个最终选定 Java 测试通过、9 组统一 API 验收通过、education flow/permissions/discovery/trade/admissions 回归通过、10 个生产迁移重复执行与 checksum 拒绝验证通过，以及微信小程序、H5、管理后台和官网构建通过。浏览器验收 20 项全部通过，其中包括 10 组截图像素差为 0、3 条真实闭环以及权限、内容 hash 和禁用态补验。统一 API 还验证了后端重启后旧 receipt 完全相同及 4 种错误码精确映射。
+此前 `fc320d65` 的证据包括：43 个最终选定 Java 测试、9 组统一 API、education flow/permissions/discovery/trade/admissions、10 个生产迁移重复执行与 checksum 拒绝检查通过，四个前端目标及后端构建通过。其20项浏览器验收及10组截图对照属于前一阶段蓝白官网，保留为历史证据；当前橙色前端使用本页顶部链接的新验收记录。统一 API 还验证了后端重启后旧 receipt 完全相同及4种错误码。本轮后端、管理端和迁移没有变更，未为更新前端而重复运行全部业务测试。
 
 首次隔离 trade 回归超时的原因是恢复库复制了 `pay_app` 中指向本地 48080 的回调，并非交易业务断言失败。两次错误回调到达原服务后分别被“交易订单不存在”和“售后单不存在”拒绝，没有向真实支付渠道发请求。隔离准备步骤随后只在恢复库中把 `pay_app` 以及订单、退款、转账和通知任务的 loopback 回调改到 48081，并增加回归前置校验；复跑 trade 与 admissions 全部通过。原业务数据经逐行核对保留，原服务运行日志和任务状态在验收期间继续变化，详细证据见 `docs/verification/2026-09-14-unified-backend.md`。
