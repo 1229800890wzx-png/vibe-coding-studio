@@ -811,7 +811,7 @@ export function Projects() {
           </div>
           <div className="grid-three project-grid">
             {filtered.map((p) => (
-              <article className="project-card" key={p.id}>
+              <article className="project-card glass-card" data-glass-card key={p.id}>
                 <div className="project-visual">
                   <ProjectVisual id={p.id} mini />
                 </div>
@@ -827,9 +827,9 @@ export function Projects() {
                     type="button"
                     className="text-button"
                     onClick={() => openProject(p.id)}
-                    aria-label={`查看${p.title}的创作过程`}
+                    aria-label={`打开${p.title}的互动体验`}
                   >
-                    查看创作过程
+                    打开互动体验
                     <Icon name="ArrowRight" size={17} />
                   </button>
                 </div>

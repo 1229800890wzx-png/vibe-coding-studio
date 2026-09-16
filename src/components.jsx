@@ -2,6 +2,7 @@ import React, {
   createContext,
   useContext,
   useEffect,
+  useId,
   useRef,
   useState,
 } from "react";
@@ -234,35 +235,48 @@ export function Logo() {
 
 export function Header() {
   const [menu, setMenu] = useState(false);
+  const menuButton = useRef(null);
+  const navigation = useRef(null);
   const location = useLocation();
   useEffect(() => {
     setMenu(false);
   }, [location]);
   useEffect(() => {
     const close = (e) => {
-      if (e.key === "Escape") setMenu(false);
+      if (e.key === "Escape" && menu) {
+        setMenu(false);
+        menuButton.current?.focus();
+      }
     };
     document.addEventListener("keydown", close);
     return () => document.removeEventListener("keydown", close);
-  }, []);
+  }, [menu]);
   return (
     <header className="site-header">
       <div className="nav-inner">
         <Logo />
         <nav
+          ref={navigation}
           aria-label="主导航"
           className={menu ? "main-nav is-open" : "main-nav"}
           id="main-menu"
+          onKeyDown={(event) => {
+            if (menu && event.key === "Tab" && menuButton.current?.getClientRects().length) {
+              const links = navigation.current?.querySelectorAll("a");
+              if (event.shiftKey && event.target === links?.[0]) {
+                event.preventDefault();
+                setMenu(false);
+                menuButton.current?.focus();
+              } else if (!event.shiftKey && event.target === links?.[links.length - 1]) {
+                setMenu(false);
+              }
+            }
+          }}
         >
           <NavLink to="/" end>
             首页
           </NavLink>
-          <NavLink
-            to="/courses"
-            className={({ isActive }) =>
-              isActive || location.pathname === "/method" ? "active" : ""
-            }
-          >
+          <NavLink to="/courses">
             课程服务
           </NavLink>
           <NavLink to="/mentors">导师团队</NavLink>
@@ -276,10 +290,17 @@ export function Header() {
           <button
             type="button"
             className="icon-button menu-button"
+            ref={menuButton}
             aria-label={menu ? "关闭导航菜单" : "打开导航菜单"}
             aria-expanded={menu}
             aria-controls="main-menu"
             onClick={() => setMenu(!menu)}
+            onKeyDown={(event) => {
+              if (menu && event.key === "Tab" && !event.shiftKey) {
+                event.preventDefault();
+                navigation.current?.querySelector("a")?.focus();
+              }
+            }}
           >
             <Icon name={menu ? "X" : "Menu"} />
           </button>
@@ -298,6 +319,11 @@ export function HeroCopy({
   breadcrumb,
   className = "",
 }) {
+  const signature = {
+    教学方法: "Think. Make. Understand.",
+    导师团队: "Curiosity, guided.",
+    作品展示: "Ideas made real.",
+  }[breadcrumb];
   return (
     <div className={`hero-copy ${className}`}>
       {breadcrumb && (
@@ -313,6 +339,7 @@ export function HeroCopy({
           <span>{breadcrumb}</span>
         </nav>
       )}
+      {signature && <p className="brand-script hero-signature" aria-hidden="true">{signature}</p>}
       <p className="eyebrow">{eyebrow}</p>
       <h1>
         {line1}
@@ -366,7 +393,7 @@ export function MentorCards({ detail = false }) {
     <>
       <div className="grid-three mentor-grid">
         {mentors.map((m) => (
-          <article key={m.title} className="mentor-card">
+          <article key={m.title} className="mentor-card glass-card" data-glass-card>
             <Art rect={m.rect} alt={`${m.title}的示意肖像`} />
             <div className="mentor-body">
               <h3>{m.title}</h3>
@@ -404,7 +431,7 @@ export function FAQ({ items, firstOpen = true, className = "" }) {
   );
 }
 
-export function Footer({ title = "从一个小小的想法开始。", course = false }) {
+export function Footer({ title = "从一个小小的想法开始。", course = false, note = "课程、人物与作品为设计示意" }) {
   return (
     <footer role="contentinfo">
       <div className="footer-cta">
@@ -438,38 +465,52 @@ export function Footer({ title = "从一个小小的想法开始。", course = f
         </nav>
         <p>
           © {new Date().getFullYear()} VIBE CODING · 少儿创造力实验室
-          <span>课程、人物与作品为设计示意</span>
+          <span>{note}</span>
         </p>
       </div>
     </footer>
   );
 }
 
-export function Modal({ title, onClose, children, className = "" }) {
+export function Modal({ title, onClose, children, className = "", closeDisabled = false, closeMessage = "正在提交，请等待结果后再关闭。" }) {
   const ref = useRef(null);
+  const titleRef = useRef(null);
+  const titleId = useId();
+  const closeStatusId = useId();
   useEffect(() => {
     const dialog = ref.current;
     const previous = document.activeElement;
-    dialog.showModal();
+    const oldRootOverflow = document.documentElement.style.overflow;
     const oldOverflow = document.body.style.overflow;
+    const oldPadding = document.body.style.paddingRight;
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbar > 0) {
+      document.body.style.paddingRight = `${parseFloat(getComputedStyle(document.body).paddingRight) + scrollbar}px`;
+    }
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
+    dialog.showModal();
+    titleRef.current?.focus({ preventScroll: true });
     return () => {
       dialog.close();
+      document.documentElement.style.overflow = oldRootOverflow;
       document.body.style.overflow = oldOverflow;
-      if (previous instanceof HTMLElement) previous.focus();
+      document.body.style.paddingRight = oldPadding;
+      if (previous instanceof HTMLElement && previous.isConnected) previous.focus({ preventScroll: true });
     };
   }, []);
   return (
     <dialog
       ref={ref}
       className={`modal ${className}`}
-      aria-labelledby="dialog-title"
+      aria-labelledby={titleId}
+      aria-describedby={closeDisabled ? closeStatusId : undefined}
       onCancel={(e) => {
         e.preventDefault();
-        onClose();
+        if (!closeDisabled) onClose();
       }}
       onClick={(e) => {
-        if (e.target === ref.current) {
+        if (!closeDisabled && e.target === ref.current) {
           const r = ref.current.getBoundingClientRect();
           if (
             e.clientX < r.left ||
@@ -482,16 +523,19 @@ export function Modal({ title, onClose, children, className = "" }) {
       }}
     >
       <div className="modal-head">
-        <h2 id="dialog-title">{title}</h2>
+        <h2 id={titleId} ref={titleRef} tabIndex={-1}>{title}</h2>
         <button
           type="button"
           className="icon-button"
           onClick={onClose}
+          disabled={closeDisabled}
+          aria-describedby={closeDisabled ? closeStatusId : undefined}
           aria-label="关闭弹窗"
         >
           <Icon name="X" />
         </button>
       </div>
+      {closeDisabled && <p className="modal-close-status" id={closeStatusId} role="status">{closeMessage}</p>}
       {children}
     </dialog>
   );

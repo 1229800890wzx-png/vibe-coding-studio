@@ -1,0 +1,206 @@
+.university-carousel {
+  --uc-paper: #f8f6f1;
+  --uc-accent: #ba4b27;
+  --uc-edge: #d8d0c2;
+  --uc-gap: 16px;
+  min-width: 0;
+  width: 100%;
+  color: #393d33;
+}
+
+.university-carousel .uc-track {
+  display: flex;
+  position: relative;
+  align-items: stretch;
+  gap: var(--uc-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: auto;
+  overflow-anchor: none;
+  scrollbar-width: none;
+  margin: 0;
+  padding: 5px 2px 17px;
+  list-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.university-carousel .uc-track::-webkit-scrollbar { display: none; }
+.university-carousel .uc-track:focus-visible { outline-offset: 5px; border-radius: 14px; }
+
+.university-carousel .uc-item {
+  flex: 0 0 calc((100% - 3.2 * var(--uc-gap)) / 4.2);
+  min-width: 0;
+  list-style: none;
+}
+
+.university-carousel .uc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 292px;
+  height: 100%;
+  padding: 21px 22px 18px;
+  border: 1px solid var(--uc-edge);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffffffd9, #fffcf6b3);
+  box-shadow: inset 0 0 0 3px #fffefa, 0 2px 3px #57412708, 0 12px 18px -18px #5f47284d;
+  backdrop-filter: blur(10px);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.university-carousel a.uc-card:hover {
+  border-color: #ba9b7e;
+  background-color: #fffefa;
+  box-shadow: inset 0 0 0 3px #fffefa, 0 2px 4px #5741270a, 0 12px 22px -16px #6f45253b;
+}
+
+.university-carousel .uc-card:focus-visible {
+  outline: 2px solid var(--uc-accent);
+  outline-offset: -5px;
+}
+
+.university-carousel .uc-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  min-height: 19px;
+  color: #756d60;
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: .06em;
+}
+
+.university-carousel .uc-card-number { color: #8c7963; font-variant-numeric: tabular-nums; }
+.university-carousel .uc-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+  height: 112px;
+  margin: 11px 0 16px;
+}
+
+.university-carousel .uc-logo img {
+  display: block;
+  width: 100%;
+  max-width: 144px;
+  height: 96px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.university-carousel .uc-logo-wide img { max-width: 180px; height: 88px; }
+.university-carousel .uc-logo-fallback {
+  display: grid;
+  place-items: center;
+  min-width: 90px;
+  height: 82px;
+  padding-inline: 12px;
+  border-block: 1px solid #d7c4af;
+  color: #8c5d3d;
+  font-family: var(--font-art, Georgia, serif);
+  font-size: 31px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.university-carousel .uc-school-name {
+  display: block;
+  font-size: clamp(18px, 1.55vw, 22px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .015em;
+}
+
+.university-carousel .uc-school-english {
+  display: block;
+  min-height: 39px;
+  margin-top: 6px;
+  color: #716c61;
+  font-size: 11px;
+  line-height: 1.7;
+  letter-spacing: .02em;
+  overflow-wrap: anywhere;
+}
+
+.university-carousel .uc-source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px solid #e8e0d3;
+  color: #985032;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.university-carousel .uc-source svg { width: 16px; height: 16px; }
+.university-carousel .uc-controls { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 2px; }
+.university-carousel .uc-position { display: flex; align-items: center; flex: 1; gap: 18px; min-width: 0; }
+.university-carousel .uc-count { flex-shrink: 0; color: #82786b; font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.university-carousel .uc-count strong { color: #74492f; font-size: 14px; font-weight: 500; }
+.university-carousel .uc-rule { height: 1px; width: 80px; min-width: 25px; background: linear-gradient(90deg, #caa989, #e0d7c8); }
+.university-carousel .uc-status { color: #797063; font-size: 11px; line-height: 1.7; }
+.university-carousel .uc-actions { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+.university-carousel .uc-actions button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid #d8cdbc;
+  border-radius: 50%;
+  background: #fffaf29c;
+  box-shadow: inset 0 0 0 2px #fffef9;
+  color: #8f5635;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.university-carousel .uc-actions button:hover:not(:disabled) { border-color: #ae7d57; background: #fffdf7; }
+.university-carousel .uc-actions button:disabled { opacity: .38; cursor: default; }
+.university-carousel .uc-actions .uc-play { gap: 7px; padding-inline: 13px; border-radius: 24px; margin-left: 4px; font-size: 11px; }
+.university-carousel .uc-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 1100px) {
+  .university-carousel .uc-item { flex-basis: calc((100% - 2.2 * var(--uc-gap)) / 3.2); }
+}
+
+@media (max-width: 760px) {
+  .university-carousel { --uc-gap: 13px; }
+  .university-carousel .uc-item { flex-basis: calc((100% - 1.3 * var(--uc-gap)) / 2.3); }
+  .university-carousel .uc-card { padding-inline: 20px; }
+  .university-carousel .uc-status { display: none; }
+  .university-carousel .uc-position { gap: 12px; }
+  .university-carousel .uc-controls { gap: 15px; }
+}
+
+@media (max-width: 520px) {
+  .university-carousel .uc-item { flex-basis: calc((100% - .35 * var(--uc-gap)) / 1.35); }
+  .university-carousel .uc-card { min-height: 292px; padding: 20px 22px 17px; }
+  .university-carousel .uc-school-name { font-size: 22px; }
+  .university-carousel .uc-logo { margin-block: 12px 17px; }
+  .university-carousel .uc-school-english { font-size: 11px; }
+  .university-carousel .uc-count { font-size: 11px; }
+  .university-carousel .uc-count strong { font-size: 13px; }
+  .university-carousel .uc-actions { gap: 5px; }
+  .university-carousel .uc-actions .uc-play { width: 44px; padding: 10px; margin-left: 0; }
+  .university-carousel .uc-play > span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .university-carousel .uc-card, .university-carousel .uc-actions button { transition: none; }
+}
