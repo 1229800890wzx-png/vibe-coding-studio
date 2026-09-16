@@ -11,7 +11,9 @@
       "path": "pages/tab/home",
       "style": {
         "navigationBarTitleText": "VIBE CODING",
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "enableShareAppMessage": true,
+        "enableShareTimeline": true
       }
     },
     {
@@ -205,38 +207,87 @@
         }
       ],
       "root": "pages/public"
+    },
+    {
+      "root": "pages/studio",
+      "pages": [
+        {
+          "path": "courses",
+          "style": {
+            "navigationBarTitleText": "课程体系",
+            "navigationStyle": "custom",
+            "enableShareAppMessage": true,
+            "enableShareTimeline": true
+          }
+        },
+        {
+          "path": "mentors",
+          "style": {
+            "navigationBarTitleText": "导师团队",
+            "navigationStyle": "custom",
+            "enableShareAppMessage": true,
+            "enableShareTimeline": true
+          }
+        },
+        {
+          "path": "method",
+          "style": {
+            "navigationBarTitleText": "教学方法",
+            "navigationStyle": "custom",
+            "enableShareAppMessage": true,
+            "enableShareTimeline": true
+          }
+        },
+        {
+          "path": "projects",
+          "style": {
+            "navigationBarTitleText": "创作展示",
+            "navigationStyle": "custom",
+            "enableShareAppMessage": true,
+            "enableShareTimeline": true
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#F5F5F7",
+    "navigationBarBackgroundColor": "#F8F6F1",
     "navigationBarTitleText": "VIBE CODING",
-    "backgroundColor": "#F5F5F7",
+    "backgroundColor": "#F8F6F1",
     "navigationStyle": "custom"
   },
   "tabBar": {
-    "color": "#6E6E73",
+    "color": "#77786C",
     "height": "58px",
-    "backgroundColor": "#FFFFFF",
-    "selectedColor": "#C94B00",
+    "backgroundColor": "#FBF9F4",
+    "selectedColor": "#BA4B27",
     "borderStyle": "white",
     "fontSize": "12px",
     "list": [
       {
         "pagePath": "pages/tab/home",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "static/studio/icons/home-tab.png",
+        "selectedIconPath": "static/studio/icons/home-active.png"
       },
       {
         "pagePath": "pages/tab/courses",
-        "text": "选课"
+        "text": "选课",
+        "iconPath": "static/studio/icons/courses-tab.png",
+        "selectedIconPath": "static/studio/icons/courses-active.png"
       },
       {
         "pagePath": "pages/tab/learning",
-        "text": "学习"
+        "text": "学习",
+        "iconPath": "static/studio/icons/learning-tab.png",
+        "selectedIconPath": "static/studio/icons/learning-active.png"
       },
       {
         "pagePath": "pages/tab/me",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "static/studio/icons/me-tab.png",
+        "selectedIconPath": "static/studio/icons/me-active.png"
       }
     ]
   }

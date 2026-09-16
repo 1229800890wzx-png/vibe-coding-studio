@@ -1,5 +1,5 @@
 <template
-  ><EduHeader title="退款与售后" /><view class="edu-page"
+  ><EduHeader title="退款与售后" /><view class="edu-page parent-flow"
     ><view class="title">查看处理进度。</view
     ><view class="subtitle">退款申请经审核后，按原支付渠道处理。</view
     ><EduState

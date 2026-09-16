@@ -20,7 +20,10 @@ export async function loadStudents() {
     family.loaded = false;
     return [];
   }
+  const accountToken = uni.getStorageSync('token');
   const students = listOf(await edu.students());
+  // A response from a previous account must not repopulate children after logout/login.
+  if (!store('user').isLogin || uni.getStorageSync('token') !== accountToken) return [];
   family.students = students;
   family.loaded = true;
   if (!students.some((s) => s.id === family.currentId)) selectStudent(students[0]?.id || 0);

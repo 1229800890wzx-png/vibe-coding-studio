@@ -24,6 +24,9 @@
         ><view class="small muted">{{ item.description }}</view></view
       >
     </view>
+    <view class="section-head"><text class="section-title">认识我们的导师</text></view>
+    <MentorRoster compact :published="teachers" />
+    <view class="small muted">可预约老师与授课时间，以后续开放的排班为准。</view>
     <view class="section-head"><text class="section-title">怎样开始一对一</text></view>
     <view class="card process-card"
       ><view v-for="(step, i) in steps" :key="step.title" class="process-step"
@@ -36,7 +39,13 @@
     >
     <view class="section-head"
       ><text class="section-title">选择指导老师</text
-      ><text class="small muted">{{ teachers.length }} 位已开放</text></view
+      ><text class="small muted">{{
+        teacherLoading
+          ? '查询中'
+          : teacherError
+          ? '预约信息暂未加载'
+          : teachers.length + ' 位已开放'
+      }}</text></view
     >
     <EduState
       :loading="teacherLoading"
@@ -249,6 +258,7 @@
   </view>
 </template>
 <script setup>
+  import MentorRoster from '@/components/edu/MentorRoster.vue';
   import { computed, reactive, ref, watch } from 'vue';
   import { onShow } from '@dcloudio/uni-app';
   import EduHeader from '@/components/edu/EduHeader.vue';
@@ -481,8 +491,8 @@
     return item.appointmentStatus === 'CANCELLED'
       ? '已撤回'
       : item.followUpStatus
-        ? '已跟进 · 待确认'
-        : '已提交 · 待联系';
+      ? '已跟进 · 待确认'
+      : '已提交 · 待联系';
   }
   async function cancel(item) {
     if (
@@ -529,8 +539,10 @@
   .private-hero {
     overflow: hidden;
     border-radius: 20px;
-    background: #1d1d1f;
-    color: #fff;
+    background: linear-gradient(145deg, #fffdf7, #efe4d3);
+    color: #30352a;
+    border: 1px solid #dfd1bf;
+    box-shadow: inset 0 0 0 2px #fffcf3;
   }
   .hero-copy {
     padding: 28px 24px;
@@ -538,7 +550,7 @@
   .private-eyebrow {
     font-size: 12px;
     letter-spacing: 2px;
-    color: #ffab60;
+    color: #ac6137;
     font-weight: 650;
   }
   .private-title {
@@ -549,7 +561,7 @@
     letter-spacing: -1px;
   }
   .private-subtitle {
-    color: #d1d1d6;
+    color: #6b6d5f;
     line-height: 1.8;
     font-size: 16px;
   }
@@ -560,7 +572,7 @@
     margin-top: 20px;
   }
   .hero-tags text {
-    border: 1px solid #55555b;
+    border: 1px solid #d8c7b1;
     padding: 5px 9px;
     border-radius: 7px;
     font-size: 13px;
@@ -638,9 +650,7 @@
     border-radius: 16px;
     text-align: left;
     line-height: 1.6;
-    transition:
-      border-color 0.12s,
-      background 0.12s;
+    transition: border-color 0.12s, background 0.12s;
   }
   .teacher-card::after {
     border: 0;

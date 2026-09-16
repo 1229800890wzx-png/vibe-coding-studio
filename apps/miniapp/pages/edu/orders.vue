@@ -1,5 +1,5 @@
 <template
-  ><EduHeader :title="orderId ? '订单详情' : '课程订单'" /><view class="edu-page"
+  ><EduHeader :title="orderId ? '订单详情' : '课程订单'" /><view class="edu-page parent-flow"
     ><view class="title">{{ orderId ? '每一次报名，都有记录。' : '我的课程订单' }}</view
     ><view v-if="!orderId" class="chips" style="margin: 20px 0"
       ><button
@@ -57,7 +57,9 @@
         ></view
       ><view class="row between" style="margin: 16px 0"
         ><text class="muted">{{ dateText(order.createTime) }}</text
-        ><text class="strong">实付 ¥{{ money(order.payPrice) }}</text></view
+        ><text class="strong"
+          >{{ order.status === 0 ? '应付' : '实付' }} ¥{{ money(order.payPrice) }}</text
+        ></view
       ><view class="row" style="justify-content: flex-end"
         ><button v-if="!orderId" class="btn quiet" @tap="go('orders', { id: order.id })"
           >订单详情</button
@@ -238,7 +240,10 @@
     refundAction.value = item.enrollmentStatus === 'CANCELLED' ? 'CANCEL' : 'KEEP';
     actionError.value = '';
   }
-  onLoad((o) => (orderId.value = Number(o.id) || 0));
+  onLoad((o) => {
+    orderId.value = Number(o.id) || 0;
+    if (['0', '10', '40'].includes(String(o.status))) filter.value = Number(o.status);
+  });
   onShow(() => {
     if (requireLogin()) refresh();
   });

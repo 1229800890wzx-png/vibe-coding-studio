@@ -1,5 +1,5 @@
 <template
-  ><EduHeader title="申请调班" /><view class="edu-page"
+  ><EduHeader title="申请调班" /><view class="edu-page parent-flow"
     ><view class="title">调整节奏，继续创作。</view
     ><view class="subtitle">选择同课程、同价的目标班期，老师审核通过后再调整上课安排。</view
     ><view v-if="source" class="note">当前班期：{{ source.name }}</view

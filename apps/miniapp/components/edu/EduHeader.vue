@@ -76,7 +76,8 @@
 <style scoped>
   .edu-header {
     padding-top: env(safe-area-inset-top);
-    background: rgba(245, 245, 247, 0.97);
+    background: rgba(248, 246, 241, 0.97);
+    border-bottom: 1px solid #e2d9cc70;
     position: sticky;
     top: 0;
     z-index: 20;
@@ -111,8 +112,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ff7a00;
-    color: #1d1d1f;
+    background: #ba4b27;
+    color: #fffaf3;
     border-radius: 9px;
     width: 30px;
     height: 30px;
@@ -135,7 +136,8 @@
     min-height: 44px;
     font-size: 14px;
     font-weight: 600;
-    background: white;
+    background: #fffcf6;
+    border: 1px solid #e1d6c5;
     border-radius: 12px;
     padding: 10px 12px;
     margin: 0;

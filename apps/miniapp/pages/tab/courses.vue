@@ -1,204 +1,215 @@
 <template>
-  <EduHeader home cart /><view class="edu-page"
-    ><text class="eyebrow">FIND YOUR NEXT IDEA</text><view class="title">把兴趣，变成能力。</view
-    ><view class="subtitle">先选学习方式，再找到适合孩子的创作方向。</view>
-    <view class="course-types"
-      ><button
-        v-for="kind in kinds"
-        :key="kind.value"
-        class="type-choice"
-        :class="{ selected: filters.kind === kind.value }"
-        @tap="setKind(kind.value)"
-        >{{ kind.value ? kind.label : '全部课程' }}</button
+  <view class="course-canvas">
+    <EduHeader home cart /><view class="edu-page"
+      ><CourseSchedule />
+      <view class="catalog-heading"
+        ><text class="eyebrow">EXPLORE COURSES / 已发布课程</text
+        ><view class="title">继续探索，找到你的方向。</view
+        ><view class="subtitle">按孩子的兴趣、基础与已开放班期选择课程。</view></view
+      >
+      <view class="course-types"
+        ><button
+          v-for="kind in kinds"
+          :key="kind.value"
+          class="type-choice"
+          :class="{ selected: filters.kind === kind.value }"
+          @tap="setKind(kind.value)"
+          >{{ kind.value ? kind.label : '全部课程' }}</button
+        ></view
+      >
+      <button class="link" @tap="openStudio('courses')">先了解基础、AI 与实战课程体系 ↗</button>
+      <view class="search-row"
+        ><input
+          class="input"
+          v-model="keyword"
+          placeholder="搜索课程、项目或兴趣"
+          confirm-type="search"
+          @confirm="search"
+        /><button class="btn secondary" @tap="search">搜索</button></view
+      ><view class="row between filter-row"
+        ><scroll-view scroll-x class="directions"
+          ><view class="chips no-wrap"
+            ><button
+              v-for="item in directions"
+              :key="item.value"
+              class="chip"
+              :class="{ active: filters.direction === item.value }"
+              @tap="setDirection(item.value)"
+              >{{ item.label }}</button
+            ></view
+          ></scroll-view
+        ><button class="chip" @tap="openFilter"
+          >筛选{{ filterCount ? ' · ' + filterCount : '' }}⌄</button
+        ></view
+      ><view class="row between muted results"
+        ><text>{{ loading ? '正在查询课程…' : error ? '课程暂未加载' : total + ' 门课程' }}</text
+        ><button class="link" @tap="go('campuses')">城市与校区 ↗</button></view
+      ><view v-if="activeFilters.length" class="selected-filters"
+        ><button
+          v-for="item in activeFilters"
+          :key="item.key"
+          class="selected-filter"
+          :aria-label="'移除' + item.label"
+          @tap="removeFilter(item.key)"
+          >{{ item.label }} <text>×</text></button
+        ></view
+      ><EduState
+        :loading="loading"
+        :error="error"
+        :empty="!courses.length"
+        title="还没有匹配的课程"
+        :description="
+          activeFilters.length
+            ? '当前条件暂无匹配；可以只放宽一个条件，保留其他选择。'
+            : '课程和班期确认后会在这里开放。也可以先了解一对一服务。'
+        "
+        @retry="refresh"
+        ><view class="recovery-actions"
+          ><button v-if="filters.campusId" class="btn secondary" @tap="removeFilter('campusId')"
+            >不限校区，保留其他条件</button
+          ><button
+            v-if="filters.startFrom || filters.startTo"
+            class="btn secondary"
+            @tap="removeFilter('date')"
+            >不限开课日期</button
+          ><button v-if="activeFilters.length" class="btn quiet" @tap="reset">清除全部条件</button
+          ><button v-else class="btn secondary" @tap="go('one-to-one')"
+            >了解一对一高级课</button
+          ></view
+        ></EduState
+      ><view class="course-grid" v-if="!loading && !error"
+        ><CourseCard
+          v-for="course in courses"
+          :key="course.id"
+          :course="course"
+          :context="filters" /></view
+      ><button v-if="courses.length < total && !loading" class="btn secondary" @tap="more"
+        >查看更多课程</button
+      ></view
+    ><view v-if="showFilter" class="filter-mask" @tap="showFilter = false"
+      ><view class="filter-sheet" @tap.stop
+        ><view class="row between"
+          ><text class="section-title">找到适合孩子的课程</text
+          ><button class="link" @tap="showFilter = false">取消</button></view
+        ><view class="field"
+          ><text class="field-label">孩子年龄</text
+          ><view class="chips"
+            ><button
+              v-for="age in ages"
+              :key="age"
+              class="chip"
+              :class="{ active: draft.age === age }"
+              @tap="draft.age = age"
+              >{{ age || '不限' }}{{ age ? ' 岁' : '' }}</button
+            ></view
+          ></view
+        ><view class="field"
+          ><text class="field-label">课程类型</text
+          ><view class="chips"
+            ><button
+              v-for="kind in kinds"
+              :key="kind.value"
+              class="chip"
+              :class="{ active: draft.kind === kind.value }"
+              @tap="draft.kind = kind.value"
+              >{{ kind.label }}</button
+            ></view
+          ></view
+        ><view class="field"
+          ><text class="field-label">学习基础</text>
+          <view class="chips"
+            ><button
+              v-for="level in levels"
+              :key="level.value"
+              class="chip"
+              :class="{ active: draft.level === level.value }"
+              @tap="draft.level = level.value"
+              >{{ level.label }}</button
+            ></view
+          >
+        </view>
+        <view class="field">
+          <text class="field-label">开课日期</text>
+          <view class="row"
+            ><picker
+              mode="date"
+              :value="draft.startFrom"
+              @change="draft.startFrom = $event.detail.value"
+              ><view class="input">{{ draft.startFrom || '开始日期' }}</view></picker
+            ><text>至</text
+            ><picker
+              mode="date"
+              :value="draft.startTo"
+              @change="draft.startTo = $event.detail.value"
+              ><view class="input">{{ draft.startTo || '结束日期' }}</view></picker
+            ></view
+          >
+          <button
+            v-if="draft.startFrom || draft.startTo"
+            class="link"
+            @tap="
+              draft.startFrom = '';
+              draft.startTo = '';
+            "
+            >清除日期</button
+          >
+        </view>
+        <view class="field"
+          ><text class="field-label">上课方式</text
+          ><view class="chips"
+            ><button
+              v-for="item in modes"
+              :key="item.value"
+              class="chip"
+              :class="{ active: draft.mode === item.value }"
+              @tap="setDraftMode(item.value)"
+              >{{ item.label }}</button
+            ></view
+          ></view
+        ><view class="field"
+          ><text class="field-label">校区</text
+          ><picker
+            :range="campusNames"
+            :value="
+              Math.max(0, campuses.findIndex((c) => String(c.id) === String(draft.campusId)) + 1)
+            "
+            @change="setDraftCampus(Number($event.detail.value))"
+            ><view class="input"
+              >{{
+                campuses.find((c) => String(c.id) === String(draft.campusId))?.name || '不限校区'
+              }}
+              ⌄</view
+            ></picker
+          ></view
+        ><view class="row filter-actions"
+          ><button
+            class="btn quiet"
+            @tap="
+              draft = {
+                age: '',
+                mode: '',
+                campusId: '',
+                level: '',
+                kind: '',
+                startFrom: '',
+                startTo: '',
+              }
+            "
+            >重置</button
+          ><button class="btn" style="flex: 1" @tap="apply">查看课程</button></view
+        ></view
       ></view
     >
-    <PrivateCourseEntry /><view class="search-row"
-      ><input
-        class="input"
-        v-model="keyword"
-        placeholder="搜索课程、项目或兴趣"
-        confirm-type="search"
-        @confirm="search"
-      /><button class="btn secondary" @tap="search">搜索</button></view
-    ><view class="row between filter-row"
-      ><scroll-view scroll-x class="directions"
-        ><view class="chips no-wrap"
-          ><button
-            v-for="item in directions"
-            :key="item.value"
-            class="chip"
-            :class="{ active: filters.direction === item.value }"
-            @tap="setDirection(item.value)"
-            >{{ item.label }}</button
-          ></view
-        ></scroll-view
-      ><button class="chip" @tap="openFilter"
-        >筛选{{ filterCount ? ' · ' + filterCount : '' }}⌄</button
-      ></view
-    ><view class="row between muted results"
-      ><text>{{ total }} 门课程</text
-      ><button class="link" @tap="go('campuses')">城市与校区 ↗</button></view
-    ><view v-if="activeFilters.length" class="selected-filters"
-      ><button
-        v-for="item in activeFilters"
-        :key="item.key"
-        class="selected-filter"
-        :aria-label="'移除' + item.label"
-        @tap="removeFilter(item.key)"
-        >{{ item.label }} <text>×</text></button
-      ></view
-    ><EduState
-      :loading="loading"
-      :error="error"
-      :empty="!courses.length"
-      title="还没有匹配的课程"
-      :description="
-        activeFilters.length
-          ? '当前条件暂无匹配；可以只放宽一个条件，保留其他选择。'
-          : '课程和班期确认后会在这里开放。也可以先了解一对一服务。'
-      "
-      @retry="refresh"
-      ><view class="recovery-actions"
-        ><button v-if="filters.campusId" class="btn secondary" @tap="removeFilter('campusId')"
-          >不限校区，保留其他条件</button
-        ><button
-          v-if="filters.startFrom || filters.startTo"
-          class="btn secondary"
-          @tap="removeFilter('date')"
-          >不限开课日期</button
-        ><button v-if="activeFilters.length" class="btn quiet" @tap="reset">清除全部条件</button
-        ><button v-else class="btn secondary" @tap="go('one-to-one')"
-          >了解一对一高级课</button
-        ></view
-      ></EduState
-    ><view class="course-grid" v-if="!loading && !error"
-      ><CourseCard
-        v-for="course in courses"
-        :key="course.id"
-        :course="course"
-        :context="filters" /></view
-    ><button v-if="courses.length < total && !loading" class="btn secondary" @tap="more"
-      >查看更多课程</button
-    ></view
-  ><view v-if="showFilter" class="filter-mask" @tap="showFilter = false"
-    ><view class="filter-sheet" @tap.stop
-      ><view class="row between"
-        ><text class="section-title">找到适合孩子的课程</text
-        ><button class="link" @tap="showFilter = false">取消</button></view
-      ><view class="field"
-        ><text class="field-label">孩子年龄</text
-        ><view class="chips"
-          ><button
-            v-for="age in ages"
-            :key="age"
-            class="chip"
-            :class="{ active: draft.age === age }"
-            @tap="draft.age = age"
-            >{{ age || '不限' }}{{ age ? ' 岁' : '' }}</button
-          ></view
-        ></view
-      ><view class="field"
-        ><text class="field-label">课程类型</text
-        ><view class="chips"
-          ><button
-            v-for="kind in kinds"
-            :key="kind.value"
-            class="chip"
-            :class="{ active: draft.kind === kind.value }"
-            @tap="draft.kind = kind.value"
-            >{{ kind.label }}</button
-          ></view
-        ></view
-      ><view class="field"
-        ><text class="field-label">学习基础</text>
-        <view class="chips"
-          ><button
-            v-for="level in levels"
-            :key="level.value"
-            class="chip"
-            :class="{ active: draft.level === level.value }"
-            @tap="draft.level = level.value"
-            >{{ level.label }}</button
-          ></view
-        >
-      </view>
-      <view class="field">
-        <text class="field-label">开课日期</text>
-        <view class="row"
-          ><picker
-            mode="date"
-            :value="draft.startFrom"
-            @change="draft.startFrom = $event.detail.value"
-            ><view class="input">{{ draft.startFrom || '开始日期' }}</view></picker
-          ><text>至</text
-          ><picker mode="date" :value="draft.startTo" @change="draft.startTo = $event.detail.value"
-            ><view class="input">{{ draft.startTo || '结束日期' }}</view></picker
-          ></view
-        >
-        <button
-          v-if="draft.startFrom || draft.startTo"
-          class="link"
-          @tap="
-            draft.startFrom = '';
-            draft.startTo = '';
-          "
-          >清除日期</button
-        >
-      </view>
-      <view class="field"
-        ><text class="field-label">上课方式</text
-        ><view class="chips"
-          ><button
-            v-for="item in modes"
-            :key="item.value"
-            class="chip"
-            :class="{ active: draft.mode === item.value }"
-            @tap="setDraftMode(item.value)"
-            >{{ item.label }}</button
-          ></view
-        ></view
-      ><view class="field"
-        ><text class="field-label">校区</text
-        ><picker
-          :range="campusNames"
-          :value="
-            Math.max(0, campuses.findIndex((c) => String(c.id) === String(draft.campusId)) + 1)
-          "
-          @change="setDraftCampus(Number($event.detail.value))"
-          ><view class="input"
-            >{{
-              campuses.find((c) => String(c.id) === String(draft.campusId))?.name || '不限校区'
-            }}
-            ⌄</view
-          ></picker
-        ></view
-      ><view class="row"
-        ><button
-          class="btn quiet"
-          @tap="
-            draft = {
-              age: '',
-              mode: '',
-              campusId: '',
-              level: '',
-              kind: '',
-              startFrom: '',
-              startTo: '',
-            }
-          "
-          >重置</button
-        ><button class="btn" style="flex: 1" @tap="apply">查看课程</button></view
-      ></view
-    ></view
-  >
+  </view>
 </template>
 <script setup>
+  import CourseSchedule from '@/components/edu/CourseSchedule.vue';
+  import { openStudio } from '@/edu/studio';
   import { ref, reactive, computed, watch, onUnmounted } from 'vue';
   import { onLoad, onPageScroll, onShow } from '@dcloudio/uni-app';
   import EduHeader from '@/components/edu/EduHeader.vue';
   import EduState from '@/components/edu/EduState.vue';
   import CourseCard from '@/components/edu/CourseCard.vue';
-  import PrivateCourseEntry from '@/components/edu/PrivateCourseEntry.vue';
   import { edu, listOf } from '@/edu/api';
   import { useResource } from '@/edu/resource';
   import { go } from '@/edu/state';
@@ -432,12 +443,20 @@
   });
 </script>
 <style scoped>
+  .course-canvas {
+    min-height: 100vh;
+    background: #f8f6f1;
+  }
+  .catalog-heading {
+    padding-top: 25px;
+    border-top: 1px solid #dccfbf;
+  }
   .course-types {
     display: flex;
     gap: 4px;
     padding: 4px;
     border-radius: 14px;
-    background: #eaeaec;
+    background: #eeeae1;
     margin: 20px 0 14px;
   }
   .type-choice {
@@ -449,13 +468,11 @@
     font-size: 15px;
     margin: 0;
     color: #6e6e73;
-    transition:
-      background 120ms ease,
-      color 120ms ease;
+    transition: background 120ms ease, color 120ms ease;
   }
   .type-choice.selected {
-    background: #fff;
-    color: #1d1d1f;
+    background: #fffdf7;
+    color: #a55130;
     font-weight: 750;
     box-shadow: 0 2px 5px #00000008;
   }
@@ -542,5 +559,13 @@
     margin: 0 auto;
     max-height: 90vh;
     overflow: auto;
+  }
+  .filter-actions {
+    position: sticky;
+    bottom: -24px;
+    margin: 0 -10px;
+    padding: 14px 10px 22px;
+    background: #fffcf5f7;
+    border-top: 1px solid #ded2c1;
   }
 </style>

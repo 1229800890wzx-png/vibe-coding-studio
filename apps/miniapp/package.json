@@ -10,7 +10,7 @@
     "preview": "vite preview --host 127.0.0.1 --port 5175 --outDir dist/build/h5",
     "dev:mp-weixin": "node tooling/uni.mjs -p mp-weixin",
     "build:mp-weixin": "node tooling/uni.mjs build -p mp-weixin",
-    "test": "node --test tooling/settlement.test.cjs"
+    "test": "node --test tooling/settlement.test.cjs tooling/parent-space.test.cjs"
   },
   "repository": "https://github.com/sheepjs/shop.git",
   "keywords": [

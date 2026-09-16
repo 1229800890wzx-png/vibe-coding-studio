@@ -1,5 +1,5 @@
 <template
-  ><EduHeader title="体验课预约" child @change="refresh" /><view class="edu-page"
+  ><EduHeader title="体验课预约" child @change="refresh" /><view class="edu-page parent-flow"
     ><view class="title">从一次体验开始。</view
     ><view class="subtitle">查看预约、课表与取消状态。</view
     ><EduState
@@ -18,7 +18,16 @@
         >{{ item.studentName || currentStudent?.name }} ·
         {{ dateText(item.startTime || item.startDate) }}</view
       ><view class="muted">{{ item.campusName || '电脑端在线课堂' }}</view
-      ><button class="btn quiet" @tap="go('consultation', { studentId: item.studentId, courseId: item.courseId, trialBookingId: item.id })">咨询这次试听</button
+      ><button
+        class="btn quiet"
+        @tap="
+          go('consultation', {
+            studentId: item.studentId,
+            courseId: item.courseId,
+            trialBookingId: item.id,
+          })
+        "
+        >咨询这次试听</button
       ><view class="row"
         ><button class="btn secondary" @tap="go('cohort', { id: item.cohortId })">查看课表</button
         ><button

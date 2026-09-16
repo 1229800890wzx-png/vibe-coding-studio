@@ -39,8 +39,8 @@
             context.kind === 'TRIAL'
               ? '体验班期起价'
               : context.kind === 'REGULAR'
-                ? '正式班期起价'
-                : '以所选班期为准'
+              ? '正式班期起价'
+              : '以所选班期为准'
           }}</view></view
         ><text class="circle-arrow">↗</text></view
       ></view
@@ -79,10 +79,11 @@
 <style scoped>
   .course-card {
     overflow: hidden;
-    border-radius: 16px;
-    background: #fff;
+    border-radius: 20px;
+    background: #fffcf7;
     margin-bottom: 16px;
-    border: 1px solid #eaeaee;
+    border: 1px solid #dfd3c3;
+    box-shadow: 0 8px 20px -16px #75532e45;
     transition: transform 0.18s;
   }
   .course-card:active {

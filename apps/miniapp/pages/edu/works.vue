@@ -4,7 +4,7 @@
     :child="!publicMode"
     @change="refresh"
   />
-  <view class="edu-page">
+  <view class="edu-page parent-flow">
     <text class="eyebrow">MADE WITH CURIOSITY</text>
     <view class="title">想法，有了自己的样子。</view>
     <view class="subtitle">{{

@@ -11,4 +11,6 @@
 <style lang="scss">
   @import '@/sheep/scss/index.scss';
   @import '@/edu/theme.scss';
+  @import '@/edu/studio.scss';
+  @import '@/edu/parent-space.scss';
 </style>

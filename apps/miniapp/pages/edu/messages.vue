@@ -1,6 +1,6 @@
 <template>
   <EduHeader title="消息中心" />
-  <view class="edu-page">
+  <view class="edu-page parent-flow">
     <view class="title">学习进展，及时知道。</view>
     <view class="subtitle">报名、课程调整与退款通知，都在这里。</view>
     <view class="row between message-toolbar">
@@ -104,7 +104,11 @@
     try {
       await call('/read', 'PUT', { ids: [message.id] });
       // Reading the final item on an unread page must keep a previous page reachable.
-      if (onlyUnread.value && pageNo.value > 1 && (pageNo.value - 1) * pageSize >= total.value - 1) {
+      if (
+        onlyUnread.value &&
+        pageNo.value > 1 &&
+        (pageNo.value - 1) * pageSize >= total.value - 1
+      ) {
         pageNo.value -= 1;
       }
       await refresh();

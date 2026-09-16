@@ -24,22 +24,22 @@
 <style scoped>
   .service-paths {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 10px;
     margin: 20px 0;
   }
   .service-path {
     margin: 0;
-    padding: 16px 12px;
+    padding: 18px;
     border-radius: 16px;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
+    background: #fffcf7;
+    border: 1px solid #dfd3c1;
+    box-shadow: inset 0 0 0 2px #fff9;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: flex-start;
     text-align: left;
-    transition:
-      transform 100ms ease,
-      background 120ms ease;
+    transition: transform 100ms ease, background 120ms ease;
   }
   .service-path:active {
     transform: scale(0.98);
@@ -48,38 +48,43 @@
     border: 0;
   }
   .path-index {
-    color: #c94b00;
-    font-size: 14px;
+    color: #a5643d;
+    font-size: 11px;
     margin-bottom: 10px;
   }
   .path-title {
     font-size: 17px;
     font-weight: 750;
     line-height: 1.4;
-    min-height: 48px;
+    min-height: 0;
+    grid-column: 1;
   }
   .path-description {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.6;
-    color: #6e6e73;
-    margin: 8px 0 18px;
+    color: #797464;
+    margin: 8px 0 0;
+    grid-column: 1;
   }
   .path-action {
-    margin-top: auto;
-    font-size: 14px;
-    color: #c94b00;
+    margin-top: 0;
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: center;
+    font-size: 12px;
+    color: #a55731;
     line-height: 1.5;
   }
   .private-path {
-    background: #1d1d1f;
-    color: #fff;
+    background: #f3ecdf;
+    color: #393b30;
   }
   .private-path .path-index,
   .private-path .path-action {
-    color: #ffb36b;
+    color: #9b613d;
   }
   .private-path .path-description {
-    color: #d2d2d7;
+    color: #797262;
   }
   @media (min-width: 600px) {
     .service-path {

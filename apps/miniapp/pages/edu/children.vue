@@ -1,5 +1,5 @@
 <template>
-  <EduHeader title="孩子档案" /><view class="edu-page"
+  <EduHeader title="孩子档案" /><view class="edu-page parent-flow"
     ><text class="eyebrow">EACH CHILD, THEIR OWN JOURNEY</text
     ><view class="title">每个孩子，<br />都有自己的成长路径。</view
     ><view v-if="returnTo" class="card stack continuation-card"

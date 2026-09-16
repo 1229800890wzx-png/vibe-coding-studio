@@ -1,5 +1,5 @@
 <template
-  ><EduHeader title="上课与课前准备" /><view class="edu-page"
+  ><EduHeader title="上课与课前准备" /><view class="edu-page parent-flow"
     ><EduState :loading="loading" :error="error" @retry="refresh" /><template
       v-if="session && !loading && !error"
       ><text class="pill">{{ session.mode === 'ONLINE' ? '电脑端在线课堂' : '线下课程' }}</text
