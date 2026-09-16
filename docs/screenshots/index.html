@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VIBE CODING · 页面与验证证据</title>
+<style>
+:root{color-scheme:light;--orange:#ff7a00;--ink:#1d1d1f;--muted:#68686c;--canvas:#f5f5f7;--line:#e5e5e9}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:#9c4400;text-underline-offset:3px}button,input{font:inherit}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #b85500;outline-offset:4px}
+.wrap{max-width:1280px;margin:auto;padding:40px 24px}header{padding:12px 0 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px}.brand{display:flex;gap:12px;align-items:center;font-weight:750;letter-spacing:.03em}.logo{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--orange);font-size:28px}.eyebrow{font-size:12px;letter-spacing:.18em;color:#9c4400;font-weight:750;margin:28px 0 10px}h1{font-size:clamp(30px,5vw,48px);line-height:1.2;letter-spacing:-.04em;margin:0 0 16px}h2{font-size:22px;line-height:1.35;margin:0 0 12px}p{margin:0 0 12px}.intro{max-width:850px;color:var(--muted);font-size:17px}.note{border-left:4px solid var(--orange);padding:18px 22px;background:#fff3e8;border-radius:0 12px 12px 0;margin:24px 0}.stats{display:flex;flex-wrap:wrap;gap:24px;margin:28px 0}.stat strong{display:block;font-size:30px;line-height:1.2}.stat span{font-size:13px;color:var(--muted)}.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 12px}.filters{display:flex;flex-wrap:wrap;gap:8px}.filter{border:1px solid var(--line);background:white;border-radius:10px;min-height:44px;padding:8px 14px;cursor:pointer}.filter[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--ink)}input{margin-left:auto;min-width:240px;min-height:44px;padding:9px 14px;border:1px solid #c7c7ce;border-radius:10px;background:white}.result{color:var(--muted);font-size:13px;margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden}.shot{height:340px;display:block;padding:16px;background:#ededf1;border-bottom:1px solid var(--line)}.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .18s ease}.shot:hover img{transform:scale(1.015)}.card-body{padding:18px}.badge{display:inline-block;border-radius:7px;padding:3px 8px;font-size:12px;font-weight:650;background:#e9f5ee;color:#22633d;margin-bottom:10px}.badge.fault{background:#fff3dd;color:#865600}.badge.current-cover{background:#fff3e8;color:#a54100}.badge.legacy-cover{background:#eeeef2;color:#666670}.card.current-cover{border:2px solid var(--orange)}.badge.history,.badge.pending{background:#eeeef2;color:#666670}.card h3{font-size:18px;margin:0 0 7px;line-height:1.35}.route{display:block;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,Consolas,monospace;color:#696973;margin:7px 0}.card p{font-size:13px;color:var(--muted)}.meta{border-top:1px solid #ededf1;margin-top:12px;padding-top:10px;font-size:12px;color:#777781;overflow-wrap:anywhere}.empty{grid-column:1/-1;padding:40px;background:white;border:1px dashed #bbb;border-radius:12px;text-align:center}.evidence{margin-top:42px;padding-top:32px;border-top:1px solid var(--line)}.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.evidence-box{padding:24px;border-radius:14px;background:white;border:1px solid var(--line)}.evidence-box h3{margin:0 0 8px;font-size:17px}.evidence-box p{color:var(--muted);font-size:14px}.evidence-box ul{margin:10px 0 0;padding-left:20px}footer{margin:36px 0 12px;color:var(--muted);font-size:12px}
+@media(max-width:950px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shot{height:310px}}
+@media(max-width:600px){.wrap{padding:24px 16px}.grid,.evidence-grid{grid-template-columns:1fr}.shot{height:410px}header{display:block}header>a{display:inline-block;margin-top:16px}input{width:100%;margin-left:0}.stat strong{font-size:25px}.intro{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.shot video{width:100%;height:100%;object-fit:contain;background:#1d1d1f}
+</style>
+</head>
+<body><div class="wrap">
+<header><div class="brand"><span class="logo" aria-hidden="true">V.</span>VIBE CODING</div><a href="../DESIGN_AND_EVIDENCE.md">查看设计与证据矩阵 →</a></header>
+<p class="eyebrow">DESIGN / IMPLEMENTATION / EVIDENCE</p><h1>每一步，都有证据。</h1>
+<p class="intro">这份画廊记录现有页面与已完成验证。截图用于检查可见界面；身份权限、交易并发与数据持久化由独立的真实接口回归支持。</p>
+<div class="note"><strong>验证范围</strong><p>“真实 API · H5”仍是浏览器中的 UniApp 页面。上传故障注入会单独标识；mp-weixin 构建通过不等于微信开发者工具、真实微信支付或手机真机通过。历史图不计入当前页面覆盖。</p></div>
+<div class="note"><strong>当前课程封面 · 2026-09-14 更新</strong><p>首页与课程详情现使用按创作方向设计的图像。下方橙框三图是本次正常真实 API 截图；图内保留“创作示意”和 TEST 资料。带“旧封面样式”的历史截图继续保留原测试证据，不能作为当前图片样式参考。<a href="../COURSE_IMAGES.md">查看六类图像、来源与替换规则 →</a></p></div>
+<div class="note"><strong>一对一高级课 · 6 张新截图</strong><p>独立课程入口、老师选择、预约申请与原 CRM 工作台已接通真实本地服务。后台截图使用原本地开发登录；仅一张故障场景图关联一次 401 续期触发与一次查询中断，实际续期、创建与保存均由原服务处理。全部仍为浏览器验证，不代表微信真机验收。<a href="../ONE_TO_ONE.md">查看一对一预约流程、接口与验证边界 →</a></p></div>
+<div class="note"><strong>课程决策与报名连续性 · 7 张新截图</strong><p>体验、系统班课和一对一分开；正式班筛选进入详情保留对应费用，登录后返回原班期。当前 29 门公开课程均为 TEST / 验收资料，不能用作真实售价或师资承诺。七图只有班期确认使用原密码登录，其余匿名；登录图输入为空。真实零结果没有伪造响应，单次孩子 GET 中断仅用于恢复验证，未发送短信、预约、下单或付款。<a href="../BENCHMARK_OPTIMIZATION.md">查看官方网页对照、已实现优化及 8 组验收 →</a></p></div>
+<div class="stats" id="stats" aria-label="证据数量"></div>
+<div class="toolbar"><div class="filters" aria-label="证据类型筛选">
+<button class="filter" data-kind="current" aria-pressed="true">当前证据</button><button class="filter" data-kind="current-cover" aria-pressed="false">当前封面 · 3 图</button><button class="filter" data-kind="legacy-cover" aria-pressed="false">旧封面样式</button><button class="filter" data-kind="live-h5" aria-pressed="false">真实 API · H5</button><button class="filter" data-kind="live-admin" aria-pressed="false">真实 API · 后台</button><button class="filter" data-kind="fault" aria-pressed="false">故障注入</button><button class="filter" data-kind="history" aria-pressed="false">历史版本</button><button class="filter" data-kind="all" aria-pressed="false">全部</button>
+</div><input id="search" type="search" placeholder="查找页面、路由或文件名" aria-label="查找页面、路由或文件名"></div>
+<p class="result" id="result" aria-live="polite"></p><main class="grid" id="gallery"></main>
+<section class="evidence"><h2>图像之外，也保留边界。</h2><div class="evidence-grid">
+<div class="evidence-box"><h3>真实接口与浏览器交互</h3><p>当前保存的报告使用本地 Java 21、MySQL、原身份与原支付测试通道。报告时间对应执行时的代码，不自动代表其后的每次变更。</p><ul><li><a href="../verification/education-learning-ui-report.json">学习页面真实浏览器回归：5 项通过</a></li><li><a href="../verification/education-admin-teaching-ui-report.json">教学后台真实浏览器回归：5 项通过</a></li><li><a href="../verification/education-review-report.json">点评与考勤 API：9 项通过</a></li><li><a href="../verification/education-work-publication-report.json">作品版本、附件与撤回 API：6 项通过</a></li></ul></div>
+<div class="evidence-box"><h3>构建结果与尚未覆盖项</h3><p>H5 与 mp-weixin 曾在当前本地工具链成功编译；活动后台类型检查通过。最终部署应以最后一轮构建日志为准。</p><ul><li><a href="../verification/frontend-build-report.json">H5 / mp-weixin / 后台构建报告</a></li><li>微信 DevTools、iOS/Android 真机：尚未验收。</li><li>真实 AppID、手机号授权、域名白名单与微信商户支付：尚未完成联调验收。</li><li>无 Lighthouse、首屏时长、帧率或压测实测结论。</li></ul></div>
+</div></section>
+<footer>缩略图展示截图顶部；点击可打开完整原尺寸文件。截图尺寸是图像尺寸，不自动等于浏览器视口；文件更新时间也不是性能数据。仅发布此文件夹时，仓库内报告与源码链接需要同时保留对应路径。</footer>
+</div>
+<script id="evidence-manifest" type="application/json">
+[
+  {
+    "file": "course-images-home-desktop.png",
+    "title": "当前封面 · 首页桌面卡片",
+    "route": "/pages/tab/home",
+    "note": "1440px 浏览器视口，截取完整四卡区域；真实 API 课程按方向显示创作示意图，图像全部加载且为 16:9，无横向溢出。保留本地 TEST 课程内容。",
+    "kind": "live-h5",
+    "coverStyle": "current",
+    "source": "tooling/bootstrap/verify-course-images.playwright.js（正常场景，无请求拦截）",
+    "modifiedAt": "2026-09-13T17:30:53.272Z",
+    "imageWidth": 816,
+    "imageHeight": 929
+  },
+  {
+    "file": "course-images-home-mobile.png",
+    "title": "当前封面 · 首页手机卡片",
+    "route": "/pages/tab/home",
+    "note": "390px 浏览器视口，截取一张完整课程卡片；真实 API、方向图完整加载与“创作示意”标注。固定导航未遮挡图片或价格；保留本地 TEST 文案。",
+    "kind": "live-h5",
+    "coverStyle": "current",
+    "source": "tooling/bootstrap/verify-course-images.playwright.js（正常场景，无请求拦截）",
+    "modifiedAt": "2026-09-13T17:30:53.883Z",
+    "imageWidth": 358,
+    "imageHeight": 418
+  },
+  {
+    "file": "course-images-detail-mobile.png",
+    "title": "当前封面 · 手机课程详情",
+    "route": "/pages/edu/course?id=35",
+    "note": "从实际首页点击进入课程 35；390px 视口，工具创作图完整加载，课程资料来自真实 API。AI 创作示意并非实际学员作品或真实授课照片。",
+    "kind": "live-h5",
+    "coverStyle": "current",
+    "source": "tooling/bootstrap/verify-course-images.playwright.js（正常场景，无请求拦截）",
+    "modifiedAt": "2026-09-13T17:30:54.049Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "one-to-one-mobile.png",
+    "title": "一对一高级课 · 手机选老师",
+    "route": "/pages/edu/one-to-one",
+    "kind": "live-h5",
+    "note": "390px 浏览器中的独立高级课程入口，展示真实本地公开教师目录与老师选中状态。这里提交期望时间申请，尚未锁定课次或报价；教师明确标记 TEST。",
+    "source": "tooling/bootstrap/verify-one-to-one-ui.playwright.js（原身份与真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T18:22:52.778Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "one-to-one-desktop.png",
+    "title": "一对一高级课 · 桌面选老师",
+    "route": "/pages/edu/one-to-one",
+    "kind": "live-h5",
+    "note": "1440px 浏览器视口的高级课程介绍与真实可预约教师列表；保留课程选择与独立一对一入口。页面未伪造正式师资、价格或预约成功状态。",
+    "source": "tooling/bootstrap/verify-one-to-one-ui.playwright.js（原身份与真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T18:22:52.881Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "one-to-one-request-form.png",
+    "title": "一对一高级课 · 预约申请表单",
+    "route": "/pages/edu/one-to-one",
+    "kind": "live-h5",
+    "note": "原会员实际登录后的完整表单截图：孩子、意向老师、北京时间、期望时长、学习目标、联系方式及再次确认。按孩子保留草稿，联系授权需重新勾选；此图采集时尚未注入失败。",
+    "source": "tooling/bootstrap/verify-one-to-one-ui.playwright.js（原身份与真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T18:22:57.027Z",
+    "imageWidth": 358,
+    "imageHeight": 1509
+  },
+  {
+    "file": "one-to-one-submitted-retry.png",
+    "title": "一对一高级课 · 刷新失败仍保留提交结果",
+    "route": "/pages/edu/one-to-one",
+    "kind": "fault",
+    "note": "截取真实提交成功后保留的结果面板，画面本身不含记录列表的错误提示。该独立场景仅注入一次申请接口401和一次记录查询中断；原会员续期、重试创建与持久化仍由真实服务处理，随后查询重试不再创建申请。",
+    "source": "tooling/bootstrap/verify-one-to-one-ui.playwright.js（单次401与单次查询中断，其余为原身份及真实 API）",
+    "modifiedAt": "2026-09-13T18:22:57.258Z",
+    "imageWidth": 358,
+    "imageHeight": 125
+  },
+  {
+    "file": "one-to-one-admin-request.png",
+    "title": "一对一高级课 · 原 CRM 预约详情",
+    "route": "/edu/admission",
+    "kind": "live-admin",
+    "note": "原本地开发后台登录后的真实 CRM 详情抽屉；通过一对一服务筛选定位申请，展示意向老师姓名快照、北京时间、学习目标和原负责人。后台截图无成功响应模拟，期望时段不代表已排课。",
+    "source": "tooling/bootstrap/verify-one-to-one-ui.playwright.js（原身份与真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T18:23:01.718Z",
+    "imageWidth": 900,
+    "imageHeight": 1000
+  },
+  {
+    "file": "one-to-one-admin-teacher.png",
+    "title": "一对一高级课 · 原教师档案开关",
+    "route": "/edu/teacher",
+    "kind": "live-admin",
+    "note": "原本地开发后台登录后的教师编辑抽屉，复用原员工身份并显示一对一预约开关。截图为打开状态；对应真实交互报告验证关闭后从公开目录移除、重新打开后恢复，仅修改本轮 TEST 老师。",
+    "source": "tooling/bootstrap/verify-one-to-one-ui.playwright.js（原身份与真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T18:23:03.327Z",
+    "imageWidth": 700,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-admission.png",
+    "title": "招生咨询工作台",
+    "route": "/edu/admission",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:31:03.7529123Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-assignment.png",
+    "title": "教学作业",
+    "route": "/edu/assignment",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:51.9080195Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-campus.png",
+    "title": "校区管理",
+    "route": "/edu/campus",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:58.5750334Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-cohort.png",
+    "title": "班期管理",
+    "route": "/edu/cohort",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:44.2314005Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-course.png",
+    "title": "课程与版本",
+    "route": "/edu/course",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:42.2114528Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-enrollment.png",
+    "title": "报名资格",
+    "route": "/edu/enrollment",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:48.8547996Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-growth-report.png",
+    "title": "成长报告管理",
+    "route": "/edu/growth-report",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:54.7160462Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-request.png",
+    "title": "请假与转班",
+    "route": "/edu/request",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:55.9880429Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-room.png",
+    "title": "教室管理",
+    "route": "/edu/room",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:59.8419077Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-session.png",
+    "title": "课次排课列表",
+    "route": "/edu/session",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:45.8605560Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-settings.png",
+    "title": "品牌与首页配置",
+    "route": "/edu/settings",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:31:02.5734511Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-student.png",
+    "title": "学员档案",
+    "route": "/edu/student",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:47.2739123Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-submission.png",
+    "title": "作品批改列表",
+    "route": "/edu/submission",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:53.4394661Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-teacher.png",
+    "title": "师资档案",
+    "route": "/edu/teacher",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:31:01.0029379Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-trial.png",
+    "title": "体验预约",
+    "route": "/edu/trial",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:50.2829282Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-edu-work.png",
+    "title": "作品审核与发布",
+    "route": "/edu/work",
+    "kind": "live-admin",
+    "note": "原管理员登录与真实 API 响应下的当前页面；具体写入与权限行为另见对应回归。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:57.3711514Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-index.png",
+    "title": "教学工作台",
+    "route": "/index",
+    "kind": "live-admin",
+    "note": "原管理员实际 API 教学工作台，按可访问范围显示待办和课次。",
+    "source": "tooling/browser-capture-admin.js",
+    "modifiedAt": "2026-09-13T16:30:40.9093782Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admin-review-conflict-live.png",
+    "title": "作业批改 · 实际版本冲突",
+    "route": "/edu/submission",
+    "kind": "live-admin",
+    "note": "另一真实编辑者先保存后，旧 revision 被拒绝；当前反馈与勾选状态保留。",
+    "source": "tooling/bootstrap/verify-education-admin-teaching-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:05:18.3957620Z",
+    "imageWidth": 1440,
+    "imageHeight": 1100
+  },
+  {
+    "file": "admin-session-calendar-live.png",
+    "title": "课次排课 · 月历",
+    "route": "/edu/session",
+    "kind": "live-admin",
+    "note": "同一原 session API 的月份视图，保留班期筛选并展示真实课次。",
+    "source": "tooling/bootstrap/verify-education-admin-teaching-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:05:23.0545587Z",
+    "imageWidth": 1440,
+    "imageHeight": 1100
+  },
+  {
+    "file": "admin-session-impact-live.png",
+    "title": "课次排课 · 影响预览",
+    "route": "/edu/session",
+    "kind": "live-admin",
+    "note": "真实只读预览：原时间、候选时间、当前受影响学员及通知说明。",
+    "source": "tooling/bootstrap/verify-education-admin-teaching-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:27:58.1839542Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admission-admin-live.png",
+    "title": "招生咨询 · 原 CRM 线索",
+    "route": "/edu/admission",
+    "kind": "live-admin",
+    "note": "原管理员会话读取 TEST 招生线索，沿用原 CRM 负责人数据范围。 完整招生 UI 套件已通过 7 项真实浏览器检查。",
+    "source": "tooling/bootstrap/verify-education-admissions-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:35:08.0404516Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "admission-followup-live.png",
+    "title": "招生跟进 · 原 CRM 记录",
+    "route": "/crm/clue/detail",
+    "kind": "live-admin",
+    "note": "通过原跟进记录界面管理 TEST 咨询；不是新建并行客户系统。 完整招生 UI 套件已通过 7 项真实浏览器检查。",
+    "source": "tooling/bootstrap/verify-education-admissions-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:35:08.8805317Z",
+    "imageWidth": 1440,
+    "imageHeight": 1000
+  },
+  {
+    "file": "flow-checkout-and-draft.webm",
+    "title": "双孩子结算、上传重试与草稿恢复",
+    "route": "/pages/edu/cart → checkout；assignment",
+    "kind": "fault",
+    "media": "video",
+    "note": "原会员与实际 API：双孩子用券后合计 89.99 元；仅第二项附件的一次上传请求被故意中断，成功项与重试走真实 API。随后 reload 恢复文字及两项附件并清理本地队列；没有提交订单或作业。",
+    "source": "tooling/browser-record-flows.js",
+    "modifiedAt": "2026-09-13T16:48:49.2195200Z"
+  },
+  {
+    "file": "flow-enrollment-payment.webm",
+    "title": "报名与付款 · 原本地支付测试通道",
+    "route": "/pages/edu/cohort → checkout → orders",
+    "kind": "live-h5",
+    "media": "video",
+    "note": "独立原会员 10002 的 TEST 孩子/班期选择、原券报价 15.00→11.99 元、UI 下单和原 mock 付款，实际报名转为 ACTIVE。无请求拦截，登录不在录像中；仅本地测试通道，不代表真实微信支付。",
+    "source": "tooling/bootstrap/verify-education-payment-video.playwright.js",
+    "modifiedAt": "2026-09-13T16:57:22.9188934Z"
+  },
+  {
+    "file": "flow-refund-progress.webm",
+    "title": "退款结果 · KEEP / CANCEL 只读回放",
+    "route": "/pages/edu/refunds",
+    "kind": "live-h5",
+    "media": "video",
+    "note": "只读展示原 API 已有的 KEEP 成功退款与 CANCEL 成功退款/资格取消状态。没有录制发起或审批退款，没有新退款操作；无请求拦截，登录在录屏外，仅本地支付测试记录。",
+    "source": "tooling/bootstrap/verify-education-payment-video.playwright.js",
+    "modifiedAt": "2026-09-13T16:57:30.0664397Z"
+  },
+  {
+    "file": "flow-schedule-preview.webm",
+    "title": "月历排课 · 影响预览与取消",
+    "route": "/edu/session",
+    "kind": "live-admin",
+    "media": "video",
+    "note": "原管理员与实际 API：月历中把 TEST 课次候选时间后移 30 分钟，查看前后时间、1 位受影响学员与本次无冲突结果；取消后复查原排课时间及版本不变，无保存或对外发送。",
+    "source": "tooling/bootstrap/capture-education-admin-flows.playwright.js",
+    "modifiedAt": "2026-09-13T16:55:14.6303833Z"
+  },
+  {
+    "file": "flow-teacher-review.webm",
+    "title": "教师批改 · 保存未发布草稿",
+    "route": "/edu/submission",
+    "kind": "live-admin",
+    "media": "video",
+    "note": "原管理员实际登录，录制从登录后开始。打开 TEST 待批作品、编辑反馈、保存 DRAFT revision 0→1，显示真实服务器更新时间；不发布反馈，无拦截或对外发送。",
+    "source": "tooling/bootstrap/capture-education-admin-flows.playwright.js",
+    "modifiedAt": "2026-09-13T16:55:00.6856466Z"
+  },
+  {
+    "file": "learning-report-live.png",
+    "title": "成长报告 · 正文展开",
+    "route": "/pages/edu/learning-list?type=reports",
+    "kind": "live-h5",
+    "note": "实际已发布报告的 summary、strengths 与 nextSteps 已展开并逐项断言。",
+    "source": "tooling/bootstrap/verify-education-learning-ui.playwright.js",
+    "modifiedAt": "2026-09-13T15:43:21.6401550Z",
+    "imageWidth": 430,
+    "imageHeight": 932
+  },
+  {
+    "file": "learning-transfer-live.png",
+    "title": "调班 · 实际相容班期选择",
+    "route": "/pages/edu/requests",
+    "kind": "live-h5",
+    "note": "真实有效报名下的 TEST 目标班期与申请原因；随后真实提交并拒绝清理。",
+    "source": "tooling/bootstrap/verify-education-learning-ui.playwright.js",
+    "modifiedAt": "2026-09-13T15:43:22.2790413Z",
+    "imageWidth": 430,
+    "imageHeight": 932
+  },
+  {
+    "file": "mini-assignment.png",
+    "title": "作业详情与提交",
+    "route": "/pages/edu/assignment",
+    "kind": "live-h5",
+    "note": "真实作业内容、附件队列与草稿/提交入口。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:32.2818756Z",
+    "imageWidth": 390,
+    "imageHeight": 1507
+  },
+  {
+    "file": "mini-assignments.png",
+    "title": "我的作业",
+    "route": "/pages/edu/learning-list?type=assignments",
+    "kind": "live-h5",
+    "note": "已发布作业列表与截止时间。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:27.9564514Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-calendar.png",
+    "title": "课程日历",
+    "route": "/pages/edu/learning-list?type=calendar",
+    "kind": "live-h5",
+    "note": "按当前孩子读取有权益的课次",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:27.0460181Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-campuses.png",
+    "title": "校区",
+    "route": "/pages/edu/campuses",
+    "kind": "live-h5",
+    "note": "已发布校区列表",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:21.0818102Z",
+    "imageWidth": 390,
+    "imageHeight": 1676
+  },
+  {
+    "file": "mini-cart.png",
+    "title": "购物车",
+    "route": "/pages/edu/cart",
+    "kind": "live-h5",
+    "note": "原 trade 购物车与孩子维度课程行",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:23.9488277Z",
+    "imageWidth": 390,
+    "imageHeight": 2036
+  },
+  {
+    "file": "mini-checkout-coupon.png",
+    "title": "确认报名 · 用券后金额",
+    "route": "/pages/edu/checkout",
+    "kind": "live-h5",
+    "note": "原结算接口重新计价，展示优惠额与金额变化确认。",
+    "source": "tooling/browser-verify-coupon.js",
+    "modifiedAt": "2026-09-13T16:11:03.7500270Z",
+    "imageWidth": 390,
+    "imageHeight": 1265
+  },
+  {
+    "file": "mini-children.png",
+    "title": "孩子档案",
+    "route": "/pages/edu/children",
+    "kind": "live-h5",
+    "note": "原会员名下的 TEST 孩子资料",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:22.0733099Z",
+    "imageWidth": 390,
+    "imageHeight": 9176
+  },
+  {
+    "file": "mini-cohort.png",
+    "title": "班期详情",
+    "route": "/pages/edu/cohort",
+    "kind": "live-h5",
+    "note": "真实 SKU 价格/余量与教学日程",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:20.2028531Z",
+    "imageWidth": 390,
+    "imageHeight": 1011
+  },
+  {
+    "file": "mini-consultation-live.png",
+    "title": "招生咨询 · 真实表单",
+    "route": "/pages/edu/consultation",
+    "kind": "live-h5",
+    "note": "原会员会话下的实际课程/孩子选项和联系授权表单。 完整招生 UI 套件已通过 7 项真实浏览器检查。",
+    "source": "tooling/bootstrap/verify-education-admissions-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:35:13.9040259Z",
+    "imageWidth": 390,
+    "imageHeight": 2426
+  },
+  {
+    "file": "mini-consultation-success.png",
+    "title": "招生咨询 · 提交完成",
+    "route": "/pages/edu/consultation",
+    "kind": "live-h5",
+    "note": "TEST 咨询经实际 API 提交并写入原 CRM；仅记录联系授权，没有发送外部消息。 完整招生 UI 套件已通过 7 项真实浏览器检查。",
+    "source": "tooling/bootstrap/verify-education-admissions-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:35:14.2856653Z",
+    "imageWidth": 390,
+    "imageHeight": 2459
+  },
+  {
+    "file": "mini-consultation.png",
+    "title": "招生咨询",
+    "route": "/pages/edu/consultation",
+    "kind": "live-h5",
+    "note": "原招生选项与咨询表单。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:37.8602128Z",
+    "imageWidth": 390,
+    "imageHeight": 2415
+  },
+  {
+    "file": "mini-coupon-selector.png",
+    "title": "优惠券选择",
+    "route": "/pages/edu/checkout",
+    "kind": "live-h5",
+    "note": "原优惠券数据，区分可用与不可用并确认选择。",
+    "source": "tooling/browser-verify-coupon.js",
+    "modifiedAt": "2026-09-13T16:11:03.5887366Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-course-filters.png",
+    "title": "课程筛选面板",
+    "route": "/pages/tab/courses",
+    "kind": "live-h5",
+    "note": "真实课程页的筛选面板；本次编辑在应用前保留原筛选。",
+    "source": "tooling/browser-verify-discovery-ui.js",
+    "modifiedAt": "2026-09-13T16:20:36.8066913Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-course.png",
+    "title": "课程详情",
+    "route": "/pages/edu/course",
+    "kind": "live-h5",
+    "note": "课程介绍、课时大纲与班期入口 此次采集的旧版缺失封面未显示图片；课程资料证据保留，当前封面参见 course-images-detail-mobile.png。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:19.3372755Z",
+    "imageWidth": 390,
+    "imageHeight": 1849
+  },
+  {
+    "file": "mini-courses-empty.png",
+    "title": "课程列表 · 零结果",
+    "route": "/pages/tab/courses",
+    "kind": "live-h5",
+    "note": "真实查询返回零条课程后的可操作空状态。",
+    "source": "tooling/browser-verify-discovery-ui.js",
+    "modifiedAt": "2026-09-13T16:20:37.6283406Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-courses-error.png",
+    "title": "课程查询 · 网络失败",
+    "route": "/pages/tab/courses",
+    "kind": "fault",
+    "note": "浏览器只中断一次课程查询请求，显示行内失败与重新加载入口；后续成功仍读取真实 API。",
+    "source": "tooling/browser-verify-discovery-ui.js",
+    "modifiedAt": "2026-09-13T16:20:38.3714355Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-courses.png",
+    "title": "课程列表 · 旧封面样式",
+    "route": "/pages/tab/courses",
+    "kind": "live-h5",
+    "note": "课程卡片、搜索与筛选入口 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:14.4267489Z",
+    "imageWidth": 390,
+    "imageHeight": 8385,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-enrollment-checkout.png",
+    "title": "独立 TEST 报名 · 原券结算",
+    "route": "/pages/edu/checkout",
+    "kind": "live-h5",
+    "note": "原会员 10002 的实际 TEST 班期与孩子进入原结算，优惠券将 15.00 元调整为 11.99 元；独立于主家长购物车。",
+    "source": "tooling/bootstrap/verify-education-payment-video.playwright.js",
+    "modifiedAt": "2026-09-13T16:57:17.9535924Z",
+    "imageWidth": 390,
+    "imageHeight": 1146
+  },
+  {
+    "file": "mini-enrollment-paid.png",
+    "title": "独立 TEST 报名 · 本地支付完成",
+    "route": "/pages/edu/orders",
+    "kind": "live-h5",
+    "note": "UI 通过原本地 mock 通道完成订单 26 / 支付单 26，实际报名为 ACTIVE。此图不证明真实微信商户支付或真机通过。",
+    "source": "tooling/bootstrap/verify-education-payment-video.playwright.js",
+    "modifiedAt": "2026-09-13T16:57:22.7825031Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-home-320.png",
+    "title": "首页 · 320px 视口 · 旧封面样式",
+    "route": "/pages/tab/home",
+    "kind": "live-h5",
+    "note": "实际 API；该次浏览器采集检查无整页横向溢出，不代表全部路由/真机。 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "tooling/bootstrap/verify-education-privacy-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:41:23.7972485Z",
+    "imageWidth": 320,
+    "imageHeight": 3957,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-home-375.png",
+    "title": "首页 · 375px 视口 · 旧封面样式",
+    "route": "/pages/tab/home",
+    "kind": "live-h5",
+    "note": "实际 API；该次浏览器采集检查无整页横向溢出，不代表全部路由/真机。 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "tooling/bootstrap/verify-education-privacy-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:41:24.7721598Z",
+    "imageWidth": 375,
+    "imageHeight": 3913,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-home-390.png",
+    "title": "首页 · 390px 视口 · 旧封面样式",
+    "route": "/pages/tab/home",
+    "kind": "live-h5",
+    "note": "原会员浏览器实际 API 首页布局；不代表微信真机或全路由验收。 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "tooling/bootstrap/verify-education-privacy-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:41:25.7438800Z",
+    "imageWidth": 390,
+    "imageHeight": 3913,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-home-430.png",
+    "title": "首页 · 430px 视口 · 旧封面样式",
+    "route": "/pages/tab/home",
+    "kind": "live-h5",
+    "note": "实际 API；该次浏览器采集检查无整页横向溢出，不代表全部路由/真机。 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "tooling/bootstrap/verify-education-privacy-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:41:26.7376092Z",
+    "imageWidth": 430,
+    "imageHeight": 3913,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-home-initial.png",
+    "title": "首页 · 历史版 · 旧封面样式",
+    "route": "/pages/tab/home",
+    "kind": "history",
+    "note": "视觉修改前的保留截图；不计入当前界面覆盖。 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "早期实际 API 截图",
+    "modifiedAt": "2026-09-13T15:25:17.0288478Z",
+    "imageWidth": 390,
+    "imageHeight": 2968,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-home.png",
+    "title": "首页 · 旧封面样式",
+    "route": "/pages/tab/home",
+    "kind": "live-h5",
+    "note": "课程推荐、品牌导航与四个原生 Tab 此图可见旧耳机占位封面，保留当时真实 API、筛选或布局证据；不代表当前课程封面。",
+    "source": "tooling/bootstrap/verify-education-privacy-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:41:25.7438800Z",
+    "imageWidth": 390,
+    "imageHeight": 3913,
+    "coverStyle": "legacy"
+  },
+  {
+    "file": "mini-learning.png",
+    "title": "学习空间",
+    "route": "/pages/tab/learning",
+    "kind": "live-h5",
+    "note": "当前孩子、已报名课程与学习工具",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:15.5393213Z",
+    "imageWidth": 390,
+    "imageHeight": 1525
+  },
+  {
+    "file": "mini-login-live.png",
+    "title": "原会员登录 · 独立浏览器",
+    "route": "/pages/edu/login",
+    "kind": "live-h5",
+    "note": "独立浏览器中的原会员登录表单；后续使用真实账号完成登录并访问业务 API，没有请求拦截。",
+    "source": "tooling/bootstrap/verify-education-privacy-ui.playwright.js",
+    "modifiedAt": "2026-09-13T16:41:09.0273292Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-materials.png",
+    "title": "学习资料",
+    "route": "/pages/edu/learning-list?type=materials",
+    "kind": "live-h5",
+    "note": "当前孩子有权益的课次资料；附件仍通过授权接口访问。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:28.8328494Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-me.png",
+    "title": "我的",
+    "route": "/pages/tab/me",
+    "kind": "live-h5",
+    "note": "原会员账户入口与消息/订单导航",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:16.4087639Z",
+    "imageWidth": 390,
+    "imageHeight": 1184
+  },
+  {
+    "file": "mini-messages.png",
+    "title": "消息中心",
+    "route": "/pages/edu/messages",
+    "kind": "live-h5",
+    "note": "原系统通知的会员收件列表与已读状态。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:36.7781442Z",
+    "imageWidth": 390,
+    "imageHeight": 4249
+  },
+  {
+    "file": "mini-order-detail.png",
+    "title": "教学订单详情",
+    "route": "/pages/edu/orders?id=…",
+    "kind": "live-h5",
+    "note": "原 trade 订单明细与孩子、班期、售后入口。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:38.7531688Z",
+    "imageWidth": 390,
+    "imageHeight": 891
+  },
+  {
+    "file": "mini-orders.png",
+    "title": "订单",
+    "route": "/pages/edu/orders",
+    "kind": "live-h5",
+    "note": "原 trade 订单记录与教学服务状态",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:25.1581095Z",
+    "imageWidth": 390,
+    "imageHeight": 9424
+  },
+  {
+    "file": "mini-payment-closed.png",
+    "title": "支付结果 · 已关闭",
+    "route": "/pages/pay/index",
+    "kind": "live-h5",
+    "note": "原 pay 已关闭状态，不继续发起支付。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:41.3369091Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-payment-refunded.png",
+    "title": "支付结果 · 已退款",
+    "route": "/pages/pay/result",
+    "kind": "live-h5",
+    "note": "原 pay 已退款状态；仅本地支付测试通道。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:40.4779838Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-payment-result.png",
+    "title": "支付结果",
+    "route": "/pages/pay/result",
+    "kind": "live-h5",
+    "note": "原 pay 订单状态；仅本地支付测试通道，不代表真实微信商户支付。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:39.6232134Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-public-works.png",
+    "title": "公开作品",
+    "route": "/pages/edu/works?public=1",
+    "kind": "live-h5",
+    "note": "仅通过当前授权及审核发布条件的公开作品。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:33.9985610Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-refund-results.png",
+    "title": "退款结果 · 原记录与学习权益",
+    "route": "/pages/edu/refunds",
+    "kind": "live-h5",
+    "note": "只读展示实际原 API 已有 KEEP / CANCEL 成功退款记录及取消资格；不是本轮通过 UI 发起或审批退款。",
+    "source": "tooling/bootstrap/verify-education-payment-video.playwright.js",
+    "modifiedAt": "2026-09-13T16:57:28.3549683Z",
+    "imageWidth": 390,
+    "imageHeight": 4001
+  },
+  {
+    "file": "mini-refunds.png",
+    "title": "退款售后",
+    "route": "/pages/edu/refunds",
+    "kind": "live-h5",
+    "note": "原售后记录与 KEEP/CANCEL 权益说明",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:26.1896491Z",
+    "imageWidth": 390,
+    "imageHeight": 4001
+  },
+  {
+    "file": "mini-reports.png",
+    "title": "成长报告",
+    "route": "/pages/edu/learning-list?type=reports",
+    "kind": "live-h5",
+    "note": "真实已发布报告列表；字段展开另有学习 UI 回归。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:30.5384980Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-request-history.png",
+    "title": "请假与调班记录",
+    "route": "/pages/edu/learning-list?type=requests",
+    "kind": "live-h5",
+    "note": "真实申请状态及教务处理理由。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:34.8747844Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-requests.png",
+    "title": "调班申请",
+    "route": "/pages/edu/requests",
+    "kind": "live-h5",
+    "note": "从有效报名进入，显示相容班期与原因表单。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:35.8062656Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-reviews.png",
+    "title": "老师反馈",
+    "route": "/pages/edu/learning-list?type=reviews",
+    "kind": "live-h5",
+    "note": "真实已发布点评列表或其空状态。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:29.6787336Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-session.png",
+    "title": "课前准备与课堂信息",
+    "route": "/pages/edu/session",
+    "kind": "live-h5",
+    "note": "报名权益下的课次详情、入会信息与请假入口。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:31.3970839Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-trials.png",
+    "title": "体验预约",
+    "route": "/pages/edu/trials",
+    "kind": "live-h5",
+    "note": "体验预约状态与班期信息",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:22.9482156Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "mini-upload-partial-failure.png",
+    "title": "作业附件 · 单项失败",
+    "route": "/pages/edu/assignment",
+    "kind": "fault",
+    "note": "浏览器只中断第二个文件一次；第一项使用真实上传 API。验证失败项提示、保留成功项与提交禁用。",
+    "source": "浏览器故障注入（单次 abort）",
+    "modifiedAt": "2026-09-13T16:48:44.5913672Z",
+    "imageWidth": 390,
+    "imageHeight": 1933
+  },
+  {
+    "file": "mini-upload-retried.png",
+    "title": "作业附件 · 单项重试",
+    "route": "/pages/edu/assignment",
+    "kind": "fault",
+    "note": "承接第二文件单次浏览器中断，失败项重试走真实上传 API；两项均已就绪，旧失败提示已清除，文字和首项保留。尚未正式提交作业；不代表微信真机网络恢复测试。",
+    "source": "浏览器故障注入后的真实 API 重试",
+    "modifiedAt": "2026-09-13T16:48:45.8383162Z",
+    "imageWidth": 390,
+    "imageHeight": 1825
+  },
+  {
+    "file": "mini-works.png",
+    "title": "孩子作品集",
+    "route": "/pages/edu/works",
+    "kind": "live-h5",
+    "note": "当前孩子作品与版本授权状态。",
+    "source": "tooling/browser-capture-miniapp.js",
+    "modifiedAt": "2026-09-13T16:28:33.1342172Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "benchmark-home-paths.png",
+    "title": "课程决策 · 首页三条路径",
+    "route": "/pages/tab/home",
+    "kind": "live-h5",
+    "note": "匿名首页的体验、系统班课和一对一入口区域；真实本地课程服务，截图保留 TEST 环境。 本图为浏览器内容区截图，采集时临时增大视口高度避开固定导航遮挡，未隐藏 UI 或改变业务响应；不是固定手机视口或真机截图。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（匿名真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T23:59:13.230Z",
+    "imageWidth": 358,
+    "imageHeight": 241
+  },
+  {
+    "file": "benchmark-selected-courses.png",
+    "title": "课程决策 · 正式班筛选",
+    "route": "/pages/tab/courses",
+    "kind": "live-h5",
+    "note": "匿名查询实际 TEST 课程 28，正式班条件与搜索词保留；价格口径为正式班期起价。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（匿名真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T23:59:13.912Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "benchmark-regular-detail.png",
+    "title": "课程决策 · 正式班详情价格",
+    "route": "/pages/edu/course?id=28&kind=REGULAR",
+    "kind": "live-h5",
+    "note": "匿名从正式班列表进入同一课程详情，筛选后的班期 62 起价为 ¥99；没有被该课程免费体验价覆盖。金额仅为 TEST 验收数据。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（匿名真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T23:59:14.074Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "benchmark-cohort-choices.png",
+    "title": "课程决策 · 体验与正式班分组",
+    "route": "/pages/edu/course?id=28&kind=REGULAR",
+    "kind": "live-h5",
+    "note": "匿名用户显式查看本课程全部班期后，正式班和体验班分组展示老师、课次、北京时间、地点、名额及每位孩子总价；返回列表仍保留原筛选。 本图为浏览器内容区截图，采集时临时增大视口高度避开固定导航遮挡，未隐藏 UI 或改变业务响应；不是固定手机视口或真机截图。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（匿名真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T23:59:14.190Z",
+    "imageWidth": 358,
+    "imageHeight": 1106
+  },
+  {
+    "file": "benchmark-filter-recovery.png",
+    "title": "课程决策 · 真实零结果恢复",
+    "route": "/pages/tab/courses",
+    "kind": "live-h5",
+    "note": "匿名真实查询返回零条，逐项移除正式班条件后仍保留搜索词；完整页面区域可见空态说明和恢复入口。没有伪造空结果响应。 本图为浏览器内容区截图，采集时临时增大视口高度避开固定导航遮挡，未隐藏 UI 或改变业务响应；不是固定手机视口或真机截图。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（匿名真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T23:59:14.848Z",
+    "imageWidth": 390,
+    "imageHeight": 1202
+  },
+  {
+    "file": "benchmark-login-continuation.png",
+    "title": "课程决策 · 登录后继续班期",
+    "route": "/pages/edu/login?returnTo=%2Fpages%2Fedu%2Fcohort%3Fid%3D62",
+    "kind": "live-h5",
+    "note": "匿名打开原会员密码登录表单，登录页刷新后仍保留目标班期。截图采集于填写手机号和密码之前，不含凭据；本轮没有发送短信。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（匿名真实本地 API；本截图无请求拦截）",
+    "modifiedAt": "2026-09-13T23:59:15.517Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  },
+  {
+    "file": "benchmark-cohort-confirmation.png",
+    "title": "课程决策 · 当前孩子与班期确认",
+    "route": "/pages/edu/cohort?id=62",
+    "kind": "live-h5",
+    "note": "原会员密码登录后显示真实本地孩子、TEST 老师、¥99 班期总价和北京时间课表。此图是孩子查询恢复后的正常状态；另有单次孩子 GET 中断及真实孩子切换撤销勾选的流程验证，未预约、下单或付款。",
+    "source": "tooling/bootstrap/verify-benchmark-ux.playwright.js（原会员密码登录后的真实本地 API；截图为恢复后的正常页面）",
+    "modifiedAt": "2026-09-13T23:59:16.069Z",
+    "imageWidth": 390,
+    "imageHeight": 844
+  }
+]
+</script>
+<script>
+const manifest=JSON.parse(document.getElementById('evidence-manifest').textContent);
+const labels={'live-h5':'真实 API · H5','live-admin':'真实 API · 后台',fault:'浏览器故障注入',history:'历史版本',pending:'来源待核实'};
+const gallery=document.getElementById('gallery'),result=document.getElementById('result'),search=document.getElementById('search');
+let selected='current';
+function element(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node}
+const count=kind=>manifest.filter(x=>kind==='live'?['live-h5','live-admin'].includes(x.kind):x.kind===kind).length;
+for(const [value,label] of [[count('live'),'真实 API 影像'],[count('fault'),'故障注入截图'],[count('history'),'历史截图'],[count('pending'),'待核实来源']]){const stat=element('div','stat');stat.append(element('strong','',value),element('span','',label));document.getElementById('stats').append(stat)}
+function render(){
+const query=search.value.trim().toLowerCase();
+const matchesKind=x=>selected==='all'||(selected==='current'?!['history','pending'].includes(x.kind):selected==='current-cover'?x.coverStyle==='current':selected==='legacy-cover'?x.coverStyle==='legacy':x.kind===selected);
+const entries=manifest.filter(x=>matchesKind(x)&&[x.title,x.route,x.file,x.note].join(' ').toLowerCase().includes(query)).sort((a,b)=>Number(b.coverStyle==='current')-Number(a.coverStyle==='current'));
+gallery.replaceChildren();result.textContent='显示 '+entries.length+' 项 · 清单内共 '+manifest.length+' 项';
+for(const item of entries){
+const card=element('article','card'+(item.coverStyle==='current'?' current-cover':'')),isVideo=item.media==='video'||/\.webm$/i.test(item.file),link=element(isVideo?'div':'a','shot');
+if(isVideo){const video=element('video');video.src=encodeURIComponent(item.file);video.controls=true;video.preload='metadata';video.setAttribute('aria-label',item.title);link.append(video)}
+else{link.href=encodeURIComponent(item.file);link.target='_blank';link.rel='noopener';const img=element('img');img.src=encodeURIComponent(item.file);img.alt=item.title+'，'+(labels[item.kind]||'来源待核实');img.loading='lazy';img.decoding='async';link.append(img)}
+const body=element('div','card-body');if(item.coverStyle)body.append(element('span','badge '+(item.coverStyle==='current'?'current-cover':'legacy-cover'),item.coverStyle==='current'?'当前封面':'旧封面样式 · 原 API 证据保留'));body.append(element('span','badge '+item.kind,labels[item.kind]||'来源待核实'),element('h3','',item.title),element('code','route',item.route),element('p','',item.note));
+const meta=element('div','meta');meta.append(element('div','',item.file),element('div','','来源：'+item.source));
+if(item.imageWidth)meta.append(element('div','','图像尺寸：'+item.imageWidth+' × '+item.imageHeight+' px'));
+if(item.modifiedAt)meta.append(element('div','','文件更新：'+new Date(item.modifiedAt).toLocaleString('zh-CN',{hour12:false})));
+if(isVideo){const download=element('a','','打开完整录屏');download.href=encodeURIComponent(item.file);download.target='_blank';download.rel='noopener';meta.append(download)}
+body.append(meta);card.append(link,body);gallery.append(card)
+}if(!entries.length)gallery.append(element('div','empty','此筛选下没有截图。可切换类型或清空关键词。'))
+}
+for(const button of document.querySelectorAll('[data-kind]'))button.addEventListener('click',()=>{selected=button.dataset.kind;for(const other of document.querySelectorAll('[data-kind]'))other.setAttribute('aria-pressed',String(other===button));render()});
+search.addEventListener('input',render);render();
+</script>
+</body></html>

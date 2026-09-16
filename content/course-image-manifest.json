@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2026-09-13T17:26:17.076Z",
+  "purpose": "Original AI-generated editorial course illustrations, not photographs of actual classes or student results",
+  "brandPalette": [
+    "#FF7A00",
+    "#1D1D1F",
+    "#F5F5F7"
+  ],
+  "entries": [
+    {
+      "key": "tools",
+      "label": "实用工具：学习计划应用",
+      "asset": "apps/miniapp/static/edu/courses/tools.jpg",
+      "publicPath": "/static/edu/courses/tools.jpg",
+      "tool": "built-in image_gen",
+      "prompt": "Create ONE landscape 16:9 premium course-cover image for VIBE CODING, an 8–16-year-old creative coding school. Photorealistic editorial still life of a real, unbranded silver laptop on a pale warm studio desk, its screen showing a beautifully simple habit-tracker / study-planner app prototype built by a beginner: large orderly checkboxes, a weekly grid, one warm orange progress ring, clear cream/ink interface without legible text. Beside it a small paper wireframe sketch and one orange pencil. This should immediately communicate making useful software on a computer, not shopping for hardware. Camera at gentle three-quarter angle, laptop screen facing camera, natural soft side light, restrained premium material detail, subtle paper texture, crisp realistic display. Color palette warm white, near-black and vivid #FF7A00 orange accents. Focus subject fills central 70 percent; keep upper-left corner clean for an overlaid course-category chip, preserve the whole screen safely within center so wide banner cropping works. No people, no hands, no headphones, no logos, no brand names, no advertising headlines, no baked-in typography outside the screen, no watermarks, no floating holograms, no sci-fi, no cartoony robot. This is an original illustrative course concept, not a photo of real students.",
+      "originalFilename": "exec-3491cb16-3ee2-4b84-ac9b-ab6bed306975.png",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "encoding": "JPEG quality 70; original dimensions/composition retained",
+      "bytes": 132888,
+      "sha256": "e2a6f814c8666e714e22c3d8c3e042387e7e7c7042aecb32a7133b619b4dc066"
+    },
+    {
+      "key": "game",
+      "label": "创意小游戏：关卡与规则",
+      "asset": "apps/miniapp/static/edu/courses/game.jpg",
+      "publicPath": "/static/edu/courses/game.jpg",
+      "tool": "built-in image_gen",
+      "prompt": "Create ONE landscape 16:9 refined photorealistic editorial course-cover still life for an 8–16 creative coding school. A real unbranded silver laptop on a clean pale sage studio desk, screen facing camera and showing a lovingly crafted beginner 2D platform game in a browser: small orange square character, three floating stepped grass platforms, tiny star collectibles, a simple score icon, pale sky, everything visually coherent and playable-looking, with a slim block-code side panel made of small colored blocks but no illegible dense text. A small squared notebook with a drawn game level and one orange pencil lies beside the laptop. Premium natural studio photography feeling, gentle three-quarter perspective, accurate screen and keyboard, refined matte materials, crisp display, soft realistic shadows, playful intellectual mood rather than toy branding. Palette sage, cream, ink, orange #FF7A00. Main subject centered within middle70 percent, screen safely inside wide-banner crop, top left clean for category chip. No people, no hands, no hardware marketing, no headphones, no logos, no headline typography, no watermark, no holograms. Original illustrative course concept.",
+      "originalFilename": "exec-d9243c40-402d-4d00-acda-1ef6b5b3dee7.png",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "encoding": "JPEG quality 70; original dimensions/composition retained",
+      "bytes": 136008,
+      "sha256": "9b56b97a2ae17f58461169bb12ec656fdefe287fecdc7820ede49fac9fc3b698"
+    },
+    {
+      "key": "story",
+      "label": "互动故事：分支选择",
+      "asset": "apps/miniapp/static/edu/courses/story.jpg",
+      "publicPath": "/static/edu/courses/story.jpg",
+      "tool": "built-in image_gen",
+      "prompt": "Create ONE landscape16:9 premium photorealistic editorial still-life course cover for a child creative coding school. On a warm ivory desk an unbranded slim silver laptop displays a charming INTERACTIVE STORY prototype: an original hand-drawn little orange fox on a woodland path with two visually distinct branching-path choice cards at the bottom, polished book-like illustration and simple readable shapes, no actual written words. Beside laptop a folded paper storyboard with 3 little connected hand-drawn scene thumbnails, one orange pencil. Capture from a gentle front three-quarter angle so complete laptop screen is visible and story is recognizable even in a small course-card image. Calm sophisticated design-magazine photography, natural diffused sunlight, fine paper grain, restrained styling, no clutter. Palette warm ivory, muted forest green, terracotta and vivid orange accents. Keep main subject in central70 percent and upper-left quiet for interface category badge, leave crop-safe margins. No people, no hands, no headphones, no logos, no outside text/headlines, no watermark, no sci-fi effects. Educational project concept, not real learner work.",
+      "originalFilename": "exec-2c57e8cf-2d4f-4cf1-ac12-015a3b79fc93.png",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "encoding": "JPEG quality 70; original dimensions/composition retained",
+      "bytes": 170366,
+      "sha256": "73ec49d8e16f5dddba2bfa03e285abfaccb11d813aa57f7355fe9ea2f5200aa8"
+    },
+    {
+      "key": "web",
+      "label": "个人网站：主题作品集",
+      "asset": "apps/miniapp/static/edu/courses/web.jpg",
+      "publicPath": "/static/edu/courses/web.jpg",
+      "tool": "built-in image_gen",
+      "prompt": "Create ONE landscape16:9 highly refined photorealistic editorial course-cover image about children building their first personal website. A real unbranded thin silver laptop on a pale cool blue desk, display oriented toward the viewer, screen showing a carefully designed personal portfolio website prototype about space exploration: cream layout, large geometric orange sun with a small orbit line, a neat gallery of three original project tiles, a minimal ink navigation bar with tiny neutral line marks instead of words. A paper wireframe on the desk echoes the same layout, accompanied by one orange pencil. Luxury design studio editorial still life, soft natural directional light, subtle material texture, elegant composition, realistic perspective and crisp screen, not a generic hardware advertisement. Near-black, white, powder blue, orange #FF7A00 accents. Center laptop and screen in the middle70 percent with generous crop-safe margins, upper-left empty for app badge. No people or hands, no headphones, no logos, no promotional headlines or giant words, no watermarks, no futuristic holograms. Clearly an illustrative coding project concept.",
+      "originalFilename": "exec-6ac66cd6-11f3-4d0e-afa6-1e9f947e247c.png",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "encoding": "JPEG quality 70; original dimensions/composition retained",
+      "bytes": 157060,
+      "sha256": "15e83d6dab6a30cd42499a88fda953ea79e423329cdef4b86a01ed46b51e8108"
+    },
+    {
+      "key": "ai",
+      "label": "AI 应用：植物识别与检查",
+      "asset": "apps/miniapp/static/edu/courses/ai.jpg",
+      "publicPath": "/static/edu/courses/ai.jpg",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium 16:9 landscape course cover for an 8–16-year-old creative coding education app, ONE photograph, not a collage.\nAn unbranded silver laptop sits on a warm pale ivory studio desk. Its screen faces the viewer and clearly shows a refined, child-friendly plant-identification AI app prototype: an input leaf photograph at left, flowing to three compact candidate plant cards at right, with understated confidence bars and check icons. The interface feels like a real plausible simple student project, crisp, organized, sage green and cream with a small #FF7A00 action shape. A real small green leaf and a single plain paper input-check-output flow sketch sit on the desk beside the laptop. Software input, checking and output are visibly tangible, not science fiction.\nPremium photorealistic editorial still life, beautiful natural materials, subtle brushed aluminum, soft daylight, precise gentle shadows, calm sophisticated warm ivory and sage palette. Laptop and complete screen remain inside the center 70% of the wide frame, with balanced clear margins and enough headroom for crop-safe placement; slight 3/4 perspective but screen is highly readable as an interface. Fine realistic textures and restrained styling.\nNo people, no hands, no headphones, no robots, no holograms, no logos, no watermarks, no advertising, no giant typography. No text outside the screen or paper. Screen labels may be very small neutral UI microcopy only; prioritize recognizable coherent UI graphics over text.",
+      "originalFilename": "exec-49018a5d-b9ef-414b-98a6-195703e5dc3f.png",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "encoding": "JPEG quality 70; original dimensions/composition retained",
+      "bytes": 139200,
+      "sha256": "9af58c45985a34192d445a92635a881e68b6bf6735b0ba6cdd89d9daf6d6bbd1"
+    },
+    {
+      "key": "product",
+      "label": "综合项目：活动日程产品",
+      "asset": "apps/miniapp/static/edu/courses/product.jpg",
+      "publicPath": "/static/edu/courses/product.jpg",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium 16:9 landscape course cover for an 8–16-year-old creative coding education app, ONE photograph, not a collage.\nAn unbranded silver laptop sits on a pale cream studio desk. Its complete screen faces the viewer and shows a coherent student-made event-planner application prototype: a calm monthly calendar, a compact sidebar, three small illustrated activity cards, and one crisp orange primary action shape. The interface has logical aligned spacing, ink-colored fine lines, cream backgrounds and #FF7A00 accents. Beside the laptop lies one paper showing a simple three-stage wireframe sequence for the same app, and a single orange pencil. Software product design is concrete and realistic, a project a teenager can build.\nPremium photorealistic editorial still life, sophisticated natural materials, lightly textured paper and soft brushed aluminum, gentle daylight, refined quiet shadows. Cool cream, pale peach and deep ink palette with orange accents. Laptop and whole screen are placed within the center 70% of this wide frame with balanced crop-safe clear margins; restrained 3/4 camera perspective facing the display. Exceptional photographic detail without clutter.\nNo people, no hands, no headphones, no logos, no robots, no holograms, no watermarks, no advertising, no giant typography. No text outside the screen or wireframe paper. Screen labels may be very small neutral UI microcopy only; favor clearly organized recognizable software interface graphics over decorative text.",
+      "originalFilename": "exec-d8985404-00b1-4261-b51e-ab53f993230a.png",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "encoding": "JPEG quality 70; original dimensions/composition retained",
+      "bytes": 129073,
+      "sha256": "f2c34c03d425450e28c034db7845d11333be05a85f94eff67e94e6410913ef8f"
+    }
+  ]
+}

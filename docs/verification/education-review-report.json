@@ -1,0 +1,74 @@
+{
+  "startedAt": "2026-09-13T16:03:18.293Z",
+  "checks": [
+    {
+      "name": "Two original SELF staff accounts gain access only through assigned cohort/session",
+      "status": "PASSED"
+    },
+    {
+      "name": "Concurrent first drafts accept exactly one writer and expose persisted server revision/time",
+      "status": "PASSED",
+      "details": {
+        "revision": 1
+      }
+    },
+    {
+      "name": "Teacher draft remains invisible to the guardian",
+      "status": "PASSED"
+    },
+    {
+      "name": "Missing and stale revisions cannot bypass review overwrite protection",
+      "status": "PASSED"
+    },
+    {
+      "name": "Fresh revision saves and reopens requireRevision with a newer server save time",
+      "status": "PASSED"
+    },
+    {
+      "name": "Concurrent updates to an existing draft accept one writer without a repeatable-read lost update",
+      "status": "PASSED"
+    },
+    {
+      "name": "Published review remains immutable even with the current revision",
+      "status": "PASSED"
+    },
+    {
+      "name": "Attendance reopens persisted session marks while another session stays unmarked",
+      "status": "PASSED"
+    },
+    {
+      "name": "Attendance scope rejects mismatched cohorts and unassigned teachers",
+      "status": "PASSED"
+    }
+  ],
+  "fixtures": {
+    "teacherUserIds": [
+      257,
+      258,
+      259
+    ],
+    "cohortIds": [
+      56,
+      57
+    ],
+    "trialIds": [
+      364,
+      365
+    ],
+    "courseId": 25,
+    "studentId": 43,
+    "first": {
+      "id": 56,
+      "sessionId": 65,
+      "enrollmentId": 33
+    },
+    "second": {
+      "id": 57,
+      "sessionId": 66,
+      "enrollmentId": 34
+    },
+    "submissionId": 7
+  },
+  "status": "PASSED",
+  "completedAt": "2026-09-13T16:03:22.938Z"
+}

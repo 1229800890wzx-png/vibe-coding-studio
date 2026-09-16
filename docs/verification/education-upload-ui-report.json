@@ -1,0 +1,69 @@
+{
+  "startedAt": "2026-09-13T16:48:37.943Z",
+  "status": "PASSED",
+  "scope": "Real original member UI session. Only second synthetic attachment upload aborted by browser; all successful uploads use live original education file service. No assignment save/submit or order create.",
+  "faultInjection": {
+    "url": "**/app-api/edu/file/upload",
+    "abortRequestOrdinal": 2,
+    "method": "route.abort(failed)"
+  },
+  "checks": [
+    {
+      "name": "Injected second-file failure preserves the first real uploaded file and shows an item-level retry"
+    },
+    {
+      "name": "Retry sends only request 3; actual success, both READY rows and removal of the stale upload-failure summary are verified before screenshot"
+    },
+    {
+      "name": "Reload restores both actual successful file IDs as READY without sending another upload"
+    },
+    {
+      "name": "Local TEST queue and text are restored; original server submission remains byte-for-byte unchanged"
+    }
+  ],
+  "uploadAttempts": 3,
+  "successfulUploads": [
+    {
+      "fileId": 2311,
+      "name": "upload-first.txt"
+    },
+    {
+      "fileId": 2312,
+      "name": "upload-second.txt"
+    }
+  ],
+  "forbiddenMutations": [],
+  "pageErrors": [],
+  "fixtures": {
+    "assignmentId": 1,
+    "studentId": 1,
+    "files": [
+      {
+        "name": "upload-first.txt",
+        "sha256": "e876c58c10acf1ece59d9fd7e723300677d51f2d70a735e3411f199a3e5586df",
+        "bytes": 60
+      },
+      {
+        "name": "upload-second.txt",
+        "sha256": "7d5dac365afc804c98ae79ae87e81d72e1e427137476d6060d39b8c9083671d0",
+        "bytes": 95
+      }
+    ]
+  },
+  "originalSubmission": {
+    "id": 1,
+    "revision": 2,
+    "status": "REVIEWED",
+    "attachmentFileIds": [
+      2295
+    ]
+  },
+  "noteAfterSuccessfulRetry": [
+    "附件已上传，正式提交后老师才会收到作业。"
+  ],
+  "completedAt": "2026-09-13T16:48:49.274Z",
+  "screenshots": [
+    "docs/screenshots/mini-upload-partial-failure.png",
+    "docs/screenshots/mini-upload-retried.png"
+  ]
+}

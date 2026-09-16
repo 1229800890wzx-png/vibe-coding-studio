@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-09-13T17:53:07.184Z",
+  "status": "PASSED",
+  "mysqlVersion": "8.4.11",
+  "tableCount": 182,
+  "publicBusinessTables": 95,
+  "columnCounts": {
+    "publicUpstream": 1597,
+    "localExtensions": 13
+  },
+  "missingColumns": []
+}

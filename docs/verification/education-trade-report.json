@@ -1,0 +1,50 @@
+{
+  "startedAt": "2026-09-13T15:30:53.175Z",
+  "environment": "local original mock channel, actual MySQL8.4",
+  "checks": [
+    {
+      "name": "Same SKU siblings stay separate original cart lines"
+    },
+    {
+      "name": "Original quote preserves two children and charges twice without shipping"
+    },
+    {
+      "name": "Original order deducts once; payment activates both registrations without second deduction"
+    },
+    {
+      "name": "Duplicate child enrollment rejected"
+    },
+    {
+      "name": "Concurrent last-seat purchases produce one successful original order"
+    },
+    {
+      "name": "Original unpaid cancellation releases the education seat"
+    },
+    {
+      "name": "Repeated partial KEEP refunds preserve teaching entitlement and seat"
+    },
+    {
+      "name": "Cumulative refund cap enforced in the original after-sale flow"
+    },
+    {
+      "name": "Transfer moves enrollment and original SKU inventory while preserving original order"
+    },
+    {
+      "name": "CANCEL refund after transfer releases current cohort only; sibling stays enrolled"
+    }
+  ],
+  "fixtures": {
+    "courseId": 20,
+    "source": 47,
+    "target": 48,
+    "last": 49,
+    "students": [
+      27,
+      28,
+      29,
+      30
+    ],
+    "orderId": 18
+  },
+  "completedAt": "2026-09-13T15:30:57.850Z"
+}

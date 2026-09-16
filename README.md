@@ -1,95 +1,46 @@
 # VIBE CODING · 少儿创造力实验室
 
-当前首期为橙色教育官网与真实课程咨询后台：课程从数据库读取，芋道管理端支持课程发布/下架、咨询查看和跟进。保留 React 互动作品展示，暂不启用在线购课。
+VIBE CODING 官网、小程序和管理后台共用统一 Java 后端与业务数据库。官网在朋友 PR #1 的暖白橙色设计基础上，加入字体与玻璃卡片优化、互动课程预览及导师团队介绍；课程发布与咨询仍读取统一后台。
 
-完整安装见 [platform/README.md](platform/README.md)，当前验收和限制见 [docs/FIRST_RELEASE.md](docs/FIRST_RELEASE.md)。下文原蓝白设计及纯前端交互说明属于早期记录；与上述文档冲突时以首期说明为准。
 
-## 本地打开
+最新汇总版本：**2026-09-16 16:10:04 +08:00（北京时间）**。完整官网与小程序代码位于 `codex/unified-platform`；变更与验证见 [2026-09-16 版本记录](docs/releases/2026-09-16-website-miniapp.md)。
 
-需要 Node.js 22.12 或更新版本。本机已用 Node.js 24 验证。
+## 官网体验
 
-```powershell
-npm install
-npm run dev
-```
+- `/`：橙色首页、课程方向筛选与搜索、教学方法、互动作品和咨询入口。
+- `/courses`：后台已发布课程列表与互动课程预览，包含编程基础、大模型、Agent、Skill、MCP 和 Vibe Coding。
+- `/courses/:id`：课程介绍与内容大纲；下架或不存在的课程不会显示详情。
+- `/mentors`：导师团队背景、13 所大学的官方校徽连续轮播，以及导师照片和个人履历。个人资料在 `src/mentor-profiles.js` 中维护；已按团队提供的信息加入乔明君、薛煌两位导师，未提供的照片与背景字段继续留空。
+- `/method`、`/projects`：教学方法与作品展示。
 
-开发地址：`http://127.0.0.1:5173/`。
+课程卡片由统一后台“教育管理 → 官网管理”创建、编辑、发布和撤下。咨询表单读取统一后端的授权与受理状态；后端成功回执后才显示提交成功，线索进入原 CRM，顾问可在官网管理或招生工作台查看状态和备注。同一请求重试不会重复创建线索。
 
-使用构建版本：
+## 本地开发
 
-```powershell
-npm run build
-npm start
-```
-
-构建版地址：`http://127.0.0.1:4173/`。Windows 推荐双击 `start-site.cmd`：它会在后台启动服务，确认页面可访问后再打开浏览器；启动窗口关闭不影响网站，重复启动会复用现有服务。电脑重启后需再次双击启动。后台日志位于 `output/server/`。
-
-`npm start` 仍以前台方式运行，关闭该命令窗口会停止服务。如果文字可见而图片显示“图片暂时未加载”，请先双击 `start-site.cmd` 恢复服务，再刷新页面。
-
-## 页面
-
-| 路径        | 内容                                                 |
-| ----------- | ---------------------------------------------------- |
-| `/`         | 首页、平板屏幕内五个自动轮播画面、创作方向、课程服务、导师 |
-| `/courses`  | 教育理念、基础理论、现代编程、AI 基础与知识路径、FAQ |
-| `/method`   | 五步教学过程、可操作的植物照护提醒实验、学习观察     |
-| `/mentors`  | 三类导师角色、教学引导与学习陪伴                     |
-| `/projects` | 七个创作示例、分类筛选和可操作案例详情               |
-
-作品分类与详情保存在 URL 参数中，例如 `/projects?category=tool&project=notes`。直接打开和刷新内页均可用。
-
-## 组件与内容
-
-- `src/content.js`：课程服务、作品、导师角色与 FAQ 的统一内容源。
-- `src/components.jsx`：导航、品牌文字、按钮、卡片、流程、FAQ、弹窗和体验意向表单。
-- `src/demos.jsx`：固定桌面与平板、轮播、日历、提醒逻辑、游戏/故事/网站/AI 概念演示。
-- `src/pages.jsx`：五页结构，遵循已确认效果图的区块顺序。
-- `src/styles.css`：颜色、字体、边缘、间距与响应式规则。
-- `public/art/`：网站使用的无损 WebP 素材；通过 SVG 视窗准确取景。原稿 PNG 与独立高清插画保存在 output 中；逐像素核对后压缩体积 27.8%。
-- `output/blue-white-site/`：原始效果图、详细审查与精修规格。
-- `output/playwright/`：实际网页截图、布局与交互检查报告。
-
-普通卡片使用单层细描边；材质与反光集中在原平板。首页默认每 6.5 秒自动轮播，支持暂停、方向键与触摸切换；悬停、键盘焦点、页面隐藏或打开弹窗时暂停，手动选择后停止自动播放。减少动态效果设置会关闭自动播放。
-
-## 已实现的示例
-
-- Minecraft 模组工坊：添加与开关预设模组、导出教学配置 JSON；没有连接实际游戏。
-- 午夜博物馆：两条故事分支、线索背包与路径回看，可返回起点。
-- MONO 产品官网：原创虚拟耳机的材质说明、配色概念与设计规格。
-- 拾页学习资料助手：原文定位、知识卡编辑/增删、Markdown 导出；使用固定示例资料，没有调用 AI。
-- 花园守卫战：关卡美术与三种角色规则切换，不含完整战斗循环。
-- 植物照护提醒：统一采用 2026 年 9 月 10 日的模拟情境；时间未到、时间已到、检查完成、输入为空均有对应反馈。只提醒观察植物，不控制自动浇水。
-- 分类与问答：明确标注预设演示与核查练习，没有调用或冒充实时 AI。
-
-## 体验预约与正式资料
-
-目前没有提供正式预约接收渠道，因此预约采用清楚标明的**本地意向流程**：字段校验 → 保存到当前浏览器 → 下载意向单；支持保存失败重试、恢复填写和删除记录。不会向外部发送联系方式，也不会显示虚构的机构接收成功。
-
-上线前需补齐真实团队资料、课程安排/费用/年龄范围、正式联系方式与预约接收方式。导师和作品的示意说明已在界面保留。没有虚构人物履历、招生效果或业务响应时间。
-
-## 验证
+需要 Node.js 22.12 或更新版本。Windows 推荐使用 `npm.cmd`：
 
 ```powershell
-npm run build
-npm run check
+npm.cmd ci
+npm.cmd run dev
 ```
 
-浏览器回归使用 Playwright CLI；相关脚本位于 `scripts/verify-*.js`。先运行构建版服务器（npm run build 与 npm start），再执行，例如：
+官网开发地址默认 `http://127.0.0.1:5173/`。生产构建与检查：
 
 ```powershell
-npx --package @playwright/cli playwright-cli -s=vibe open http://127.0.0.1:4173 --browser chrome
-npx --package @playwright/cli playwright-cli -s=vibe run-code --filename scripts/verify-interactions.js --raw
+npm.cmd run check
+npm.cmd run build
+npm.cmd start
 ```
 
-这些文件是传给 CLI 的函数表达式，末尾不要加入分号。详细验收记录见 `output/playwright/VERIFICATION.md`。
+构建版默认监听 `http://127.0.0.1:4173/`。`scripts/serve.mjs` 通过公开 allowlist 将课程与咨询 API 转发到 `VIBE_API_TARGET`，不会转发管理接口。
 
-## GitHub 下载
+## 统一应用
 
-仓库包含运行所需的源码与图片，安装依赖后可直接构建。已构建的 Windows 运行包在仓库 Releases 中下载，解压后运行 `start-site.cmd`（需 Node.js 22.12+，无需安装项目依赖）。
+- `apps/server`：Spring Boot 服务端，包含原会员、课程、交易、支付、CRM 和官网适配。
+- `apps/admin`：Vue 管理后台；开发命令为 `npm.cmd --prefix apps/admin run dev-server`。
+- `apps/miniapp`：少儿端 H5 / 微信小程序；开发命令为 `npm.cmd --prefix apps/miniapp run dev:h5`。
+- `infra/migration`：生产数据库基线和前向迁移。
 
-`output/` 是本地设计过程和截图目录，不随源码提交。相关设计生成/截图脚本需要本地原始素材，日常 `npm run build` 和 `npm run dev` 不依赖它们。
+服务端启动前必须提供私有数据库、Redis、租户、密钥和回调配置。完整命令、部署边界、内容导入与回退见 [统一后端说明](docs/UNIFIED_BACKEND.md)。
 
-## 静态托管
-
-构建输出是 `dist/`，没有后端依赖。托管服务需要将不存在的页面路径回退到 `index.html`，同时保留真实静态资源的 404。`scripts/serve.mjs` 已实现本地预览所需的页面回退；公网发布应使用正式托管服务和 HTTPS。
-
+`infra/website-content.json` 是三个课程方向的默认导入清单。导入工具默认只预览；应用时也只创建缺失 slug，不覆盖任何已有草稿或运营内容。旧独立教育栈已经退役，迁移背景与上游来源见 [platform/README.md](platform/README.md)。

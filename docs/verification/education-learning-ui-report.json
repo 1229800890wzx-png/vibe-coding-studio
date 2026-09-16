@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-09-13T15:43:20.095Z",
+  "checks": [
+    "Real uni.navigateTo between list modes and navigateBack restore correct calendar/assignment titles",
+    "Hash navigation renders the expected title when awaited",
+    "Material card shows original filename and session title; authenticated download returns exact bytes/name",
+    "Actual published growth report renders strengths and nextSteps",
+    "Enrolled-course entry carries course/enrollment/child; compatible trial target posts correct payload and appears in real request list"
+  ],
+  "fixtures": {
+    "targetCohortId": 53
+  },
+  "status": "PASSED"
+}

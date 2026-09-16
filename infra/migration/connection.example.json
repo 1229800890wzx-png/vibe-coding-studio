@@ -1,0 +1,12 @@
+{
+  "host": "mysql.internal.example",
+  "port": 3306,
+  "database": "vibe_education_production",
+  "confirmDatabase": "vibe_education_production",
+  "username": "<dedicated-migration-user>",
+  "password": "<secret-manager-value>",
+  "adminUsername": "vibe_admin",
+  "adminPasswordHash": "<BCrypt-hash-of-institution-password>",
+  "oauthSecret": "<independent-random-64-hex-characters>",
+  "adminRedirectUris": ["https://admin.example.org/"]
+}

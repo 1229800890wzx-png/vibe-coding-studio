@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "project_id": "vibe-edu",
+  "captured_at": "2026-09-14T07:35:36+08:00",
+  "capture_definition": "本轮 web 工具公开访问结果的人工核对观察于此时间归档。不是页面发布日期，也不是原始 HTML 抓取时间。",
+  "snapshot_kind": "curated_observation_excerpt",
+  "is_simulated": false,
+  "sources": [
+    {
+      "source_id": "xdf-beijing-public",
+      "competitor_id": "new-oriental",
+      "source_url": "https://www.xdf.cn/beijing/",
+      "title": "新东方官网-新东方课程报名入口",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["城市上下文为北京；少儿素质按课程方向组织，公开卡片显示授课形式和预约行动。", "页面具有课程或班号搜索、校区及师资入口；学习工具链接指向独立的云教室和 APP。"],
+      "access_notes": "web 直接打开成功；公开官网，不是原生微信小程序。未登录、未预约；未确认目标链接登录后的功能。"
+    },
+    {
+      "source_id": "xdf-tianjin-public",
+      "competitor_id": "new-oriental",
+      "source_url": "https://www.xdf.cn/tianjin",
+      "title": "天津新东方官网-2026课程报名-新东方教育",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["少儿素质课程卡并列展示开课日期、授课形式、适用年级和起价。", "课程方向仍是一级选择依据；教师并非唯一入口。"],
+      "access_notes": "web 直接打开成功。搜索摘要与打开内容的具体日期和起价不一致，故仅留存字段结构，不能用作实时班期或售价证明。"
+    },
+    {
+      "source_id": "xdf-zhengzhou-mobile",
+      "competitor_id": "new-oriental",
+      "source_url": "https://m.xdf.cn/city/410100",
+      "title": "新东方网-新东方郑州学校",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["移动站搜索涵盖课程、班号、老师和地点；少儿素质方向与查看校区入口并存。", "页面下方校区按区域组织；少儿课程方向卡具有预约入口。"],
+      "access_notes": "web 直接打开成功；这是 M 站。页脚年份较旧，抓取可达不能证明每项内容于 2026 年更新；局部无课提示不能解释为全站停售。"
+    },
+    {
+      "source_id": "xdf-quality-wechat-h5-home",
+      "competitor_id": "new-oriental",
+      "source_url": "https://z553878.weixin.xdf.cn/wechat/index/",
+      "title": "新东方素质学堂（页面可见品牌名）",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["页面可见编程推荐系列和科普、机器人内容分组；编程区含 Python 入门及家长规划讲座。", "提供课程、直播及个人入口；部分内容标免费。"],
+      "access_notes": "web 直接打开成功；官方 xdf.cn 子域上的公开 H5。域名和页面品牌可核实，原生小程序名称、主体及页面未经验证。未提交姓名或年级。"
+    },
+    {
+      "source_id": "xdf-quality-wechat-h5-course",
+      "competitor_id": "new-oriental",
+      "source_url": "https://z553878.weixin.xdf.cn/wechat/course/index",
+      "title": "课程",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["公开文本仅读取到品牌介绍、姓名及年级表单、底部导航。"],
+      "access_notes": "直接打开成功但课程列表未被工具解析。不能确认列表为空、筛选不存在或需要何种登录；未填写或提交表单。"
+    },
+    {
+      "source_id": "xdf-programming-2023",
+      "competitor_id": "new-oriental",
+      "source_url": "https://www.xdf.cn/93/202302/12901002.html",
+      "title": "新东方i编程课程简介-新东方网",
+      "source_type": "primary",
+      "valid_at": "2023-02-23T19:05:00+08:00",
+      "observations": ["官方课程介绍按图形化、Python、C++ 描述递进体系，并将故事、游戏和实际应用联系到学习能力。"],
+      "access_notes": "web 直接打开成功；页面署名素质教育中心，属历史内容介绍。不是 2026 课程目录或原生小程序页面。仅保存自写摘要，不复制全文和配图。"
+    },
+    {
+      "source_id": "xdf-historical-selection",
+      "competitor_id": "new-oriental",
+      "source_url": "https://www.xdf.cn/zhuanti/help/select.html",
+      "title": "选课流程",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["历史帮助页描述班号、关键词和分类三种选课路径；选定班级后进入报名购物车。"],
+      "access_notes": "web 直接打开成功；页脚版权范围为 2011—2014，明确作为历史参考。不能据此认定现行网页或微信小程序仍采用相同流程。"
+    },
+    {
+      "source_id": "xdf-historical-signup",
+      "competitor_id": "new-oriental",
+      "source_url": "https://www.xdf.cn/zhuanti/help/signup.html",
+      "title": "网报流程",
+      "source_type": "primary",
+      "valid_at": "unknown",
+      "observations": ["历史网报帮助区分班级核对、账号登录和学员信息，并描述为多个学员报名。"],
+      "access_notes": "web 直接打开成功；页脚版权范围为 2011—2014。其旧式登录、听课证配送和支付说明不作为本项目现行交互依据。"
+    }
+  ],
+  "unverified_access_attempts": [
+    {"source_url":"https://souke.xdf.cn/search?categoryCode=1200&cityCode=110100","result":"web 访问超时；具体搜索及班期详情待验证。"},
+    {"source_url":"https://souke.xdf.cn/search?categoryCode=1249&cityCode=120100","result":"web 访问超时；不能推断相应课程停售。"},
+    {"source_url":"https://roombox.xdf.cn/","result":"web 访问超时；仅确认官网提供该学习工具入口。"},
+    {"source_url":"https://docs.roombox.xdf.cn/","result":"一次结果可见简介及文档导航，后续完整读取超时；未用不完整正文支撑具体学习服务能力。"}
+  ]
+}

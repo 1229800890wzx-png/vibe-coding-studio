@@ -1,0 +1,188 @@
+{
+  "collectedAt": "2026-09-13T16:44:15.264Z",
+  "scope": "Existing final Java 21 Maven run only; no test execution or rebuild. Selects only classes explicitly reported by this log, never counts other Surefire XML.",
+  "logFile": ".tools/backend-java21-final-gaps.log",
+  "checks": [
+    {
+      "name": "Exactly one successful build with an unambiguous final run time",
+      "status": "PASSED"
+    },
+    {
+      "name": "Log modification time agrees with the recorded build finish",
+      "status": "PASSED"
+    },
+    {
+      "name": "Six distinct logged test classes match the final selected 22-test batch",
+      "status": "PASSED"
+    },
+    {
+      "name": "Matching Surefire class/count/duration and testcase count: cn.iocoder.yudao.module.infra.service.file.PrivateFilePathsTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Surefire XML belongs to this run window and compiled test predates its result: cn.iocoder.yudao.module.infra.service.file.PrivateFilePathsTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Matching Surefire class/count/duration and testcase count: cn.iocoder.yudao.module.crm.service.CrmAdmissionsBoundaryTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Surefire XML belongs to this run window and compiled test predates its result: cn.iocoder.yudao.module.crm.service.CrmAdmissionsBoundaryTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Matching Surefire class/count/duration and testcase count: cn.iocoder.yudao.module.edu.service.EduAccessServiceTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Surefire XML belongs to this run window and compiled test predates its result: cn.iocoder.yudao.module.edu.service.EduAccessServiceTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Matching Surefire class/count/duration and testcase count: cn.iocoder.yudao.module.edu.service.EduReviewServiceTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Surefire XML belongs to this run window and compiled test predates its result: cn.iocoder.yudao.module.edu.service.EduReviewServiceTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Matching Surefire class/count/duration and testcase count: cn.iocoder.yudao.module.edu.service.EduRulesTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Surefire XML belongs to this run window and compiled test predates its result: cn.iocoder.yudao.module.edu.service.EduRulesTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Matching Surefire class/count/duration and testcase count: cn.iocoder.yudao.module.edu.service.EduTradeLifecycleServiceTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Surefire XML belongs to this run window and compiled test predates its result: cn.iocoder.yudao.module.edu.service.EduTradeLifecycleServiceTest",
+      "status": "PASSED"
+    },
+    {
+      "name": "Three reactor module summaries independently total the same 22 successful, unskipped tests",
+      "status": "PASSED"
+    }
+  ],
+  "suites": [
+    {
+      "className": "cn.iocoder.yudao.module.infra.service.file.PrivateFilePathsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 0.048,
+      "logRunningLine": 447,
+      "logSummaryLine": 448,
+      "xmlFile": "apps/server/yudao-module-infra/target/surefire-reports/TEST-cn.iocoder.yudao.module.infra.service.file.PrivateFilePathsTest.xml",
+      "xmlSha256": "211ee0f340131cdbb3423a3dc5d78dc8c67fa47f0c372cfc1f425b532c5d40d6",
+      "xmlModifiedAt": "2026-09-13T16:14:08.746Z",
+      "compiledTestFile": "apps/server/yudao-module-infra/target/test-classes/cn/iocoder/yudao/module/infra/service/file/PrivateFilePathsTest.class",
+      "compiledTestModifiedAt": "2026-09-12T15:27:03.676Z",
+      "status": "PASSED"
+    },
+    {
+      "className": "cn.iocoder.yudao.module.crm.service.CrmAdmissionsBoundaryTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 2.026,
+      "logRunningLine": 513,
+      "logSummaryLine": 520,
+      "xmlFile": "apps/server/yudao-module-crm/target/surefire-reports/TEST-cn.iocoder.yudao.module.crm.service.CrmAdmissionsBoundaryTest.xml",
+      "xmlSha256": "34ad004bcd846e95ce4b5f8c8070f3fc526504a6680f76702c11bc948e046938",
+      "xmlModifiedAt": "2026-09-13T16:14:30.488Z",
+      "compiledTestFile": "apps/server/yudao-module-crm/target/test-classes/cn/iocoder/yudao/module/crm/service/CrmAdmissionsBoundaryTest.class",
+      "compiledTestModifiedAt": "2026-09-13T16:14:27.236Z",
+      "status": "PASSED"
+    },
+    {
+      "className": "cn.iocoder.yudao.module.edu.service.EduAccessServiceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 1.734,
+      "logRunningLine": 742,
+      "logSummaryLine": 749,
+      "xmlFile": "apps/server/yudao-module-edu/target/surefire-reports/TEST-cn.iocoder.yudao.module.edu.service.EduAccessServiceTest.xml",
+      "xmlSha256": "19151dea104e413bcdcea3e2fc805caf84c99ba0b0521b37c2e4bf4306802fd2",
+      "xmlModifiedAt": "2026-09-13T16:14:54.676Z",
+      "compiledTestFile": "apps/server/yudao-module-edu/target/test-classes/cn/iocoder/yudao/module/edu/service/EduAccessServiceTest.class",
+      "compiledTestModifiedAt": "2026-09-13T16:14:51.431Z",
+      "status": "PASSED"
+    },
+    {
+      "className": "cn.iocoder.yudao.module.edu.service.EduReviewServiceTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 0.734,
+      "logRunningLine": 750,
+      "logSummaryLine": 751,
+      "xmlFile": "apps/server/yudao-module-edu/target/surefire-reports/TEST-cn.iocoder.yudao.module.edu.service.EduReviewServiceTest.xml",
+      "xmlSha256": "ef29c62c694dca60a2213ebe1666627ae46bdc892e8e354cd47591bcbc829e98",
+      "xmlModifiedAt": "2026-09-13T16:14:55.399Z",
+      "compiledTestFile": "apps/server/yudao-module-edu/target/test-classes/cn/iocoder/yudao/module/edu/service/EduReviewServiceTest.class",
+      "compiledTestModifiedAt": "2026-09-13T16:14:51.492Z",
+      "status": "PASSED"
+    },
+    {
+      "className": "cn.iocoder.yudao.module.edu.service.EduRulesTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 0.016,
+      "logRunningLine": 752,
+      "logSummaryLine": 753,
+      "xmlFile": "apps/server/yudao-module-edu/target/surefire-reports/TEST-cn.iocoder.yudao.module.edu.service.EduRulesTest.xml",
+      "xmlSha256": "03739982c9f96de1d9577109b495d2646518818bfb2ffd4824f8d096584c8ca4",
+      "xmlModifiedAt": "2026-09-13T16:14:55.414Z",
+      "compiledTestFile": "apps/server/yudao-module-edu/target/test-classes/cn/iocoder/yudao/module/edu/service/EduRulesTest.class",
+      "compiledTestModifiedAt": "2026-09-13T16:14:51.505Z",
+      "status": "PASSED"
+    },
+    {
+      "className": "cn.iocoder.yudao.module.edu.service.EduTradeLifecycleServiceTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 0.453,
+      "logRunningLine": 754,
+      "logSummaryLine": 755,
+      "xmlFile": "apps/server/yudao-module-edu/target/surefire-reports/TEST-cn.iocoder.yudao.module.edu.service.EduTradeLifecycleServiceTest.xml",
+      "xmlSha256": "e3a81b98f6ea0ffa3979e671bcca831d67450f500f732a3ed52412ff916e942d",
+      "xmlModifiedAt": "2026-09-13T16:14:55.885Z",
+      "compiledTestFile": "apps/server/yudao-module-edu/target/test-classes/cn/iocoder/yudao/module/edu/service/EduTradeLifecycleServiceTest.class",
+      "compiledTestModifiedAt": "2026-09-13T16:14:51.581Z",
+      "status": "PASSED"
+    }
+  ],
+  "limitations": [
+    "The build log has a finish time and rounded total duration rather than per-line timestamps. The run start is inferred, with a two-second timestamp rounding tolerance.",
+    "These Surefire XML files have no testsuite timestamp attribute. Matching class/count/duration and XML modification times within the recorded run window provide cross-validation; compiled-test files must predate those XML results but may be reused by Maven incremental compilation. This is local evidence, not an external attestation.",
+    "This report covers the selected 22 tests from this one run, not every test in the repository or earlier test reports."
+  ],
+  "logSha256": "e85b92e2c7de14e1dc032b177f2531097bed602f2af62ad1a6505601bd8d7526",
+  "logModifiedAt": "2026-09-13T16:15:03.981Z",
+  "buildFinishedAt": "2026-09-14T00:15:03+08:00",
+  "buildDurationSeconds": 72,
+  "inferredBuildStartedAt": "2026-09-13T16:13:51.000Z",
+  "timestampToleranceMs": 2000,
+  "totals": {
+    "tests": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "PASSED",
+  "completedAt": "2026-09-13T16:44:15.288Z"
+}

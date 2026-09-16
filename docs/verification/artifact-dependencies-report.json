@@ -1,0 +1,236 @@
+{
+  "startedAt": "2026-09-13T16:47:48.054010Z",
+  "completedAt": "2026-09-13T16:49:38.056696Z",
+  "status": "PASSED",
+  "scope": "Read-only actual artifact inventory; PASS means extraction/correlation completed, never legal compliance or release approval. Only this report and the named inventory were written.",
+  "artifact": {
+    "path": "apps/server/yudao-server/target/yudao-server.jar",
+    "sha256": "d1a927eeb7a7f7766e739f1f87af5e3389f08a31b8ddf602e30f001c0758c9ca",
+    "sizeBytes": 219849150,
+    "modifiedAt": "2026-09-13T16:15:03.978282Z"
+  },
+  "inventoryFile": "infra/templates/backend-artifact-dependencies.json",
+  "inventorySha256": "b11f4f33767729216c27bedef523b8d8b492f108edd848085a253f4f998b0e9c",
+  "summary": {
+    "packagedJars": 281,
+    "projectModules": 25,
+    "thirdPartyJars": 256,
+    "coordinateUnknown": 1,
+    "licenseMetadataUnknown": 27,
+    "gplFamilyReviewFlags": 7,
+    "thirdPartyLicenseUnknown": 2,
+    "projectPomsWithoutLicenseMetadata": 25
+  },
+  "checks": [
+    {
+      "name": "All actual BOOT-INF/lib jar entries inventoried exactly once",
+      "status": "PASSED"
+    },
+    {
+      "name": "Packaged artifact SHA256 matches current build evidence",
+      "status": "PASSED"
+    },
+    {
+      "name": "No archive/POM parsing failures silently omitted",
+      "status": "PASSED"
+    },
+    {
+      "name": "Every jar has explicit license metadata status, retaining UNKNOWN",
+      "status": "PASSED"
+    }
+  ],
+  "licenseReviewRequired": true,
+  "gplFamilyReview": [
+    {
+      "jarPath": "BOOT-INF/lib/annotations-3.0.1.jar",
+      "coordinates": {
+        "groupId": "com.google.code.findbugs",
+        "artifactId": "annotations",
+        "version": "3.0.1"
+      },
+      "declaredLicenses": [
+        {
+          "name": "GNU Lesser Public License",
+          "url": "http://www.gnu.org/licenses/lgpl.html",
+          "distribution": "repo",
+          "source": "maven-cache:com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "jarPath": "BOOT-INF/lib/jsqlparser-5.2.jar",
+      "coordinates": {
+        "groupId": "com.github.jsqlparser",
+        "artifactId": "jsqlparser",
+        "version": "5.2"
+      },
+      "declaredLicenses": [
+        {
+          "name": "GNU Library or Lesser General Public License (LGPL) V2.1",
+          "url": "http://www.gnu.org/licenses/lgpl-2.1.html",
+          "distribution": "repo",
+          "source": "maven-cache:com/github/jsqlparser/jsqlparser/5.2/jsqlparser-5.2.pom"
+        },
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+          "distribution": "repo",
+          "source": "maven-cache:com/github/jsqlparser/jsqlparser/5.2/jsqlparser-5.2.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "jarPath": "BOOT-INF/lib/justauth-spring-boot-starter-1.4.0.jar",
+      "coordinates": {
+        "groupId": "com.xkcoding.justauth",
+        "artifactId": "justauth-spring-boot-starter",
+        "version": "1.4.0"
+      },
+      "declaredLicenses": [
+        {
+          "name": "GNU Lesser General Public License v3.0",
+          "url": "https://www.gnu.org/licenses/lgpl-3.0.html",
+          "distribution": "repo",
+          "source": "maven-cache:com/xkcoding/justauth/justauth-spring-boot-starter/1.4.0/justauth-spring-boot-starter-1.4.0.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "jarPath": "BOOT-INF/lib/logback-classic-1.5.34.jar",
+      "coordinates": {
+        "groupId": "ch.qos.logback",
+        "artifactId": "logback-classic",
+        "version": "1.5.34"
+      },
+      "declaredLicenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html",
+          "comments": "Eclipse Public License 2.0",
+          "source": "maven-cache:ch/qos/logback/logback-parent/1.5.34/logback-parent-1.5.34.pom"
+        },
+        {
+          "name": "LGPL-2.1-only",
+          "url": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html",
+          "comments": "GNU Lesser General Public License v2.1 only",
+          "source": "maven-cache:ch/qos/logback/logback-parent/1.5.34/logback-parent-1.5.34.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "jarPath": "BOOT-INF/lib/logback-core-1.5.34.jar",
+      "coordinates": {
+        "groupId": "ch.qos.logback",
+        "artifactId": "logback-core",
+        "version": "1.5.34"
+      },
+      "declaredLicenses": [
+        {
+          "name": "EPL-2.0",
+          "url": "https://www.eclipse.org/legal/epl-v20.html",
+          "comments": "Eclipse Public License 2.0",
+          "source": "maven-cache:ch/qos/logback/logback-parent/1.5.34/logback-parent-1.5.34.pom"
+        },
+        {
+          "name": "LGPL-2.1-only",
+          "url": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html",
+          "comments": "GNU Lesser General Public License v2.1 only",
+          "source": "maven-cache:ch/qos/logback/logback-parent/1.5.34/logback-parent-1.5.34.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "jarPath": "BOOT-INF/lib/mysql-connector-j-9.7.0.jar",
+      "coordinates": {
+        "groupId": "com.mysql",
+        "artifactId": "mysql-connector-j",
+        "version": "9.7.0"
+      },
+      "declaredLicenses": [
+        {
+          "name": "The GNU General Public License, v2 with Universal FOSS Exception, v1.0",
+          "distribution": "repo",
+          "comments": "For detailed license information see the LICENSE file in this distribution.",
+          "source": "maven-cache:com/mysql/mysql-connector-j/9.7.0/mysql-connector-j-9.7.0.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    },
+    {
+      "jarPath": "BOOT-INF/lib/simple-http-1.0.5.jar",
+      "coordinates": {
+        "groupId": "com.xkcoding.http",
+        "artifactId": "simple-http",
+        "version": "1.0.5"
+      },
+      "declaredLicenses": [
+        {
+          "name": "GNU Lesser General Public License v3.0",
+          "url": "https://www.gnu.org/licenses/lgpl-3.0.html",
+          "distribution": "repo",
+          "source": "maven-cache:com/xkcoding/http/simple-http/1.0.5/simple-http-1.0.5.pom"
+        }
+      ],
+      "reviewFlags": [
+        "GPL_FAMILY_DECLARATION_REQUIRES_REVIEW"
+      ]
+    }
+  ],
+  "unknownLicenseFiles": [
+    "BOOT-INF/lib/dom4j-1.6.1.jar",
+    "BOOT-INF/lib/jcip-annotations-1.0.jar",
+    "BOOT-INF/lib/yudao-common-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-crm-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-edu-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-infra-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-member-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-pay-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-product-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-promotion-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-statistics-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-system-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-trade-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-module-trade-api-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-biz-data-permission-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-biz-ip-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-biz-tenant-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-excel-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-job-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-monitor-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-mq-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-mybatis-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-protection-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-redis-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-security-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-web-2026.08-SNAPSHOT.jar",
+    "BOOT-INF/lib/yudao-spring-boot-starter-websocket-2026.08-SNAPSHOT.jar"
+  ],
+  "limitations": [
+    "Embedded notice fingerprints locate retained jar notices; no new standalone third-party notice copies were created.",
+    "Maven license declarations may be inherited or express multiple alternatives; obligations and exceptions must be reviewed before distribution.",
+    "Shaded embedded Maven components are listed when available, but this is a jar-level inventory rather than class-level provenance."
+  ],
+  "errors": [],
+  "unknownThirdPartyLicenseFiles": [
+    "BOOT-INF/lib/dom4j-1.6.1.jar",
+    "BOOT-INF/lib/jcip-annotations-1.0.jar"
+  ],
+  "projectLicenseMetadataNote": "25 original project module POMs omit license fields; each has a separate source MIT provenance pointer. They are not counted as third-party unknowns."
+}

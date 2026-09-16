@@ -1,0 +1,85 @@
+.mentor-page { --mp-edge: #d4cec2; background: radial-gradient(ellipse at 87% 9%, #ece8dc5c, transparent 24%), linear-gradient(180deg,#f8f6f1 0%,#faf8f3 36%,#f5f3ec 65%,#f8f6f1 92%); }
+.mentor-page section, .mentor-page [id] { scroll-margin-top: 96px; }
+.mentor-page p { margin: 0; }
+.mentor-page .mp-kicker { display: flex; align-items: center; gap: 9px; font-size: 11px; line-height: 1.8; letter-spacing: .1em; color: var(--accent); font-weight: 600; }
+.mp-kicker > span { height: 5px; width: 5px; border-radius: 50%; background: currentColor; }
+.mp-hero { display: grid; grid-template-columns: 1.17fr 1fr; align-items: center; gap: 64px; padding-top: 60px; padding-bottom: 48px; }
+.mp-hero-copy, .mp-hero-overview { min-width: 0; }
+.mp-hero h1 { font-size: clamp(35px,3.65vw,52px); line-height: 1.42; letter-spacing: -.035em; margin: 22px 0 16px; }
+.mp-hero h1 > span { color: var(--accent); }
+.mentor-page .mp-hero-script { font-family: var(--font-art); font-size: 34px; font-style: italic; color: #946546; line-height: 1.25; letter-spacing: -.025em; }
+.mp-hero-overview { border-left: 1px solid var(--mp-edge); padding-left: 34px; }
+.mentor-page .mp-hero-intro { font-size: 16px; line-height: 2; color: var(--body); }
+.mp-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+.mp-hero-actions .button { font-size: 14px; }
+.mp-hero-foundations { display: flex; gap: 0; margin-top: 23px; font-size: 12px; line-height: 1.8; color: #797163; }
+.mp-hero-foundations span + span { border-left: 1px solid #d4c5b2; padding-left: 16px; margin-left: 16px; }
+.mp-background { padding-top: 32px; padding-bottom: 30px; }
+.mp-section-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.95fr); align-items: start; gap: 72px; margin-bottom: 32px; }
+.mp-section-head h2 { margin: 10px 0 0; font-size: 32px; line-height: 1.5; }
+.mp-background-experience { min-width: 0; max-width: 520px; }
+.mp-background-experience h3 { margin: 10px 0 12px; font-size: 23px; line-height: 1.5; letter-spacing: -.02em; font-weight: 600; }
+.mentor-page .mp-background-description { font-size: 14px; line-height: 1.95; color: var(--body); text-wrap: balance; }
+.mp-profiles { padding-top: 36px; padding-bottom: 76px; }
+.mp-profiles-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 28px; }
+.mp-profiles-heading h2 { margin: 10px 0 0; font-size: 32px; line-height: 1.5; letter-spacing: -.025em; }
+.mp-profiles-heading > p { max-width: 360px; padding-bottom: 5px; font-size: 13px; line-height: 1.9; color: #797163; }
+.mp-profile-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.mp-profile-card { min-width: 0; overflow: hidden; border: 1px solid var(--mp-edge); border-radius: 12px; background: #fffdf8a6; }
+.mp-profile-photo { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; border-bottom: 1px solid #ded7ca; background: #eeebe2; }
+.mp-profile-photo-empty { display: grid; place-items: center; padding: 24px; background: #f0ede5; }
+.mp-profile-photo-empty > span { font-size: 12px; line-height: 1.8; letter-spacing: .05em; color: #6a6155; }
+.mp-profile-info { padding: 23px 24px 24px; }
+.mp-profile-info h3 { margin: 0 0 20px; font-size: 21px; line-height: 1.5; letter-spacing: -.02em; font-weight: 600; }
+.mp-profile-card[data-mentor-placeholder="true"] .mp-profile-info h3 { color: #746c60; }
+.mp-profile-background { display: grid; gap: 13px; margin: 0; }
+.mp-profile-background > div { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 14px; align-items: start; }
+.mp-profile-background dt { font-size: 12px; line-height: 1.9; color: #797163; }
+.mp-profile-background dd { margin: 0; font-size: 13px; line-height: 1.75; color: var(--body); overflow-wrap: anywhere; }
+.mp-profile-background dd.mp-profile-pending { color: #797163; }
+.mentor-page .footer-cta h2 { font-size: 29px; }
+@media(max-width:1100px) {
+  .mp-hero { gap: 35px; padding-top: 50px; }
+  .mp-hero h1 { font-size: 39px; }
+  .mp-hero-overview { padding-left: 26px; }
+  .mp-profile-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+}
+@media(max-width:850px) {
+  .mp-hero { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; padding-bottom: 32px; }
+  .mp-hero-copy { max-width: 620px; }
+  .mp-hero h1 { font-size: 46px; }
+  .mp-hero-overview { max-width: 620px; border-left: 0; padding-left: 0; }
+  .mp-section-head { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 30px; align-items: start; }
+  .mp-section-head h2 { font-size: 29px; }
+  .mp-desktop-break { display: none; }
+  .mp-background-experience h3 { font-size: 21px; }
+  .mp-profiles { padding-top: 28px; padding-bottom: 58px; }
+  .mp-profiles-heading { gap: 24px; }
+  .mp-profiles-heading h2 { font-size: 29px; }
+  .mp-profiles-heading > p { max-width: 225px; }
+  .mp-profile-info { padding: 21px; }
+}
+@media(max-width:550px) {
+  .mp-hero { padding-top: 31px; gap: 22px; }
+  .mp-hero h1 { font-size: clamp(29px,7.85vw,40px); margin-top: 18px; line-height: 1.55; letter-spacing: -.04em; }
+  .mentor-page .mp-hero-script { font-size: 28px; }
+  .mentor-page .mp-hero-intro { font-size: 14px; }
+  .mp-hero-intro br { display: none; }
+  .mp-hero-actions { gap: 9px; margin-top: 23px; }
+  .mp-hero-actions .button { font-size: 12px; padding: 11px 13px; }
+  .mp-hero-foundations { font-size: 10px; margin-top: 19px; }
+  .mp-hero-foundations span + span { padding-left: 10px; margin-left: 10px; }
+  .mp-background { padding-top: 23px; padding-bottom: 26px; }
+  .mp-section-head h2 { font-size: 27px; }
+  .mp-section-head { grid-template-columns: 1fr; gap: 22px; margin-bottom: 25px; }
+  .mp-background-experience h3 { margin-block: 8px 10px; font-size: 21px; }
+  .mp-profiles { padding-top: 25px; padding-bottom: 42px; }
+  .mp-profiles-heading { display: grid; gap: 10px; margin-bottom: 22px; }
+  .mp-profiles-heading h2 { font-size: 27px; }
+  .mp-profiles-heading > p { max-width: none; padding-bottom: 0; }
+  .mp-profile-grid { grid-template-columns: 1fr; gap: 22px; }
+  .mp-profile-photo { aspect-ratio: 4 / 3; }
+  .mp-profile-info { padding: 21px 22px 23px; }
+  .mp-profile-info h3 { font-size: 20px; margin-bottom: 18px; }
+  .mentor-page .footer-cta h2 { font-size: 25px; }
+}

@@ -1,0 +1,37 @@
+name: vibe-edu-foundation
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: vibe_edu
+      MYSQL_USER: vibe_edu
+      MYSQL_PASSWORD: ${VIBE_DB_PASSWORD:?Run tooling/bootstrap/init-local.ps1 first}
+      MYSQL_ROOT_PASSWORD: ${VIBE_DB_ROOT_PASSWORD:?Run tooling/bootstrap/init-local.ps1 first}
+      TZ: Asia/Shanghai
+    ports:
+      - '127.0.0.1:13306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    healthcheck:
+      test: ['CMD-SHELL', 'MYSQL_PWD="$${MYSQL_ROOT_PASSWORD}" mysqladmin ping -h 127.0.0.1 -u root --silent']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:16379:6379'
+    volumes:
+      - redis_data:/data
+    command: ['redis-server', '--appendonly', 'yes']
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  mysql_data:
+  redis_data:

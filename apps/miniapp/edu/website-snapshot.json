@@ -1,0 +1,390 @@
+{
+  "source": "Official website: src/showcase-content.js, src/university-backgrounds.js, src/course-lessons.js",
+  "syncedOn": "2026-09-16",
+  "projects": [
+    {
+      "id": "minecraft",
+      "category": "game",
+      "title": "Minecraft 模组工坊",
+      "description": "自定义物品与规则，让熟悉的世界有自己的玩法。",
+      "tags": ["事件与条件", "变量与参数", "模组设计"],
+      "thought": "怎样给熟悉的方块世界添加自己的玩法？",
+      "rule": "定义事件与触发条件，再把效果组织成可开关的模组配置。",
+      "check": "添加模组后检查启用数量，再关闭其中一个，确认配置同步变化。",
+      "reflection": "此处可编辑与导出教学配置；真正的 Minecraft 模组还需要对应版本的开发与测试。",
+      "image": "/static/studio/minecraft.jpg"
+    },
+    {
+      "id": "museum",
+      "category": "story",
+      "title": "午夜博物馆",
+      "description": "探索线索、选择分支，让每一次决定改变故事。",
+      "tags": ["分支逻辑", "状态管理", "交互叙事"],
+      "thought": "同一个场景，选择怎样改变之后的线索和故事？",
+      "rule": "保存故事节点与线索，再显示相应的叙述和路线。",
+      "check": "分别探索星图与钥匙路线，返回起点后应清除已获得的线索。",
+      "reflection": "如果两个分支最终汇合，如何保留读者一路上的选择？",
+      "image": "/static/studio/museum.jpg"
+    },
+    {
+      "id": "mono",
+      "category": "website",
+      "title": "MONO · 原创产品官网",
+      "description": "从产品摄影到响应式布局，设计自己的品牌表达。",
+      "tags": ["网页结构", "响应式布局", "组件交互"],
+      "thought": "怎样让读者先看见产品特点，再有条理地了解细节？",
+      "rule": "用层级组织页面，连接材质说明、配色概念与设计规格。",
+      "check": "在手机和桌面查看内容，检查按钮、焦点与折叠面板。",
+      "reflection": "MONO 为原创虚拟产品设计练习，配色概念与展示中的雾银图片分别标明。",
+      "image": "/static/studio/mono.jpg"
+    },
+    {
+      "id": "notes",
+      "category": "tool",
+      "title": "拾页 · 学习资料助手",
+      "description": "把资料整理成可追溯、可编辑、可导出的知识卡。",
+      "tags": ["结构化数据", "文件处理", "AI 结果核验"],
+      "thought": "怎样把读过的资料变成自己的知识，还能找回原文依据？",
+      "rule": "把摘要与原文段落关联，编辑知识卡，再导出结构化笔记。",
+      "check": "定位来源、修改卡片并导出，检查文件是否包含最新内容与资料。",
+      "reflection": "当前使用固定示例资料，不调用 AI；接入模型后仍需要逐条核验出处。",
+      "image": "/static/studio/notes.jpg"
+    },
+    {
+      "id": "tower",
+      "category": "game",
+      "title": "花园守卫战",
+      "description": "设计不同角色、资源和关卡，探索塔防游戏怎样运转。",
+      "tags": ["定时事件", "碰撞检测", "资源管理"],
+      "thought": "怎样让防御角色发现目标，并以不同规则回应？",
+      "rule": "根据角色类型设置攻击、生产资源或拦截的行为。",
+      "check": "切换三种角色，检查规则说明和所需能力是否一致。",
+      "reflection": "此处为关卡美术与规则演示；完整游戏还需实现战斗循环、胜负和难度平衡。",
+      "image": "/static/studio/tower.jpg"
+    }
+  ],
+  "universities": [
+    {
+      "id": "nju",
+      "name": "南京大学",
+      "english": "Nanjing University",
+      "country": "中国",
+      "logo": "/pages/studio/static/universities/nju.png",
+      "sourceUrl": "https://www.nju.edu.cn/"
+    },
+    {
+      "id": "fudan",
+      "name": "复旦大学",
+      "english": "Fudan University",
+      "country": "中国",
+      "logo": "/pages/studio/static/universities/fudan.png",
+      "sourceUrl": "https://www.fudan.edu.cn/"
+    },
+    {
+      "id": "tsinghua",
+      "name": "清华大学",
+      "english": "Tsinghua University",
+      "country": "中国",
+      "logo": "/pages/studio/static/universities/tsinghua.png",
+      "sourceUrl": "https://www.tsinghua.edu.cn/"
+    },
+    {
+      "id": "pku",
+      "name": "北京大学",
+      "english": "Peking University",
+      "country": "中国",
+      "logo": "/pages/studio/static/universities/pku.png",
+      "sourceUrl": "https://www.pku.edu.cn/"
+    },
+    {
+      "id": "sjtu",
+      "name": "上海交通大学",
+      "english": "Shanghai Jiao Tong University",
+      "country": "中国",
+      "logo": "/pages/studio/static/universities/sjtu.png",
+      "sourceUrl": "https://www.sjtu.edu.cn/"
+    },
+    {
+      "id": "ucl",
+      "name": "伦敦大学学院",
+      "english": "UCL · University College London",
+      "country": "英国",
+      "logo": "/pages/studio/static/universities/ucl.png",
+      "sourceUrl": "https://www.ucl.ac.uk/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "imperial",
+      "name": "帝国理工学院",
+      "english": "Imperial College London",
+      "country": "英国",
+      "logo": "/pages/studio/static/universities/imperial.png",
+      "sourceUrl": "https://www.imperial.ac.uk/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "cambridge",
+      "name": "剑桥大学",
+      "english": "University of Cambridge",
+      "country": "英国",
+      "logo": "/pages/studio/static/universities/cambridge.png",
+      "sourceUrl": "https://www.cam.ac.uk/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "lse",
+      "name": "伦敦政治经济学院",
+      "english": "LSE · London School of Economics and Political Science",
+      "country": "英国",
+      "logo": "/pages/studio/static/universities/lse.png",
+      "sourceUrl": "https://www.lse.ac.uk/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "leeds",
+      "name": "利兹大学",
+      "english": "University of Leeds",
+      "country": "英国",
+      "logo": "/pages/studio/static/universities/leeds.png",
+      "sourceUrl": "https://www.leeds.ac.uk/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "manchester",
+      "name": "曼彻斯特大学",
+      "english": "The University of Manchester",
+      "country": "英国",
+      "logo": "/pages/studio/static/universities/manchester.png",
+      "sourceUrl": "https://www.manchester.ac.uk/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "unsw",
+      "name": "新南威尔士大学",
+      "english": "UNSW Sydney",
+      "country": "澳大利亚",
+      "logo": "/pages/studio/static/universities/unsw.png",
+      "sourceUrl": "https://www.unsw.edu.au/",
+      "logoShape": "wide"
+    },
+    {
+      "id": "sydney",
+      "name": "悉尼大学",
+      "english": "The University of Sydney",
+      "country": "澳大利亚",
+      "logo": "/pages/studio/static/universities/sydney.png",
+      "sourceUrl": "https://www.sydney.edu.au/",
+      "logoShape": "wide"
+    }
+  ],
+  "lessons": {
+    "start": {
+      "defaultLessonId": "logic",
+      "summary": "从说清想法开始，认识程序的顺序与条件，做出能解释的小作品。",
+      "prerequisite": "适合初次接触编程、愿意表达与探索的孩子。",
+      "lessons": [
+        {
+          "id": "express",
+          "title": "表达与提问",
+          "subtitle": "把脑海里的想法说清楚",
+          "heading": "一个好问题，让创作有了方向。",
+          "intro": "把“我想做什么”变成别人也能理解、可以检查的任务。",
+          "concepts": ["目标与范围", "上下文", "检查结果"],
+          "explanation": [
+            "先说作品给谁用、要解决什么问题，再描述一个具体动作。例如“做一个小游戏”还不够清楚；“点击星星加一分，点重开回到零分”就能让人理解规则。",
+            "和 AI 交流时，作品现状、已有规则和希望保留的内容都是上下文。补充这些信息有助于它理解任务，但回答仍可能出错；要把结果与自己的要求逐项比较。"
+          ],
+          "objectives": [
+            "把一个模糊想法写成包含目标和规则的任务说明。",
+            "指出一个可以亲手检查的结果，并判断它是否符合要求。"
+          ],
+          "exercise": "express"
+        },
+        {
+          "id": "story",
+          "title": "图像与故事",
+          "subtitle": "让选择改变故事的走向",
+          "heading": "同一个开头，可以通向不同结局。",
+          "intro": "先安排故事的顺序，再用选择连接场景，认识最初的程序结构。",
+          "concepts": ["执行顺序", "故事分支", "输入与反馈"],
+          "explanation": [
+            "把故事拆成“发生了什么、角色做了什么、接下来会怎样”。用文字或简单草图排列场景，理解程序也会按照约定的顺序执行动作。",
+            "给角色两种选择，为每个按钮写清下一幕。点击是输入，新的场景是反馈；亲自走过每条路线，检查按钮有没有跳错、结局是否说得通。"
+          ],
+          "objectives": [
+            "用几个相连的场景表示一个有分支的故事。",
+            "分别测试两种选择，说明输入如何改变后续内容。"
+          ],
+          "exercise": "story"
+        },
+        {
+          "id": "logic",
+          "title": "顺序与条件",
+          "subtitle": "让程序学会作出选择",
+          "heading": "规则，决定接下来会发生什么。",
+          "intro": "理解顺序与条件，观察输入如何改变结果。",
+          "concepts": ["条件判断", "输入与输出", "验证规则"],
+          "explanation": [
+            "为冒险世界设计一扇门：星星数量达到三颗才打开。先取得数量，再判断条件，最后执行对应动作。程序根据明确的规则行动，每一步都需要说清楚。",
+            "分别尝试零颗、两颗、三颗和五颗，检查门是否按规则打开。三颗正好位于条件的边界，尤其值得测试；后续再用变量保存分数、用循环表示重复动作。"
+          ],
+          "objectives": [
+            "说明一条“如果……就……”规则中的条件和动作。",
+            "用条件成立、不成立和边界情况检查程序结果。"
+          ],
+          "exercise": "logic"
+        }
+      ]
+    },
+    "create": {
+      "defaultLessonId": "vibe",
+      "summary": "理解 AI，练习小步协作；在项目中接触 Skill、MCP 与调试验证。",
+      "prerequisite": "先理解基本程序规则；学习 Skill、MCP 前，先完成一次 AI 协作与结果检查。",
+      "lessons": [
+        {
+          "id": "ai",
+          "title": "AI 与大模型",
+          "subtitle": "理解能力，也认识限制",
+          "heading": "AI 能帮忙，也需要我们来判断。",
+          "intro": "从模型、上下文和多模态出发，理解 AI 如何生成内容、使用工具。",
+          "concepts": ["模型与上下文", "多模态", "Agent 与工具"],
+          "explanation": [
+            "模型通过训练从例子中学习规律；使用时，它根据当前输入和上下文生成内容。补充背景可能改善回答，但“说得像真的”不等于正确。要检查事实、关键代码和实际运行结果。",
+            "多模态可以处理文字、图片等不同形式的信息，例如根据界面草图讨论按钮行为。Agent 将模型、指令和工具结合起来完成任务；工具是否运行成功，要看实际返回与检查结果。"
+          ],
+          "objectives": [
+            "区分训练与使用，说明上下文为什么会影响回答。",
+            "辨认模型回答与工具返回，并为一个结果提出检查办法。"
+          ],
+          "exercise": "ai"
+        },
+        {
+          "id": "vibe",
+          "title": "高效 Vibe Coding",
+          "subtitle": "想清楚，再小步完成",
+          "heading": "把想法说清楚，把每一步做扎实。",
+          "intro": "用自然语言和 AI 协作编程，保留自己对目标、代码与结果的判断。",
+          "concepts": ["任务拆解", "验收条件", "小步验证"],
+          "explanation": [
+            "任务说明要包含目标、范围、当前背景、约束和验收条件。例如只增加“计分与重开”，明确点击加一、重开归零，并说明哪些页面需要保持原样。先看计划，再逐步修改。",
+            "每完成一步就运行检查，阅读相关的变量、条件或函数，比较代码改了哪里。保存可运行的版本，再开始下一步；遇到错误先复现和定位，避免一次让 AI 同时改动很多无关内容。"
+          ],
+          "objectives": [
+            "为一个小功能写出范围清楚、结果可检查的任务说明。",
+            "完成“计划、修改、运行、检查、保存”的协作过程，并解释关键规则。"
+          ],
+          "exercise": "vibe"
+        },
+        {
+          "id": "skill",
+          "title": "Skill 技能包",
+          "subtitle": "让好方法可以再用一次",
+          "heading": "把有效的方法，整理成可复用的步骤。",
+          "intro": "用说明、流程和参考资源记录做法，在兼容工具中按需使用。",
+          "concepts": ["SKILL.md", "流程复用", "结果复查"],
+          "explanation": [
+            "Skill 可以理解为给 AI 使用的方法包：以 SKILL.md 说明用途与步骤，必要时附上参考资料、模板或脚本。它帮助工具采用已有的方法，不是在重新训练模型，也不保证每次都能完成任务。",
+            "为“小游戏检查”写一份 Skill，列出计分、重开和边界情况的检查步骤。套用到另一个作品时，调整与作品有关的规则，检查是否有遗漏，再把新经验补回方法包。"
+          ],
+          "objectives": [
+            "写清一个 Skill 适用的任务、执行步骤和检查要求。",
+            "把同一方法用于两个作品，指出需要调整的规则。"
+          ],
+          "exercise": "skill"
+        },
+        {
+          "id": "mcp",
+          "title": "MCP 工具连接",
+          "subtitle": "认识请求、返回与权限",
+          "heading": "让 AI 应用，连接需要的工具与数据。",
+          "intro": "理解连接协议，分清“查看信息”和“修改内容”的权限边界。",
+          "concepts": ["连接协议", "请求与返回", "读取与修改权限"],
+          "explanation": [
+            "MCP 是 AI 应用与外部工具、数据等系统交互的一种开放协议。应用通过 MCP 服务发现和使用可用能力，再接收返回结果；MCP 本身不是模型，连接成功也不代表任务已经完成。",
+            "在页面的教学模拟中读取作品清单，观察请求参数与返回内容，并比较读取和删除的区别。真实连接需要实际的服务、账号及授权；本示例不会连接外部账号，也不会修改真实作品。"
+          ],
+          "objectives": [
+            "按顺序说明 AI 应用、MCP 服务与工具或数据之间的关系。",
+            "判断一个请求是读取还是修改，并说明需要确认哪些权限。"
+          ],
+          "exercise": "mcp"
+        },
+        {
+          "id": "debug",
+          "title": "调试与版本",
+          "subtitle": "找到问题，保留可用版本",
+          "heading": "出现错误，也能找到下一步。",
+          "intro": "复现问题、检查改动、验证修复，让每次调整都有依据。",
+          "concepts": ["复现与定位", "边界测试", "版本记录"],
+          "explanation": [
+            "遇到重复计分，先写下操作步骤、预期结果和实际结果，再检查相关代码及修改差异。一次只验证一个猜想，修复后重新测试正常操作、连续点击和重开等情况。",
+            "为可运行的作品保存版本，并记录改了什么、为什么改。工具的临时检查点与 Git 等长期版本记录用途不同；恢复版本后还要运行检查，确认代码与预期状态一致。"
+          ],
+          "objectives": [
+            "用可重复的步骤描述一个错误，并用测试判断修复是否有效。",
+            "解释一次修改差异，练习保存与恢复可运行的版本。"
+          ],
+          "exercise": "debug"
+        }
+      ]
+    },
+    "grow": {
+      "defaultLessonId": "iterate",
+      "summary": "持续改进作品、复用方法，在新工具出现时也能比较、验证与选择。",
+      "prerequisite": "适合已有可运行作品，希望继续改进并讲清设计过程的孩子。",
+      "lessons": [
+        {
+          "id": "iterate",
+          "title": "迭代与新技术",
+          "subtitle": "用同一任务比较新工具",
+          "heading": "工具会更新，解决问题的方法可以积累。",
+          "intro": "带着真实需求观察新技术，用证据决定是否采用一种新能力。",
+          "concepts": ["任务对照", "能力与限制", "验证与迭代"],
+          "explanation": [
+            "先从已有作品中选出一个需要改善的问题，再为它写清验收条件。比较不同工具或新的 Agent 能力时，使用相同任务与检查清单，观察完成情况、需要的帮助和出现的问题。",
+            "尝试复用 Skill，或在合适的教学环境中用 MCP 读取需要的数据，检查这些能力是否真的有帮助。只保留经过验证的改动，记录版本与选择理由；产品界面变化时，重新核对实际功能。"
+          ],
+          "objectives": [
+            "用同一任务和验收标准比较两种工具或做法。",
+            "根据运行结果解释保留、调整或放弃一次改动的理由。"
+          ],
+          "exercise": "iterate"
+        },
+        {
+          "id": "portfolio",
+          "title": "整理作品与方法",
+          "subtitle": "留下作品，也留下思考",
+          "heading": "作品集，也是一份可以回看的学习记录。",
+          "intro": "把问题、规则、关键改动与检查结果，整理成别人读得懂的说明。",
+          "concepts": ["作品说明", "版本脉络", "方法复用"],
+          "explanation": [
+            "为每个作品记录“给谁用、解决什么、怎样体验”，再说明关键程序规则。保留修改前后的差异和测试结果，让自己与他人都能看懂作品是怎样逐步完成的。",
+            "整理可复用的任务说明、检查清单与 Skill，记录它们适合什么情况。公开展示前检查是否包含个人信息、密钥或未经允许的素材，只分享适合公开的作品内容。"
+          ],
+          "objectives": [
+            "为一个作品整理包含用途、体验步骤和验证结果的说明。",
+            "从项目中提取一个可复用的方法，并说明使用条件。"
+          ],
+          "exercise": "portfolio"
+        },
+        {
+          "id": "share",
+          "title": "分享与反馈",
+          "subtitle": "讲清选择，听见真实体验",
+          "heading": "让别人体验，也让自己的思考被看见。",
+          "intro": "展示作品如何工作，区分观察与建议，把反馈变成下一次改进。",
+          "concepts": ["演示与表达", "体验反馈", "改进优先级"],
+          "explanation": [
+            "用一个具体任务演示作品，解释关键规则与设计选择，说明哪些部分得到 AI 帮助、自己怎样检查结果。作品仍有限制时，也把尚未解决的问题讲清楚。",
+            "观察体验者在哪里停顿、操作是否符合预期，再听取他们的建议。把可以复现的问题和个人偏好分开，选出一个最值得先改进的问题，补充验收条件后进入下一轮创作。"
+          ],
+          "objectives": [
+            "演示一个真实操作过程，并解释自己的设计与验证方法。",
+            "把一条体验反馈转化为具体、可以检查的改进任务。"
+          ],
+          "exercise": "share"
+        }
+      ]
+    }
+  }
+}

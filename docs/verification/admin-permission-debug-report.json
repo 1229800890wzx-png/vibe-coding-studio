@@ -1,0 +1,326 @@
+{
+  "startedAt": "2026-09-13T16:27:51.881Z",
+  "responses": [
+    {
+      "path": "/admin-api/system/tenant/get-by-website",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": null,
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/tenant/get-by-website",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": null,
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/tenant/get-id-by-name",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": null,
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/auth/login",
+      "method": "POST",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/dict-data/simple-list",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/auth/get-permission-info",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/notify-message/get-unread-count",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/tenant/simple-list",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/app-api/edu/config/get",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/auth/get-permission-info",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/notify-message/get-unread-count",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/tenant/simple-list",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/app-api/edu/config/get",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/session/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/cohort/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/auth/get-permission-info",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/notify-message/get-unread-count",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/system/tenant/simple-list",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/app-api/edu/config/get",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": false,
+      "authScheme": "none",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/session/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/cohort/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/session/get",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/cohort/get",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/room/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/teacher/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/session/preview",
+      "method": "POST",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "path": "/admin-api/edu/cohort/page",
+      "method": "GET",
+      "httpStatus": 200,
+      "authPresent": true,
+      "authScheme": "Bearer",
+      "tenant": "1",
+      "responseEncrypted": false,
+      "code": 0,
+      "message": ""
+    }
+  ],
+  "identity": {
+    "userId": 1,
+    "username": "admin",
+    "roles": [
+      "common",
+      "super_admin"
+    ]
+  },
+  "probes": [
+    {
+      "tokenMode": "anonymous",
+      "httpStatus": 200,
+      "code": 0,
+      "message": ""
+    },
+    {
+      "tokenMode": "admin",
+      "httpStatus": 200,
+      "code": 403,
+      "message": "没有该操作权限"
+    }
+  ],
+  "status": "PASSED",
+  "finishedAt": "2026-09-13T16:27:58.330Z"
+}

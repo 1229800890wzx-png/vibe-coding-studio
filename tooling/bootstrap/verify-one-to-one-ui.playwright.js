@@ -1,0 +1,71 @@
+// Independent browser acceptance. Original logins/APIs; synthetic TEST requests only.
+// One explicit 401 and one GET abort exercise recovery; no success responses are fabricated.
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+const require=createRequire(import.meta.url),cache=path.join(process.env.LOCALAPPDATA,'npm-cache','_npx');
+const modulePath=fs.readdirSync(cache).map(n=>path.join(cache,n,'node_modules/playwright')).find(p=>fs.existsSync(path.join(p,'package.json')));
+const {chromium}=require(modulePath);
+const env=Object.fromEntries(fs.readFileSync('.runtime/foundation.env','utf8').split(/\r?\n/).filter(x=>x&&!x.startsWith('#')).map(x=>{const i=x.indexOf('=');return[x.slice(0,i),x.slice(i+1)]}));
+const fixture=JSON.parse(fs.readFileSync('.runtime/one-to-one-api-report.json','utf8')).browser;
+assert(fixture,'Run the actual one-to-one API verification first');
+const report={startedAt:new Date().toISOString(),scope:'Independent browser, actual original member/admin authentication and local API/MySQL. One injected 401 before create and one aborted history GET; real token refresh and subsequent persisted creation. No external communication or payment.',checks:[],errors:[],screenshots:[]};
+const save=()=>fs.writeFileSync('.runtime/one-to-one-ui-report.json',JSON.stringify(report,null,2)+'\n');
+const pass=(name,details={})=>{report.checks.push({name,status:'PASSED',...details});save();console.log('PASS: '+name)};
+const browser=await chromium.launch({channel:'msedge',headless:true});
+const context=await browser.newContext({viewport:{width:390,height:844},timezoneId:'Asia/Shanghai',deviceScaleFactor:1});
+const mini=await context.newPage();mini.on('pageerror',e=>report.errors.push(e.message));
+const base='http://127.0.0.1:5174';
+const shot=async(file,locator)=>{const target='docs/screenshots/'+file; if(locator)await locator.screenshot({path:target,animations:'disabled'});else await mini.screenshot({path:target,animations:'disabled'});report.screenshots.push(target)};
+const pickerField=i=>mini.locator('uni-picker').nth(i).locator('.form-field');
+async function pickerWheel(index,column,delta){await mini.locator('uni-picker').nth(index).click();await mini.waitForTimeout(250);const box=await mini.locator('uni-picker-view-column:visible').nth(column).locator('.uni-picker-view-indicator').boundingBox();assert(box);await mini.mouse.move(box.x+box.width/2,box.y+box.height/2);await mini.mouse.wheel(0,delta);await mini.waitForTimeout(300);await mini.locator('.uni-picker-action-confirm:visible').click()}
+try{
+ await mini.goto(base+'/#/pages/tab/courses');await mini.locator('.private-entry').click();await mini.waitForURL(u=>u.hash.endsWith('/pages/edu/one-to-one'));
+ await mini.locator('.teacher-card').first().waitFor();
+ const teacher=mini.locator('.teacher-card').filter({hasText:fixture.teacherName});await teacher.click();assert(await teacher.evaluate(n=>n.classList.contains('selected')));
+ for(const width of [320,390,1440]){await mini.setViewportSize({width,height:width===1440?1000:844});assert(await mini.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));if(width!==320){await mini.evaluate(()=>window.scrollTo(0,0));await shot(`one-to-one-${width===390?'mobile':'desktop'}.png`)}}
+ pass('Independent course entry, real published teacher selection and 320/390/1440 layouts',{teacherId:fixture.teacherId});
+ await mini.setViewportSize({width:390,height:844});await mini.getByText('家长登录',{exact:true}).click();await mini.getByText('密码登录',{exact:true}).click();await mini.locator('input').nth(0).fill(fixture.parentMobile);await mini.locator('input').nth(1).fill(env.VIBE_MEMBER_PASSWORD);await mini.locator('.checkrow').click();await mini.getByText(/^登录(?: \/ 注册|并继续)$/).click();await mini.waitForURL(u=>u.hash.endsWith('/pages/edu/one-to-one'));await mini.locator('.booking-form').waitFor();assert(await teacher.evaluate(n=>n.classList.contains('selected')));
+ pass('Original parent login returns to the separate course and keeps the selected teacher');
+ const key=Date.now().toString(36),goal='TEST 一对一浏览器验收 '+key+'：我做了一个小游戏，想学习调试与关卡设计。请勿外部联系。';
+ await mini.locator('textarea').fill(goal);await mini.locator('.booking-form uni-input input').nth(0).fill('TEST 一对一家长 '+key);await mini.locator('.booking-form uni-input input').nth(1).fill(fixture.parentMobile);
+ await pickerWheel(1,2,100);await mini.locator('uni-picker').nth(2).click();await mini.waitForTimeout(250);await mini.locator('.uni-picker-action-confirm:visible').click();
+ const originalChild=await pickerField(0).textContent();
+ await pickerWheel(0,0,100);assert.notEqual(await pickerField(0).textContent(),originalChild);await mini.waitForFunction(()=>document.querySelector('textarea')?.value === '',null,{timeout:3000});
+ await pickerWheel(0,0,-100);assert.equal(await pickerField(0).textContent(),originalChild);await mini.waitForFunction(goal=>document.querySelector('textarea')?.value===goal,goal,{timeout:3000});
+ await mini.reload();await mini.locator('.booking-form').waitFor();await mini.waitForFunction(goal=>document.querySelector('textarea')?.value===goal,goal,{timeout:3000});assert.equal(await pickerField(0).textContent(),originalChild);assert(await teacher.evaluate(n=>n.classList.contains('selected')));
+ assert.equal(await mini.locator('.submit-appointment').getAttribute('disabled'),'true');
+ pass('Child-specific drafts restore after switching and reload; contact consent is never restored',{child:originalChild.trim()});
+ await mini.locator('.consent-row').click();await shot('one-to-one-request-form.png',mini.locator('.booking-form'));
+ let injected401=0,abortedHistory=0,refreshCalls=0;let successfulId;
+ mini.on('response',r=>{if(r.url().includes('/member/auth/refresh-token'))refreshCalls++});
+ await mini.route('**/edu/admission/create',async route=>{if(!injected401){injected401++;await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({code:401,msg:'TEST: access-token renewal recovery'})})}else await route.continue()});
+ await mini.route('**/edu/admission/list',async route=>{if(!abortedHistory){abortedHistory++;await route.abort('failed')}else await route.continue()});
+ const created=mini.waitForResponse(async r=>r.url().includes('/edu/admission/create')&&(await r.json()).code===0);
+ await mini.locator('.submit-appointment').click();const result=await (await created).json();successfulId=result.data.id;assert(successfulId);
+ await mini.locator('.success-panel').getByText('预约申请已提交，等待老师与你确认。',{exact:true}).waitFor();await mini.getByText('操作已完成，预约记录暂未刷新，请重试。',{exact:true}).waitFor();assert.equal(injected401,1);assert.equal(abortedHistory,1);assert.equal(refreshCalls,1);
+ await shot('one-to-one-submitted-retry.png',mini.locator('.success-panel'));
+ pass('Original token renewal succeeds once and persisted submission remains visible when history refresh fails',{clueId:successfulId,injected401,abortedHistory,realRefreshCalls:refreshCalls});
+ await mini.unroute('**/edu/admission/create');await mini.unroute('**/edu/admission/list');
+ await mini.getByText('重新加载',{exact:true}).click();await mini.locator('.booking-form').waitFor();await mini.locator('.appointment-record').filter({hasText:result.data.name}).first().waitFor();
+ pass('Retry recovers the real saved appointment without sending another create request',{clueId:successfulId});
+ const admin=await browser.newPage({viewport:{width:1440,height:1000},timezoneId:'Asia/Shanghai'});admin.on('pageerror',e=>report.errors.push(e.message));await admin.goto('http://127.0.0.1:49090/login');await admin.getByRole('textbox',{name:'请输入用户名',exact:true}).fill('admin');await admin.getByRole('textbox',{name:'请输入密码',exact:true}).fill(env.VIBE_ADMIN_PASSWORD);await admin.getByRole('button',{name:'登录',exact:true}).click();await admin.waitForURL(u=>!u.pathname.includes('/login'));await admin.goto('http://127.0.0.1:49090/edu/admission');await admin.getByRole('heading',{name:'招生与一对一预约'}).waitFor();
+ await admin.locator('.el-form-item').filter({hasText:'服务'}).locator('.el-select').click();await admin.getByRole('option',{name:'一对一高级课',exact:true}).click();const listResponse=admin.waitForResponse(r=>r.url().includes('/crm/clue/page')&&r.url().includes('educationServiceType=ONE_TO_ONE'));await admin.getByRole('button',{name:'查询',exact:true}).click();const listing=await(await listResponse).json();assert.equal(listing.code,0);assert(listing.data.list.every(r=>r.educationServiceType==='ONE_TO_ONE'));const record=listing.data.list.find(r=>r.id===successfulId);assert(record);assert.equal(record.educationTeacherId,fixture.teacherId);
+ const row=admin.getByRole('row').filter({hasText:record.name});await row.getByRole('button',{name:record.name,exact:true}).click();const drawer=admin.locator('.el-drawer:visible');await drawer.getByText(fixture.teacherName,{exact:true}).waitFor();await drawer.getByText('意向老师',{exact:true}).waitFor();assert((await drawer.textContent()).includes('期望时间（北京时间）'));await drawer.screenshot({path:'docs/screenshots/one-to-one-admin-request.png',animations:'disabled'});report.screenshots.push('docs/screenshots/one-to-one-admin-request.png');
+ pass('Original CRM desk filters one-to-one requests and displays selected teacher, desired time and learning goal',{clueId:successfulId,teacherId:record.educationTeacherId,ownerUserId:record.ownerUserId});
+ const item=mini.locator('.appointment-record').filter({hasText:result.data.name}).first();const cancelResponse=mini.waitForResponse(r=>r.url().includes('/edu/admission/cancel'));await item.locator('.cancel-appointment').click();await mini.locator('.uni-modal__btn_primary').click();const cancelled=await(await cancelResponse).json();assert.equal(cancelled.code,0);assert.equal(cancelled.data.id,successfulId);assert.equal(cancelled.data.appointmentStatus,'CANCELLED');await mini.locator('.success-panel').getByText('预约申请已撤回，记录已保留。',{exact:true}).waitFor();await mini.locator('.appointment-record').filter({hasText:result.data.name}).first().getByText('已撤回',{exact:true}).waitFor();
+ pass('Parent withdraws the same persisted request through the original session and sees retained history',{clueId:successfulId});
+ await admin.goto('http://127.0.0.1:49090/edu/teacher');
+ const teacherRow=admin.getByRole('row').filter({hasText:fixture.teacherName});await teacherRow.waitFor();
+ await teacherRow.getByRole('button',{name:'编辑',exact:true}).click();
+ const teacherDrawer=admin.locator('.el-drawer:visible');await teacherDrawer.getByText('一对一高级课',{exact:true}).waitFor();
+ const teacherSwitch=teacherDrawer.getByRole('switch');assert.equal(await teacherSwitch.getAttribute('aria-checked'),'true');
+ await teacherDrawer.screenshot({path:'docs/screenshots/one-to-one-admin-teacher.png',animations:'disabled'});report.screenshots.push('docs/screenshots/one-to-one-admin-teacher.png');
+ await teacherDrawer.locator('.el-switch').click();const switchResponse=admin.waitForResponse(r=>r.url().includes('/edu/teacher/update'));await teacherDrawer.getByRole('button',{name:'保存',exact:true}).click();assert.equal((await(await switchResponse).json()).code,0);
+ const directoryOff=await mini.request.get(base+'/app-api/edu/teacher/list?oneToOne=true',{headers:{'tenant-id':'1'}}).then(r=>r.json());assert.equal(directoryOff.code,0);assert(!directoryOff.data.some(t=>t.id===fixture.teacherId));
+ await teacherRow.getByRole('button',{name:'编辑',exact:true}).click();await teacherDrawer.locator('.el-switch').click();const restoredResponse=admin.waitForResponse(r=>r.url().includes('/edu/teacher/update'));await teacherDrawer.getByRole('button',{name:'保存',exact:true}).click();assert.equal((await(await restoredResponse).json()).code,0);
+ const directoryOn=await mini.request.get(base+'/app-api/edu/teacher/list?oneToOne=true',{headers:{'tenant-id':'1'}}).then(r=>r.json());assert(directoryOn.data.some(t=>t.id===fixture.teacherId));
+ pass('Original teacher editor switch removes and restores this TEST teacher in the public directory',{teacherId:fixture.teacherId});
+ assert.deepEqual(report.errors,[]);report.status='PASSED';report.completedAt=new Date().toISOString();save();
+}catch(e){await mini.screenshot({path:'.runtime/one-to-one-ui-failure.png'}).catch(()=>{});console.log('Visible child:',await pickerField(0).textContent().catch(()=>''));report.status='FAILED';report.error=e.stack||String(e);save();throw e}finally{await browser.close()}

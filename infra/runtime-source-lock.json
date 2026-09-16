@@ -1,0 +1,15 @@
+{
+  "platform": "linux/amd64",
+  "verifiedRuntimeImages": [
+    {"tag":"mysql:8.4","manifestDigest":"sha256:8c19b656bb381f163750b238852bd377ba5764e1ec30cdd3f02e55cf8e2f89b7","observedVersion":"8.4.11"},
+    {"tag":"redis:7.4-alpine","manifestDigest":"sha256:1db42ccef14898aa29bae778452d567534b59c107129cbc1163fb552de184d3c"}
+  ],
+  "portableJdk": {
+    "vendor":"Amazon Corretto",
+    "version":"21.0.12.9.1",
+    "javaVersion":"21.0.12.1",
+    "url":"https://corretto.aws/downloads/resources/21.0.12.9.1/amazon-corretto-21.0.12.9.1-windows-x64-jdk.zip",
+    "sha256":"a85f5430ff621668cc682438e2eb54e3466d57112afb97b8a724005588852c22"
+  },
+  "note":"Observed official image manifests are recorded for repeatable retrieval; compose tags permit already-loaded offline images. No global JDK, Maven, Docker daemon or proxy configuration is changed."
+}

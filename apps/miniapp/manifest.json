@@ -1,0 +1,39 @@
+{
+  "name": "VIBE CODING",
+  "appid": "",
+  "description": "面向家庭的少儿创作课程与学习服务",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "vueVersion": "3",
+  "locale": "zh-Hans",
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": true,
+      "minified": true,
+      "postcss": true
+    },
+    "optimization": {
+      "subPackages": true
+    },
+    "lazyCodeLoading": "requiredComponents",
+    "usingComponents": true,
+    "uniStatistics": {
+      "enable": false
+    }
+  },
+  "h5": {
+    "title": "VIBE CODING",
+    "router": {
+      "mode": "hash",
+      "base": "/"
+    },
+    "uniStatistics": {
+      "enable": false
+    }
+  },
+  "uniStatistics": {
+    "enable": false
+  }
+}

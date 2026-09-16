@@ -1,0 +1,57 @@
+{
+  "status": "PASSED",
+  "completedAt": "2026-09-13T23:51:56.4163915Z",
+  "checks": [
+    {
+      "target": "H5",
+      "command": "npm run build:h5",
+      "exitCode": 0,
+      "status": "PASSED",
+      "artifact": "apps/miniapp/dist/build/h5/index.html",
+      "artifactModified": "2026-09-13T23:51:51.824Z",
+      "sha256": "bb0e3f08db393f57be47eb653a41e9847264ddd008cce764a3b301298f57240e",
+      "buildLog": ".tools/benchmark-h5-build.log"
+    },
+    {
+      "target": "WeChat miniapp",
+      "command": "npm run build:mp-weixin",
+      "exitCode": 0,
+      "status": "PASSED",
+      "artifact": "apps/miniapp/dist/build/mp-weixin/app.json",
+      "artifactModified": "2026-09-13T23:51:50.315Z",
+      "sha256": "93bce88d9ca7181d9f4dede559eb682f59f5adc96a6bb6c7d199ca338a578101",
+      "buildLog": ".tools/benchmark-mp-build.log"
+    }
+  ],
+  "limitations": [
+    "Build output only; mp-weixin has not been run on WeChat developer tools or real devices.",
+    "No production release, merchant configuration or performance certification.",
+    "Freshness of all active source inputs is checked separately by delivery-integrity-report."
+  ],
+  "weChatArtifact": {
+    "files": 375,
+    "totalBytes": 2155108,
+    "rootPages": 4,
+    "subPackages": [
+      {
+        "root": "pages/edu",
+        "pages": 18
+      },
+      {
+        "root": "pages/pay",
+        "pages": 2
+      },
+      {
+        "root": "pages/public",
+        "pages": 3
+      }
+    ],
+    "packageBytes": {
+      "MAIN": 1997411,
+      "pages/edu": 148656,
+      "pages/pay": 5720,
+      "pages/public": 3321
+    },
+    "note": "Raw compiled sizes; WeChat developer-tool upload and real-device testing remain external."
+  }
+}

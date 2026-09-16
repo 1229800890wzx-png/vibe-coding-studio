@@ -1,0 +1,165 @@
+{
+  "startedAt": "2026-09-13T16:57:06.302Z",
+  "status": "PASSED",
+  "scope": "Actual UI clicks on isolated local TEST child/course/cart lines, original member auth and original mock payment. No production sources changed, request interception, real merchant, or external messaging.",
+  "testEnvironment": {
+    "origin": "http://127.0.0.1:5177",
+    "apiOrigin": "http://127.0.0.1:48080",
+    "existingTestFlag": "VITE_ENABLE_TEST_PAYMENT=true",
+    "memberId": 10002
+  },
+  "checks": [
+    {
+      "name": "Dedicated original isolation member and new TEST child/course/cohort/coupon prepared; main guardian cart is untouched",
+      "memberId": 10002,
+      "studentId": 61,
+      "cohortId": 70,
+      "couponId": 5
+    },
+    {
+      "name": "UI selects the TEST child and cohort, reprices the original coupon and creates exactly one isolated original order",
+      "orderId": 26,
+      "payOrderId": 26,
+      "expectedPayPrice": 1199
+    },
+    {
+      "name": "UI mock payment calls the original service once; original callback activates enrollment and deducts one seat",
+      "orderId": 26,
+      "orderNo": "o202609140057181",
+      "status": 10,
+      "payStatus": true,
+      "payOrderId": 26,
+      "itemId": 32,
+      "studentId": 61,
+      "enrollmentStatus": "ACTIVE",
+      "payPrice": 1199,
+      "remainingStock": 2
+    },
+    {
+      "name": "Original primary guardian cart is byte-for-byte unchanged and the isolated member has no leftover cart line"
+    },
+    {
+      "name": "Read-only UI replay displays successful original KEEP and CANCEL refunds, including cancelled learning entitlement",
+      "source": "Existing actual local original API regression records; read-only browser replay",
+      "keep": {
+        "afterSaleId": 13,
+        "orderId": 25,
+        "orderItemId": 30,
+        "status": 50,
+        "refundPrice": 100,
+        "entitlementAction": "KEEP"
+      },
+      "cancel": {
+        "afterSaleId": 11,
+        "orderId": 18,
+        "orderItemId": 21,
+        "status": 50,
+        "refundPrice": 8000,
+        "entitlementAction": "CANCEL",
+        "enrollmentStatus": "CANCELLED"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "videos": [
+    {
+      "file": "docs/screenshots/flow-enrollment-payment.webm",
+      "scope": "Actual recorded child/cohort selection → original coupon quote → UI order creation → original mock payment → paid order",
+      "sha256": "ed2bcafffa82d15aa4673a341f1d69373735721cddcc8631d6e4144065081ddc",
+      "bytes": 948252,
+      "decodedMedia": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 390,
+            "height": 844,
+            "avg_frame_rate": "25/1"
+          }
+        ],
+        "format": {
+          "duration": "14.440000",
+          "size": "948252"
+        }
+      }
+    },
+    {
+      "file": "docs/screenshots/flow-refund-progress.webm",
+      "scope": "Read-only replay of existing original API-created mock refunds and actual entitlement state",
+      "sha256": "9fd3e237de3021c1197b2445234bd8c1062f7bb5f6da0a4a8d59173729614bc9",
+      "bytes": 282908,
+      "decodedMedia": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 390,
+            "height": 844,
+            "avg_frame_rate": "25/1"
+          }
+        ],
+        "format": {
+          "duration": "5.280000",
+          "size": "282908"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "This proves local H5 and the upstream mock channel only; real WeChat merchant payment, AppID, HTTPS and device acceptance remain pending.",
+    "Refund recording is a read-only replay of existing refunds created by original local API regression tests, not a new UI refund request."
+  ],
+  "fixture": {
+    "key": "mu0240tk",
+    "memberId": 10002,
+    "studentName": "TEST 录屏学员 mu0240tk",
+    "courseName": "TEST 报名流程 mu0240tk",
+    "cohortName": "TEST 独立报名班 mu0240tk",
+    "capacity": 3,
+    "price": 1500,
+    "studentId": 61,
+    "courseId": 35,
+    "cohortId": 70,
+    "skuId": 10071,
+    "spuId": 10027,
+    "templateId": 5,
+    "couponId": 5,
+    "orderId": 26,
+    "payOrderId": 26
+  },
+  "originalState": {
+    "orderId": 26,
+    "orderNo": "o202609140057181",
+    "status": 10,
+    "payStatus": true,
+    "payOrderId": 26,
+    "itemId": 32,
+    "studentId": 61,
+    "enrollmentStatus": "ACTIVE",
+    "payPrice": 1199,
+    "remainingStock": 2
+  },
+  "refundEvidence": {
+    "source": "Existing actual local original API regression records; read-only browser replay",
+    "keep": {
+      "afterSaleId": 13,
+      "orderId": 25,
+      "orderItemId": 30,
+      "status": 50,
+      "refundPrice": 100,
+      "entitlementAction": "KEEP"
+    },
+    "cancel": {
+      "afterSaleId": 11,
+      "orderId": 18,
+      "orderItemId": 21,
+      "status": 50,
+      "refundPrice": 8000,
+      "entitlementAction": "CANCEL",
+      "enrollmentStatus": "CANCELLED"
+    }
+  },
+  "completedAt": "2026-09-13T16:57:30.217Z"
+}

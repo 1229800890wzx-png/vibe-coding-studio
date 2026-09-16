@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { Header, Reservation, ReservationContext } from "./components";
-import { Courses, Mentors, Method, NotFound, Projects } from "./pages";
+import { Header, ReservationContext } from "./components";
+import { Method, NotFound, Projects } from "./pages";
+import MentorPage from './mentor-page';
 import EducationHome from './education-home';
 import CourseCatalog from './course-catalog';
 import InquiryForm from './inquiry-form';
@@ -31,7 +32,7 @@ export default function App() {
     setReservation(false);
   }, [location.pathname, location.hash]);
   return (
-    <ReservationContext.Provider value={() => setReservation(true)}>
+    <ReservationContext.Provider value={(context = {}) => setReservation(context)}>
       <a className="skip-link" href="#main-content">
         跳转到主要内容
       </a>
@@ -42,12 +43,12 @@ export default function App() {
           <Route path="/courses" element={<CourseCatalog />} />
           <Route path="/courses/:id" element={<CourseCatalog />} />
           <Route path="/method" element={<Method />} />
-          <Route path="/mentors" element={<Mentors />} />
+          <Route path="/mentors" element={<MentorPage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {reservation && <InquiryForm onClose={() => setReservation(false)} />}
+      {reservation && <InquiryForm courseId={reservation.courseId} courseTitle={reservation.courseTitle} onClose={() => setReservation(false)} />}
     </ReservationContext.Provider>
   );
 }

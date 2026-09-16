@@ -1,0 +1,105 @@
+{
+  "trade_cart.student_id": {
+    "definition": "bigint NULL",
+    "localExtension": true,
+    "source": "infra/sql/trade-education.sql",
+    "reason": "Local education extension to original trade cart model; identifies the selected original-member child without replacing cart or order models. This column is not present in the fixed upstream commit."
+  },
+  "trade_order_item.student_id": {
+    "definition": "bigint NULL",
+    "localExtension": true,
+    "source": "infra/sql/trade-education.sql",
+    "reason": "Local education extension to original trade order item model; persists the selected child for entitlement processing. This column is not present in the fixed upstream commit."
+  },
+  "promotion_coupon_template.take_count": {
+    "definition": "int NOT NULL DEFAULT 0",
+    "source": "apps/server/yudao-module-mall/yudao-module-promotion/src/main/java/cn/iocoder/yudao/module/promotion/dal/mysql/coupon/CouponTemplateMapper.java",
+    "reason": "Original template creation omits this counter. The public mapper checks take_count < total_count and increments take_count; actual MySQL coupon grant failed with 1013004002 when the generated nullable column started NULL. Initialize the original counter to zero; reconcile existing NULL values from original non-deleted coupon records."
+  },
+  "promotion_coupon_template.use_count": {
+    "definition": "int NOT NULL DEFAULT 0",
+    "source": "apps/server/yudao-module-mall/yudao-module-promotion/src/main/java/cn/iocoder/yudao/module/promotion/dal/dataobject/coupon/CouponTemplateDO.java",
+    "reason": "The original template model exposes a usage counter, while creation omits it. Initialize new templates at zero, and reconcile existing NULL values from original non-deleted coupons whose status is USED (2). Existing non-null counters are preserved."
+  },
+  "trade_order.refund_point": {
+    "definition": "int NOT NULL DEFAULT 0",
+    "source": "apps/server/yudao-module-mall/yudao-module-trade/src/main/java/cn/iocoder/yudao/module/trade/service/order/TradeOrderUpdateServiceImpl.java",
+    "reason": "Original refundOrderItem adds getRefundPoint() to returned points. New-order creation leaves this field unset. Public H2 test SQL says nullable but actual MySQL integration proves an initial zero is required."
+  },
+  "crm_clue.education_member_id": {
+    "definition": "bigint NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "Education origin and explicit guardian-contact consent reference on the original CRM clue. Original CRM owner, permission, follow-up and audit models remain authoritative."
+  },
+  "crm_clue.education_student_id": {
+    "definition": "bigint NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "Education origin and explicit guardian-contact consent reference on the original CRM clue. Original CRM owner, permission, follow-up and audit models remain authoritative."
+  },
+  "crm_clue.education_course_id": {
+    "definition": "bigint NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "Education origin and explicit guardian-contact consent reference on the original CRM clue. Original CRM owner, permission, follow-up and audit models remain authoritative."
+  },
+  "crm_clue.education_consent_time": {
+    "definition": "datetime NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "Education origin and explicit guardian-contact consent reference on the original CRM clue. Original CRM owner, permission, follow-up and audit models remain authoritative."
+  },
+  "crm_clue.education_consent_version": {
+    "definition": "varchar(64) NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "Education origin and explicit guardian-contact consent reference on the original CRM clue. Original CRM owner, permission, follow-up and audit models remain authoritative."
+  },
+  "crm_clue.follow_up_status": {
+    "definition": "bit NOT NULL DEFAULT b'0'",
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/service/clue/CrmClueServiceImpl.java",
+    "reason": "Original createClue omits initial boolean states; original pending-follow queries require false and transformClue unboxes transformStatus. A new clue starts uncontacted and unconverted."
+  },
+  "crm_clue.transform_status": {
+    "definition": "bit NOT NULL DEFAULT b'0'",
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/service/clue/CrmClueServiceImpl.java",
+    "reason": "Original createClue omits initial boolean states; original pending-follow queries require false and transformClue unboxes transformStatus. A new clue starts uncontacted and unconverted."
+  },
+  "crm_clue.education_service_type": {
+    "definition": "varchar(32) NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "One-to-one appointment request facts on original CRM lead. Teacher name is a request-time snapshot; requested time does not reserve a lesson. Original owner/team permissions remain authoritative."
+  },
+  "crm_clue.education_teacher_id": {
+    "definition": "bigint NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "One-to-one appointment request facts on original CRM lead. Teacher name is a request-time snapshot; requested time does not reserve a lesson. Original owner/team permissions remain authoritative."
+  },
+  "crm_clue.education_teacher_name": {
+    "definition": "varchar(80) NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "One-to-one appointment request facts on original CRM lead. Teacher name is a request-time snapshot; requested time does not reserve a lesson. Original owner/team permissions remain authoritative."
+  },
+  "crm_clue.education_preferred_start_time": {
+    "definition": "datetime NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "One-to-one appointment request facts on original CRM lead. Teacher name is a request-time snapshot; requested time does not reserve a lesson. Original owner/team permissions remain authoritative."
+  },
+  "crm_clue.education_preferred_end_time": {
+    "definition": "datetime NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "One-to-one appointment request facts on original CRM lead. Teacher name is a request-time snapshot; requested time does not reserve a lesson. Original owner/team permissions remain authoritative."
+  },
+  "crm_clue.education_appointment_status": {
+    "definition": "varchar(32) NULL",
+    "localExtension": true,
+    "source": "apps/server/yudao-module-crm/src/main/java/cn/iocoder/yudao/module/crm/dal/dataobject/clue/CrmClueDO.java",
+    "reason": "One-to-one appointment request facts on original CRM lead. Teacher name is a request-time snapshot; requested time does not reserve a lesson. Original owner/team permissions remain authoritative."
+  }
+}

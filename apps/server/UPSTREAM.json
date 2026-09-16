@@ -1,0 +1,19 @@
+{
+  "repository": "https://github.com/YunaiV/ruoyi-vue-pro",
+  "branch": "master-jdk17",
+  "commit": "8e43004cf68a405cd3485f98f8a539b97ca6544a",
+  "archive": "https://codeload.github.com/YunaiV/ruoyi-vue-pro/zip/8e43004cf68a405cd3485f98f8a539b97ca6544a",
+  "archiveSha256": "0e20dbaa490a4c4b3ccb91b70f918b0f2c707bfcfc7b4838f8ec49759dfbc326",
+  "license": "MIT",
+  "licenseSha256": "772daf1f82a50025a74e4066050490d875feba62a49cf0ecefa1b4cc824e9a07",
+  "importMethod": "Public source archive extracted without nested Git history; all original module source retained.",
+  "localChanges": [
+    "Activate original member, pay and mall modules; edu is an independent extension module.",
+    "CRM source retained, activation deferred because it requires BPM.",
+    "Add foundation loopback-only configuration with runtime environment credentials.",
+    "Gate original MockPayClient registration to sole foundation profile plus explicit opt-in.",
+    "Education adapters and narrow product/trade integrations are documented in project docs.",
+    "Sanitize public demo credentials in active base/local/dev server YAML; defaults use foundation and authentication mock remains disabled."
+  ],
+  "database": "Public root MySQL system/infra SQL, public module test SQL type hints and current DO/tenant-interceptor models; see infra/database/source-manifest.json. No restricted SQL attachment fetched."
+}

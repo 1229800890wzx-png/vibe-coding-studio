@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-09-13T16:08:36.364Z",
+  "checks": [
+    {
+      "name": "Cross-parent student access denied",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Child profile linked to original member",
+      "details": {
+        "studentId": 46
+      }
+    },
+    {
+      "name": "Teacher profile reuses original system administrator identity"
+    },
+    {
+      "name": "Draft curriculum is not publicly readable",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Eight-lesson course published as a versioned snapshot"
+    },
+    {
+      "name": "Original SPU minimum price follows added trial SKU without rewriting stock"
+    },
+    {
+      "name": "Formal eight-session and free trial cohorts create original SPU/SKUs and publish"
+    },
+    {
+      "name": "Free trial booking idempotently grants learning access and decrements original SKU once"
+    },
+    {
+      "name": "Cross-parent file download denied",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Private attachment stored through original infra with authenticated download"
+    },
+    {
+      "name": "Private homework draft is hidden from teacher detail",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Private draft attachment denied even to headquarters staff",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Homework draft, idempotent submission and published teacher review verified"
+    },
+    {
+      "name": "Unpublished growth report is hidden",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Growth report publication and owner visibility verified"
+    },
+    {
+      "name": "Work cannot publish before guardian consent",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Guardian revocation immediately withdraws public work",
+      "details": {
+        "code": 1090000001
+      }
+    },
+    {
+      "name": "Versioned guardian consent, moderation, publication and withdrawal verified"
+    }
+  ],
+  "fixtures": {
+    "studentId": 46,
+    "teacherId": 1,
+    "courseId": 28,
+    "regular": {
+      "id": 62,
+      "sessionIds": [
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78
+      ],
+      "skuId": 10063
+    },
+    "trial": {
+      "id": 63,
+      "sessionIds": [
+        79
+      ],
+      "skuId": 10064
+    },
+    "enrollmentId": 36,
+    "fileId": 2308,
+    "submissionId": 10,
+    "reportId": 3,
+    "workId": 6
+  },
+  "status": "PASSED"
+}

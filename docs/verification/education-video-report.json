@@ -1,0 +1,47 @@
+{
+  "startedAt": "2026-09-13T16:48:37.943Z",
+  "status": "PASSED",
+  "checks": [
+    {
+      "name": "Original two-child cart and coupon 4 produce a real 1001-fen repricing without placing an order"
+    },
+    {
+      "name": "Unsaved text and this run’s two real successful attachments survive reload in the recorded context"
+    },
+    {
+      "name": "Recorded flow ends with local queue cleanup, unchanged server submission and no order creation"
+    }
+  ],
+  "video": "docs/screenshots/flow-checkout-and-draft.webm",
+  "limitations": [
+    "Chromium H5 local TEST data; no real WeChat payment.",
+    "One upload failure deliberately injected and labeled. Other business requests were not intercepted.",
+    "Draft and coupon selection changes stayed in this temporary browser context. No order or assignment submitted."
+  ],
+  "quote": {
+    "couponId": 4,
+    "selectedCartIds": [
+      10,
+      9
+    ],
+    "studentIds": [
+      42,
+      41
+    ],
+    "initialPayPrice": 10000,
+    "payPrice": 8999,
+    "couponPrice": 1001
+  },
+  "sha256": "4184bd7850e925ff4aa5a2418b6ddc8ab2bb9fc6aecbe32c58f13d8dbb6b543d",
+  "bytes": 716974,
+  "ownIdenticalRawCopyRemoved": true,
+  "completedAt": "2026-09-13T16:48:49.274Z",
+  "decodedMedia": {
+    "codec": "vp8",
+    "width": 390,
+    "height": 844,
+    "fps": 25,
+    "durationSeconds": 10.32,
+    "verification": "ffprobe -v error; decoded stream and format verified after current run"
+  }
+}

@@ -4,10 +4,22 @@ dist/
 .env.local
 .env.*
 !.env.example
+!.env.website.example
 output/
 .playwright-cli/
 *.log
-platform/vendor/
-platform/downloads/
-platform/__pycache__/
-!platform/overlays/yudao-ui-admin-vue3-master/.env.education
+.tools/
+.runtime/
+.superpowers/
+**/target/
+**/node_modules/
+**/dist/
+**/unpackage/
+**/.env.local
+**/.env.*.local
+**/.playwright-cli/
+
+# Local curriculum rendering and inspection output
+/tmp/
+__pycache__/
+*.pyc

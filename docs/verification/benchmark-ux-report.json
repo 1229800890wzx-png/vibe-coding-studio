@@ -1,0 +1,120 @@
+{
+  "startedAt": "2026-09-13T23:59:11.289Z",
+  "scope": "Actual local published APIs and original member password login; independent browser. One child GET failure is deliberately injected. No SMS, new booking, order or payment.",
+  "checks": [
+    {
+      "name": "Selection query whitelist, Beijing date boundary and distinct cohort continuation routes",
+      "status": "PASSED"
+    },
+    {
+      "name": "Home separates three learning services; regular list selection and actual price remain consistent in detail",
+      "status": "PASSED",
+      "courseId": 28,
+      "regularCohortIds": [
+        62
+      ],
+      "minimumPriceFen": 9900
+    },
+    {
+      "name": "Detail explicitly broadens to grouped trial/regular classes, scrolls to choices, and preserves original list search on return",
+      "status": "PASSED"
+    },
+    {
+      "name": "Zero-result recovery removes one condition at a time and preserves search until explicitly removed",
+      "status": "PASSED"
+    },
+    {
+      "name": "Original member login survives login-page reload and child-list failure, returns to the same cohort without reauthenticating",
+      "status": "PASSED",
+      "cohortId": 62,
+      "originalLoginCalls": 1,
+      "deliberatelyAbortedChildRequests": 1
+    },
+    {
+      "name": "Switching to another real child clears class-rule consent and states whose enrollment is being confirmed",
+      "status": "PASSED"
+    },
+    {
+      "name": "Guest one-to-one teacher selection survives original parent login and family loading without submitting an appointment",
+      "status": "PASSED"
+    },
+    {
+      "name": "320/390/430/1440 browser widths have no whole-page horizontal overflow",
+      "status": "PASSED",
+      "layouts": [
+        {
+          "width": 320,
+          "route": "/pages/tab/courses",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 320,
+          "route": "/pages/edu/course?id=28&kind=REGULAR",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 320,
+          "route": "/pages/edu/login?returnTo=%2Fpages%2Fedu%2Fcohort%3Fid%3D62",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 390,
+          "route": "/pages/tab/courses",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 390,
+          "route": "/pages/edu/course?id=28&kind=REGULAR",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 390,
+          "route": "/pages/edu/login?returnTo=%2Fpages%2Fedu%2Fcohort%3Fid%3D62",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 430,
+          "route": "/pages/tab/courses",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 430,
+          "route": "/pages/edu/course?id=28&kind=REGULAR",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 430,
+          "route": "/pages/edu/login?returnTo=%2Fpages%2Fedu%2Fcohort%3Fid%3D62",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 1440,
+          "route": "/pages/tab/courses",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 1440,
+          "route": "/pages/edu/course?id=28&kind=REGULAR",
+          "horizontalOverflow": false
+        },
+        {
+          "width": 1440,
+          "route": "/pages/edu/login?returnTo=%2Fpages%2Fedu%2Fcohort%3Fid%3D62",
+          "horizontalOverflow": false
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    "docs/screenshots/benchmark-home-paths.png",
+    "docs/screenshots/benchmark-selected-courses.png",
+    "docs/screenshots/benchmark-regular-detail.png",
+    "docs/screenshots/benchmark-cohort-choices.png",
+    "docs/screenshots/benchmark-filter-recovery.png",
+    "docs/screenshots/benchmark-login-continuation.png",
+    "docs/screenshots/benchmark-cohort-confirmation.png"
+  ],
+  "errors": [],
+  "status": "PASSED",
+  "completedAt": "2026-09-13T23:59:21.508Z"
+}

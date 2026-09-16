@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-09-13T18:22:51.314Z",
+  "scope": "Independent browser, actual original member/admin authentication and local API/MySQL. One injected 401 before create and one aborted history GET; real token refresh and subsequent persisted creation. No external communication or payment.",
+  "checks": [
+    {
+      "name": "Independent course entry, real published teacher selection and 320/390/1440 layouts",
+      "status": "PASSED",
+      "teacherId": 16
+    },
+    {
+      "name": "Original parent login returns to the separate course and keeps the selected teacher",
+      "status": "PASSED"
+    },
+    {
+      "name": "Child-specific drafts restore after switching and reload; contact consent is never restored",
+      "status": "PASSED",
+      "child": "联调学员1789227127081⌄"
+    },
+    {
+      "name": "Original token renewal succeeds once and persisted submission remains visible when history refresh fails",
+      "status": "PASSED",
+      "clueId": 33,
+      "injected401": 1,
+      "abortedHistory": 1,
+      "realRefreshCalls": 1
+    },
+    {
+      "name": "Retry recovers the real saved appointment without sending another create request",
+      "status": "PASSED",
+      "clueId": 33
+    },
+    {
+      "name": "Original CRM desk filters one-to-one requests and displays selected teacher, desired time and learning goal",
+      "status": "PASSED",
+      "clueId": 33,
+      "teacherId": 16,
+      "ownerUserId": 1
+    },
+    {
+      "name": "Parent withdraws the same persisted request through the original session and sees retained history",
+      "status": "PASSED",
+      "clueId": 33
+    },
+    {
+      "name": "Original teacher editor switch removes and restores this TEST teacher in the public directory",
+      "status": "PASSED",
+      "teacherId": 16
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "docs/screenshots/one-to-one-mobile.png",
+    "docs/screenshots/one-to-one-desktop.png",
+    "docs/screenshots/one-to-one-request-form.png",
+    "docs/screenshots/one-to-one-submitted-retry.png",
+    "docs/screenshots/one-to-one-admin-request.png",
+    "docs/screenshots/one-to-one-admin-teacher.png"
+  ],
+  "status": "PASSED",
+  "completedAt": "2026-09-13T18:23:04.761Z"
+}

@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-09-12T15:53:57.382Z",
+  "status": "PASSED",
+  "sourceDatabase": "vibe_edu",
+  "restoredDatabase": "vibe_edu_restore_20260912155206825",
+  "backupPath": ".runtime/backups/vibe-edu-20260912155206825.sql",
+  "sha256": "268d02ebc4697b90d0a60da860063e9249e4bf2c67d8aabb7df060ba72a7dd22",
+  "bytes": 1620313,
+  "verifiedTables": 182,
+  "verifiedRows": 6502,
+  "originalAdminId": 1,
+  "originalMemberId": 10001,
+  "activeBrand": "VIBE CODING",
+  "educationNotificationTemplates": 1,
+  "educationMenuCount": 42,
+  "curriculumCount": 10,
+  "scope": "New restore database retained for review; source database unchanged. Password hashes and backup contents remain in ignored .runtime only."
+}

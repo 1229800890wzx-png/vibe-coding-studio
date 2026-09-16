@@ -1,0 +1,35 @@
+{
+  "scope": "Anonymous public browser reads only. No authentication, contact, booking or payment; screenshots show only captured viewport.",
+  "sources": [
+    {
+      "url": "https://m.xdf.cn/city/410100",
+      "file": "xdf-mobile-public.png",
+      "surface": "Official public mobile website; not native WeChat",
+      "capturedAt": "2026-09-13T23:44:45.805Z",
+      "title": "新东方网-新东方郑州学校",
+      "finalUrl": "https://m.xdf.cn/city/410100",
+      "httpStatus": 200,
+      "isSimulated": false,
+      "sha256": "c25e49f881ab16a75fe398e6c2becde081849042ce75e62daf0a0c1fe44ffc49",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "url": "https://z553878.weixin.xdf.cn/wechat/index/",
+      "file": "xdf-quality-h5-public.png",
+      "surface": "Official subdomain H5; not native WeChat",
+      "capturedAt": "2026-09-13T23:44:49.005Z",
+      "title": "",
+      "finalUrl": "https://z553878.weixin.xdf.cn/wechat/index/",
+      "httpStatus": 200,
+      "isSimulated": false,
+      "sha256": "f5f1c2bd161e7b33e136a482db8c8ec23d023d9ff4816c0281f882e2fb8b3166",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    }
+  ]
+}

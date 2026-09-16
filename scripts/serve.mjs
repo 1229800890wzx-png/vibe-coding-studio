@@ -2,8 +2,9 @@ import http from "node:http";
 import { createReadStream, existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { websiteApiProxy } from './website-proxy.mjs';
 
-const root = path.resolve(
+const root = process.env.VIBE_WEB_ROOT ? path.resolve(process.env.VIBE_WEB_ROOT) : path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../dist",
 );
@@ -14,7 +15,10 @@ const types = {
   ".css": "text/css; charset=utf-8",
   ".svg": "image/svg+xml",
   ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
   ".webp": "image/webp",
+  ".woff2": "font/woff2",
   ".json": "application/json; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
 };
@@ -24,16 +28,12 @@ if (!existsSync(path.join(root, "index.html"))) {
 }
 http
   .createServer((req, res) => {
-    if (req.url?.startsWith('/app-api/education/')) {
-      const upstream = http.request({hostname:'127.0.0.1',port:48080,path:req.url,method:req.method,headers:{'content-type':'application/json','accept':'application/json'}}, response=>{
-        res.writeHead(response.statusCode,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
-        response.pipe(res);
-      });
-      upstream.setTimeout(15000,()=>upstream.destroy());
-      upstream.on('error',()=>{if(!res.headersSent)res.writeHead(503,{'Content-Type':'application/json'});res.end(JSON.stringify({code:503,msg:'服务暂时不可用，请稍后重试。'}));});
-      req.pipe(upstream);
-      return;
-    }
+    websiteApiProxy(req, res, () => serveStatic(req, res));
+  })
+  .listen(port, "127.0.0.1", () =>
+    console.log(`VIBE CODING: http://127.0.0.1:${port}`),
+  );
+function serveStatic(req, res) {
     if (!["GET", "HEAD"].includes(req.method)) {
       res.writeHead(405, { Allow: "GET, HEAD" });
       return res.end("Method not allowed");
@@ -76,7 +76,4 @@ http
     createReadStream(file)
       .on("error", () => res.destroy())
       .pipe(res);
-  })
-  .listen(port, "127.0.0.1", () =>
-    console.log(`VIBE CODING: http://127.0.0.1:${port}`),
-  );
+}

@@ -1,0 +1,2 @@
+# Liquibase and the source manifest hash exact bytes; checkout must not rewrite them.
+infra/migration/** -text

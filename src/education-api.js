@@ -1,14 +1,65 @@
-import {useCallback,useEffect,useState} from 'react';
-export async function educationRequest(path, options={}) {
- const response=await fetch('/app-api/education'+path,{...options,headers:{'Content-Type':'application/json',...options.headers},signal:AbortSignal.timeout(12000)});
- if(!response.ok) throw new Error('服务暂时不可用，请稍后重试。');
- const result=await response.json();
- if(result.code!==0) throw new Error(result.msg||'操作未完成，请重试。');
- return result.data;
+import { useCallback, useEffect, useState } from 'react';
+
+const prefix = '/app-api/edu';
+
+export async function educationRequest(path, { signal, body, ...options } = {}) {
+  const response = await fetch(prefix + path, {
+    ...options, signal: signal || AbortSignal.timeout(20000),
+    headers: { 'Content-Type': 'application/json' },
+    ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
+  });
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result || result.code !== 0) {
+    const error = new Error(result?.msg || '暂时无法连接，请稍后重试。');
+    error.code = result?.code || response.status;
+    throw error;
+  }
+  return result.data;
 }
-export function useCourses(){
- const [data,setData]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState('');
- const reload=useCallback(()=>{setLoading(true);setError('');educationRequest('/courses').then(setData).catch(()=>setError('课程暂时未能加载，请稍后重试。')).finally(()=>setLoading(false))},[]);
- useEffect(reload,[reload]);
- return {data,loading,error,reload};
+export const getWebsiteOfferings = options => educationRequest('/website-offering/list', options);
+export const getAdmissionOptions = options => educationRequest('/website-admission/options', options);
+export const submitAdmission = body => educationRequest('/website-admission/create', { method: 'POST', body });
+export const getCourseDetail = id => educationRequest('/course/get?id=' + encodeURIComponent(id));
+export const getCoursePage = params => educationRequest('/course/page?' + new URLSearchParams(params));
+export const getBrand = options => educationRequest('/config/get', options);
+export const getTeachers = options => educationRequest('/teacher/list', options);
+
+/** Keep only a digest and random retry token, never contact information, in session storage. */
+export async function submissionIdentity(payload) {
+  const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(payload)))))
+    .map(byte => byte.toString(16).padStart(2, '0')).join('');
+  const key = 'vibe-admission-request:' + digest;
+  let requestId;
+  try { requestId = sessionStorage.getItem(key); } catch { /* memory fallback below */ }
+  requestId ||= crypto.randomUUID();
+  try { sessionStorage.setItem(key, requestId); } catch { /* the form also retains its current request */ }
+  return { key, requestId };
+}
+
+/** Website slugs are navigation IDs; business course IDs are separate optional references. */
+export async function getCourses(options) {
+  const offerings = await getWebsiteOfferings(options);
+  return offerings.map(offering => ({ ...offering, id: offering.slug, offeringId: offering.id }));
+}
+
+export function useCourses() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [attempt, setAttempt] = useState(0);
+  const reload = useCallback(() => setAttempt(value => value + 1), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setError('');
+    getCourses({ signal: controller.signal }).then(courses => {
+      if (!controller.signal.aborted) setData(courses);
+    }).catch(() => {
+      if (!controller.signal.aborted) setError('课程暂时未能加载，请稍后重试。');
+    }).finally(() => {
+      if (!controller.signal.aborted) setLoading(false);
+    });
+    return () => controller.abort();
+  }, [attempt]);
+  return { data, loading, error, reload };
 }

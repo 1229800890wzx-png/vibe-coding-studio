@@ -16,6 +16,9 @@ const entries = [
   "README.md",
   "start-site.cmd",
   "scripts/serve.mjs",
+  "scripts/website-proxy.mjs",
+  "vite.config.js",
+  "docs/UNIFIED_BACKEND.md",
   "scripts/start-site.mjs",
 ];
 
@@ -50,7 +53,7 @@ npm run dev
 
 修改后运行 npm run build，再启动网站即可查看新的构建版。源码位于 src，网站图片位于 public。此包未包含 node_modules、设计评审页或原始生成素材。
 
-更多页面与功能说明见 README.md。此包是网站前端，实际提供的预约和示例功能以页面说明为准。
+此包是网站前端，课程介绍和预约已经接入统一后端。启动前设置 VIBE_API_TARGET 为真实后端地址（默认 http://127.0.0.1:48080）；后端不可用时会明确提示失败。此包不包含数据库和后端服务。整套部署说明见 docs/UNIFIED_BACKEND.md。
 `;
 
 function powershellLiteral(value) {

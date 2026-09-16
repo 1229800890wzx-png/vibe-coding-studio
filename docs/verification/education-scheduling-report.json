@@ -1,0 +1,311 @@
+{
+  "startedAt": "2026-09-13T15:09:52.675Z",
+  "environment": "Actual local Java21 API / MySQL8.4; TEST fixtures only",
+  "checks": [
+    {
+      "name": "Concurrent sessions sharing one teacher persist exactly one schedule",
+      "status": "PASSED",
+      "details": {
+        "persistedSessionIds": [
+          34
+        ]
+      }
+    },
+    {
+      "name": "Concurrent sessions sharing one room with different teachers persist exactly one schedule",
+      "status": "PASSED",
+      "details": {
+        "persistedSessionIds": [
+          35
+        ]
+      }
+    },
+    {
+      "name": "Sequential teacher and room overlap requests fail without persisting rows",
+      "status": "PASSED",
+      "details": {
+        "baseCohortId": 34,
+        "rejectedCohortId": 35
+      }
+    },
+    {
+      "name": "Concurrent sessions in one cohort with different teachers persist exactly one schedule",
+      "status": "PASSED",
+      "details": {
+        "cohortId": 36,
+        "persistedSessionIds": [
+          37
+        ]
+      }
+    },
+    {
+      "name": "Concurrent purchases for one child in overlapping distinct cohorts leave one valid pending enrollment",
+      "status": "PASSED",
+      "details": {
+        "rounds": 3,
+        "cohorts": [
+          37,
+          38
+        ],
+        "outcome": "Exactly one pending enrollment per child; original unpaid orders cancelled after verification."
+      }
+    },
+    {
+      "name": "Publication pins every chronological lesson and rejects duplicate mappings",
+      "status": "PASSED",
+      "details": {
+        "cohortId": 39,
+        "lessonIds": [
+          17,
+          18
+        ]
+      }
+    },
+    {
+      "name": "Wrong-version lesson fails both session save and publication of deliberately malformed TEST fixture",
+      "status": "PASSED",
+      "details": {
+        "sessionId": 40,
+        "rejectedTemplateId": 19,
+        "fixtureRestored": true
+      }
+    }
+  ],
+  "fixtures": {
+    "users": [
+      255,
+      256
+    ],
+    "teachers": [
+      7,
+      8
+    ],
+    "courses": [
+      14,
+      15
+    ],
+    "cohorts": [
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "sessions": [
+      36,
+      38,
+      39,
+      40,
+      41
+    ],
+    "students": [
+      17,
+      18,
+      19
+    ],
+    "orders": [
+      14,
+      15,
+      16
+    ],
+    "deptId": 126,
+    "campusId": 5,
+    "roomId": 3,
+    "pinnedCohortId": 39,
+    "pinnedSessionId": 40
+  },
+  "isolation": "REPEATABLE-READ",
+  "teacherRace": {
+    "cohorts": [
+      30,
+      31
+    ],
+    "responses": [
+      {
+        "code": 0,
+        "msg": "",
+        "data": 34
+      },
+      {
+        "code": 1090000001,
+        "msg": "教师或教室在这个时段已有课程，请调整时间或资源",
+        "data": null
+      }
+    ],
+    "persisted": [
+      {
+        "id": 34,
+        "cohort_id": 30,
+        "teacher_id": 7,
+        "room_id": null,
+        "start_time": "2026-11-12T15:09:52.675Z",
+        "end_time": "2026-11-12T16:09:52.675Z",
+        "lesson_template_id": null
+      }
+    ]
+  },
+  "roomRace": {
+    "cohorts": [
+      32,
+      33
+    ],
+    "responses": [
+      {
+        "code": 1090000001,
+        "msg": "教师或教室在这个时段已有课程，请调整时间或资源",
+        "data": null
+      },
+      {
+        "code": 0,
+        "msg": "",
+        "data": 35
+      }
+    ],
+    "persisted": [
+      {
+        "id": 35,
+        "cohort_id": 33,
+        "teacher_id": 8,
+        "room_id": 3,
+        "start_time": "2026-11-13T15:09:52.675Z",
+        "end_time": "2026-11-13T16:09:52.675Z",
+        "lesson_template_id": null
+      }
+    ]
+  },
+  "cohortRace": {
+    "cohortId": 36,
+    "responses": [
+      {
+        "code": 1090000001,
+        "msg": "该班期已有重叠课次",
+        "data": null
+      },
+      {
+        "code": 0,
+        "msg": "",
+        "data": 37
+      }
+    ],
+    "persisted": [
+      {
+        "id": 37,
+        "cohort_id": 36,
+        "teacher_id": 8,
+        "room_id": null,
+        "start_time": "2026-11-16T15:09:52.675Z",
+        "end_time": "2026-11-16T16:09:52.675Z",
+        "lesson_template_id": null
+      }
+    ]
+  },
+  "purchaseRaces": [
+    {
+      "round": 0,
+      "studentId": 17,
+      "responses": [
+        {
+          "code": 1090000001,
+          "msg": "孩子的上课时间与已报名课程冲突",
+          "data": null
+        },
+        {
+          "code": 0,
+          "msg": "",
+          "data": {
+            "id": 14,
+            "payOrderId": 14
+          }
+        }
+      ],
+      "pending": [
+        {
+          "id": 14,
+          "current_cohort_id": 38,
+          "status": "PENDING_PAYMENT",
+          "order_item_id": 16
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "studentId": 18,
+      "responses": [
+        {
+          "code": 0,
+          "msg": "",
+          "data": {
+            "id": 15,
+            "payOrderId": 15
+          }
+        },
+        {
+          "code": 1090000001,
+          "msg": "孩子的上课时间与已报名课程冲突",
+          "data": null
+        }
+      ],
+      "pending": [
+        {
+          "id": 15,
+          "current_cohort_id": 37,
+          "status": "PENDING_PAYMENT",
+          "order_item_id": 17
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "studentId": 19,
+      "responses": [
+        {
+          "code": 0,
+          "msg": "",
+          "data": {
+            "id": 16,
+            "payOrderId": 16
+          }
+        },
+        {
+          "code": 1090000001,
+          "msg": "孩子的上课时间与已报名课程冲突",
+          "data": null
+        }
+      ],
+      "pending": [
+        {
+          "id": 16,
+          "current_cohort_id": 37,
+          "status": "PENDING_PAYMENT",
+          "order_item_id": 18
+        }
+      ]
+    }
+  ],
+  "duplicateTemplate": {
+    "cohortId": 39,
+    "response": {
+      "code": 1090000001,
+      "msg": "课表包含重复或不属于当前课程版本的课次模板",
+      "data": null
+    }
+  },
+  "wrongTemplate": {
+    "cohortId": 39,
+    "sessionId": 40,
+    "rejectedTemplateId": 19,
+    "response": {
+      "code": 1090000001,
+      "msg": "课表包含重复或不属于当前课程版本的课次模板",
+      "data": null
+    },
+    "intentionalFixtureMutation": true
+  },
+  "status": "PASSED",
+  "completedAt": "2026-09-13T15:09:59.090Z"
+}

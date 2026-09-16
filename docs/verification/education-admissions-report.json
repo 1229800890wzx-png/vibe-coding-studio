@@ -1,0 +1,84 @@
+{
+  "startedAt": "2026-09-13T16:18:25.702Z",
+  "scope": "Local TEST fixtures through original member/system/CRM/education APIs. SQL reads only. No SMS, phone calls, email or external messages sent.",
+  "checks": [
+    {
+      "name": "Original infra configuration selects an active original employee; disabled configuration closes admissions",
+      "configId": 21,
+      "ownerUserId": 270
+    },
+    {
+      "name": "Missing consent, stale consent and another parent’s child reject without creating a CRM clue",
+      "codes": [
+        1090000001,
+        1090000001,
+        1090000001
+      ]
+    },
+    {
+      "name": "Consented consultation creates one original CRM clue and OWNER permission with explicit trial foreign-key linkage",
+      "clueId": 11,
+      "trialBookingId": 373,
+      "originalOwnerPermissionId": 13
+    },
+    {
+      "name": "Original CRM owner filtering hides another employee’s clue, team, follow-up and education detail"
+    },
+    {
+      "name": "Original clue creation works and a forged team-update business ID cannot change another clue’s owner"
+    },
+    {
+      "name": "Original follow-up writes progress and next contact time; parent view omits internal CRM notes",
+      "followUpId": 3,
+      "followType": {
+        "value": "1",
+        "label": "打电话"
+      }
+    },
+    {
+      "name": "Cross-parent list and trial linkage fail without changing the original trial association"
+    },
+    {
+      "name": "Original owner transfer removes old access and preserves trial association and follow-up history"
+    }
+  ],
+  "fixtures": {
+    "departmentId": 129,
+    "owners": [
+      {
+        "id": 270,
+        "username": "testcrmAmu00q9ly"
+      },
+      {
+        "id": 271,
+        "username": "testcrmBmu00q9ly"
+      }
+    ],
+    "student": {
+      "id": 57,
+      "name": "TEST 招生孩子mu00q9ly"
+    },
+    "strangerStudentId": 58,
+    "courseId": 34,
+    "cohortId": 69,
+    "trialBookingId": 373,
+    "clueId": 11,
+    "directClueIds": [
+      12,
+      13
+    ],
+    "followUpId": 3
+  },
+  "browser": {
+    "clueId": 15,
+    "studentId": 59,
+    "courseId": 34,
+    "cohortId": 69,
+    "trialBookingId": 374,
+    "followUpId": 4,
+    "ownerUserId": 1
+  },
+  "status": "PASSED",
+  "completedAt": "2026-09-13T16:18:27.790Z",
+  "configurationRestoredTo": "1"
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cn.vibecoding</groupId><artifactId>production-migrations</artifactId><version>1.0.0</version><packaging>pom</packaging>
+  <name>Original-domain production schema migrations</name>
+  <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <!-- Invoke the actual OSS CLI. The upstream liquibase-maven-plugin 4.33.0
+       adds liquibase-commercial; it is intentionally absent from this project. -->
+  <dependencies>
+    <dependency><groupId>org.liquibase</groupId><artifactId>liquibase-core</artifactId><version>4.33.0</version></dependency>
+    <dependency><groupId>info.picocli</groupId><artifactId>picocli</artifactId><version>4.7.7</version></dependency>
+    <dependency><groupId>com.mysql</groupId><artifactId>mysql-connector-j</artifactId><version>9.7.0</version></dependency>
+  </dependencies>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.1</version>
+    <configuration><mainClass>liquibase.integration.commandline.LiquibaseCommandLine</mainClass><arguments>
+      <argument>--defaults-file=${env.VIBE_LIQUIBASE_DEFAULTS}</argument>
+      <argument>${env.VIBE_LIQUIBASE_COMMAND}</argument>
+    </arguments></configuration>
+  </plugin></plugins></build>
+</project>

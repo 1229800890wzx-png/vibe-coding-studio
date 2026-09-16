@@ -1,0 +1,54 @@
+{
+  "status": "PASSED",
+  "completedAt": "2026-09-13T18:19:22.331Z",
+  "checks": [
+    {
+      "name": "Java21 selected tests and complete original server package",
+      "status": "PASSED",
+      "classes": [
+        {
+          "name": "cn.iocoder.yudao.module.crm.service.CrmAdmissionsBoundaryTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "cn.iocoder.yudao.module.edu.service.EduOneToOneAdmissionTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "log": ".tools/backend-one-to-one-final.log",
+      "jarSha256": "6341ec2472e8eca087b73908c991c6a297fccf28f2dcc20a3d8fae4696604500"
+    },
+    {
+      "name": "Original admin active typecheck, scoped ESLint and production build",
+      "status": "PASSED",
+      "logs": [
+        ".tools/one-to-one-admin-types.log",
+        ".tools/one-to-one-admin-eslint.log",
+        ".tools/one-to-one-admin-build.log"
+      ]
+    },
+    {
+      "name": "H5 and WeChat build include the separate one-to-one route",
+      "status": "PASSED",
+      "routes": [
+        "one-to-one"
+      ],
+      "packageBytes": {
+        "MAIN": 1985799,
+        "pages/edu": 126912,
+        "pages/pay": 5720,
+        "pages/public": 3321
+      }
+    }
+  ],
+  "limitations": [
+    "Actual browser acceptance uses the original local development profile. Production admin captcha configuration remains unchanged.",
+    "Raw WeChat compilation is not real-device or store-upload acceptance."
+  ]
+}

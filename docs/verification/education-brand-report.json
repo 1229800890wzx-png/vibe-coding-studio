@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-09-13T16:03:53.917Z",
+  "checks": [
+    {
+      "name": "Brand operator endpoint inherits original staff authentication and permissions"
+    },
+    {
+      "name": "Fixed original config key whitelist rejects unrelated keys and unsafe display values"
+    },
+    {
+      "name": "Two editors cannot silently overwrite: exactly one revision wins and public branding matches persisted values"
+    },
+    {
+      "name": "Brand edits persist in original infra_config and remain visible through original config administration"
+    }
+  ],
+  "status": "PASSED",
+  "restoredOriginalValues": true
+}

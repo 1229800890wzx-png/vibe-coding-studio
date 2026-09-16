@@ -1,0 +1,13 @@
+{
+  "artifact": "org.liquibase:liquibase-core:4.33.0",
+  "role": "Standalone production migration build tool, not included in the Spring Boot app",
+  "license": "Apache-2.0",
+  "licenseSource": "https://raw.githubusercontent.com/liquibase/liquibase/v4.33.0/LICENSE.txt",
+  "licenseSha256": "f92896db6490e0e3aa53401adcb0aa36dba01839fb137fc353602a37bc89a124",
+  "sourceTag": "v4.33.0",
+  "rootDirectorySource": "https://api.github.com/repos/liquibase/liquibase/contents?ref=v4.33.0",
+  "rootNoticeFiles": [],
+  "noticeObservation": "No root NOTICE file in the fixed source tag listing; no copyright notice was invented.",
+  "excludedArtifact": "org.liquibase:liquibase-commercial",
+  "execution": "Actual liquibase-core CLI through exec-maven-plugin; native changelog/lock/checksum engine"
+}

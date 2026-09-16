@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0">
+  <!-- Same public mirror already declared by fixed upstream; includes plugin dependency resolution. -->
+  <mirrors>
+    <mirror>
+      <id>huaweicloud</id>
+      <mirrorOf>central</mirrorOf>
+      <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+    </mirror>
+  </mirrors>
+</settings>

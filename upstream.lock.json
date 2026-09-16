@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "importPolicy": "Public source archives, no restricted SQL bundles; preserve upstream licenses",
+  "repositories": [
+    {"path":"apps/server","url":"https://github.com/YunaiV/ruoyi-vue-pro","ref":"master-jdk17","commit":"8e43004cf68a405cd3485f98f8a539b97ca6544a","license":"MIT"},
+    {"path":"apps/admin","url":"https://github.com/yudaocode/yudao-ui-admin-vue3","ref":"master","commit":"aab14fb0e74720dd09e964ae066f8bbde9f9012e","license":"MIT"},
+    {"path":"apps/miniapp","url":"https://github.com/yudaocode/yudao-mall-uniapp","ref":"master","commit":"3c4bf3864415054a88fe616a414e098972329412","license":"MIT"}
+  ]
+}
