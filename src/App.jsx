@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Header, ReservationContext } from "./components";
-import { Mentors, Method, NotFound, Projects } from "./pages";
+import { Method, NotFound, Projects } from "./pages";
+import MentorPage from './mentor-page';
 import EducationHome from './education-home';
 import CourseCatalog from './course-catalog';
 import InquiryForm from './inquiry-form';
@@ -42,7 +43,7 @@ export default function App() {
           <Route path="/courses" element={<CourseCatalog />} />
           <Route path="/courses/:id" element={<CourseCatalog />} />
           <Route path="/method" element={<Method />} />
-          <Route path="/mentors" element={<Mentors />} />
+          <Route path="/mentors" element={<MentorPage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

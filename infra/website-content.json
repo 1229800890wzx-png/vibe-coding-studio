@@ -1,5 +1,5 @@
 [
-  {"slug":"start","title":"创意启蒙","description":"从观察、表达和简单逻辑开始，让孩子找到自己的第一个创意。","outline":"表达与提问\n图像与故事\n认识程序中的顺序与条件","stage":1,"image":"minecraft","sortOrder":1,"published":true},
-  {"slug":"create","title":"AI 项目创作","description":"认识编程与 AI，把故事、游戏和小工具变成可以体验的作品。","outline":"拆解创作目标\n编程与调试\n理解 AI 输出并验证结果","stage":2,"image":"museum","sortOrder":2,"published":true},
-  {"slug":"grow","title":"作品成长计划","description":"围绕感兴趣的主题，学习迭代、测试与展示，积累自己的作品集。","outline":"持续迭代作品\n整理个人作品集\n展示设计与学习过程","stage":3,"image":"notes","sortOrder":3,"published":true}
+  {"slug":"start","title":"创意启蒙","description":"从表达想法和编程基础出发，认识程序中的规则，初步了解 AI 能做什么，并学会检查结果。","outline":"表达与提问\n图像与故事\n顺序与条件\n变量与循环入门","stage":1,"image":"minecraft","sortOrder":1,"published":true},
+  {"slug":"create","title":"AI 项目创作","description":"理解 AI 与大模型，练习高效 Vibe Coding 协作；具备基础后认识 Skill 方法包与 MCP 连接，完成能运行、能解释的项目。","outline":"AI 与大模型：上下文、多模态与 Agent\n高效 Vibe Coding：明确目标、小步修改、运行验证\nSkill 方法包：记录步骤、复用方法、检查结果\nMCP 工具连接：理解请求、数据与授权范围\n调试与版本：复现问题、比较改动、保存与恢复","stage":2,"image":"museum","sortOrder":2,"published":true},
+  {"slug":"grow","title":"作品成长计划","description":"围绕自己的作品持续测试与迭代，复用有效方法、记录版本，学习比较新工具，展示作品和解决问题的过程。","outline":"持续迭代与验证\n整理个人作品集\n展示设计与学习过程\n新工具观察与迁移","stage":3,"image":"notes","sortOrder":3,"published":true}
 ]

@@ -18,3 +18,8 @@ output/
 **/.env.local
 **/.env.*.local
 **/.playwright-cli/
+
+# Local curriculum rendering and inspection output
+/tmp/
+__pycache__/
+*.pyc
