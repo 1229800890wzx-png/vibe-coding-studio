@@ -41,6 +41,7 @@ const user = defineStore('user', {
     userInfo: clone(defaultUserInfo), // 用户信息
     userWallet: clone(defaultUserWallet), // 用户钱包信息
     isLogin: !!uni.getStorageSync('token'), // 登录状态
+    sessionVersion: 0, // Changes on login/logout, not on access-token renewal.
     numData: cloneDeep(defaultNumData), // 用户其他数据
     lastUpdateTime: 0, // 上次更新时间
   }),
@@ -80,7 +81,9 @@ const user = defineStore('user', {
     },
 
     // 设置 token
-    setToken(token = '', refreshToken = '') {
+    setToken(token = '', refreshToken = '', { refresh = false, sessionVersion } = {}) {
+      if (refresh && (!this.isLogin || sessionVersion !== this.sessionVersion)) return false;
+      if (!refresh) this.sessionVersion = (Number(this.sessionVersion) || 0) + 1;
       if (token === '') {
         this.isLogin = false;
         uni.removeStorageSync('token');
@@ -89,7 +92,7 @@ const user = defineStore('user', {
         this.isLogin = true;
         uni.setStorageSync('token', token);
         uni.setStorageSync('refresh-token', refreshToken);
-        this.loginAfter();
+        if (!refresh) this.loginAfter();
       }
       return this.isLogin;
     },

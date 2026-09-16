@@ -71,6 +71,11 @@ const http = new Request({
  */
 http.interceptors.request.use(
   (config) => {
+    const sessionVersion = $store('user').sessionVersion;
+    // A queued retry from an old account must never acquire the new account's token.
+    if (config.custom.authSessionVersion !== undefined && config.custom.authSessionVersion !== sessionVersion)
+      return Promise.reject(new Error('登录状态已更新，请重新加载'));
+    config.custom.authSessionVersion = sessionVersion;
     // 自定义处理【auth 授权】：必须登录的接口，则跳出 AuthModal 登录弹窗
     if (config.custom.auth && !$store('user').isLogin) {
       showAuthModal();
@@ -111,13 +116,16 @@ http.interceptors.request.use(
  */
 http.interceptors.response.use(
   (response) => {
+    // Close before auth handling, which may reject a stale refresh response.
+    response.config.custom.showLoading && closeLoading();
     // 约定：如果是 /auth/ 下的 URL 地址，并且返回了 accessToken 说明是登录相关的接口，则自动设置登陆令牌
     if (response.config.url.indexOf('/member/auth/') >= 0 && response.data?.data?.accessToken) {
-      $store('user').setToken(response.data.data.accessToken, response.data.data.refreshToken);
+      const accepted = $store('user').setToken(response.data.data.accessToken, response.data.data.refreshToken, {
+        refresh: response.config.url.indexOf('/member/auth/refresh-token') >= 0,
+        sessionVersion: response.config.custom.authSessionVersion,
+      });
+      if (!accepted) return Promise.reject(new Error('登录状态已更新，请重新加载'));
     }
-
-    // 自定处理【loading 加载中】：如果需要显示 loading，则关闭 loading
-    response.config.custom.showLoading && closeLoading();
 
     // 自定义处理【error 错误提示】：如果需要显示错误提示，则显示错误提示
     if (response.data.code !== 0) {
@@ -223,6 +231,8 @@ http.interceptors.response.use(
 let requestList = []; // 请求队列
 let isRefreshToken = false; // 是否正在刷新中
 const refreshToken = async (config) => {
+  if (config.custom.authSessionVersion !== $store('user').sessionVersion)
+    return Promise.reject(new Error('登录状态已更新，请重新加载'));
   // 如果当前已经是 refresh-token 的 URL 地址，并且还是 401 错误，说明是刷新令牌失败了，直接返回 Promise.reject(error)
   if (config.url.indexOf('/member/auth/refresh-token') >= 0) {
     return Promise.reject('error');
@@ -259,6 +269,8 @@ const refreshToken = async (config) => {
       requestList.forEach((cb) => {
         cb();
       });
+      // A delayed refresh failure must not log out an account signed in meanwhile.
+      if (config.custom.authSessionVersion !== $store('user').sessionVersion) throw e;
       // 提示是否要登出。即不回放当前请求！不然会形成递归
       return handleAuthorized();
     } finally {

@@ -1,5 +1,7 @@
 # 本地运行指引
 
+2026-09-16 本机最新实测：官网 4173、管理端 49090、家长 H5 5174、统一 API 48080；独立原生数据库 13306、Redis 16379。重启使用本机忽略文件 `.runtime/start-all.ps1`，账号见 `.runtime/local-accounts.md`。验收范围、演示内容和已知问题见 [本机验收记录](verification/2026-09-16-local-e2e.md)。此配置不适用于生产。
+
 > 历史端口、PID、个人工作目录和 `platform/start-education*.ps1` 已失效。当前运行入口如下。
 
 ## 官网

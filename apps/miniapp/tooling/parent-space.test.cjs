@@ -90,7 +90,7 @@ test('Beijing class time is stable across browser time zones and missing data st
 });
 function deferredFamily() {
   let resolve;
-  const user = { isLogin: true },
+  const user = { isLogin: true, sessionVersion: 1 },
     storage = { token: 'first' };
   const context = vm.createContext({
     computed: (fn) => ({
@@ -128,7 +128,18 @@ test('a children request from another token cannot overwrite the current account
   const c = deferredFamily();
   const request = c.api.loadStudents();
   c.storage.token = 'second';
+  c.user.sessionVersion++;
   c.resolve([{ id: 77, name: 'old account child' }]);
   await request;
   assert.equal(c.api.family.students.length, 0);
+});
+
+test('a successful token refresh keeps the same account children request valid', async () => {
+  const c = deferredFamily();
+  const request = c.api.loadStudents();
+  c.storage.token = 'renewed-token';
+  c.resolve([{ id: 77, name: 'same account child' }]);
+  await request;
+  assert.equal(c.api.family.students.length, 1);
+  assert.equal(c.api.family.currentId, 77);
 });

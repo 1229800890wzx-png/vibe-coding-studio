@@ -46,7 +46,7 @@ public class EduWebsiteOfferingService {
     @Transactional(rollbackFor = Exception.class)
     public EduWebsiteOfferingRespVO create(EduWebsiteOfferingCreateReqVO request) {
         access.permission("website", "create");
-        validateCourse(request.courseId());
+        validateCourse(request.courseId(), false);
         EduWebsiteOfferingDO row = new EduWebsiteOfferingDO();
         row.setSlug(request.slug());
         row.setTitle(request.title());
@@ -71,7 +71,7 @@ public class EduWebsiteOfferingService {
         access.permission("website", "update");
         EduWebsiteOfferingDO current = found(offerings.selectById(request.id()), "网站课程卡片不存在");
         require(Objects.equals(current.getSlug(), request.slug()), "slug 创建后不可修改");
-        validateCourse(request.courseId());
+        validateCourse(request.courseId(), Boolean.TRUE.equals(current.getPublished()));
         EduWebsiteOfferingDO row = new EduWebsiteOfferingDO();
         row.setId(request.id());
         row.setSlug(request.slug());
@@ -91,17 +91,19 @@ public class EduWebsiteOfferingService {
     @Transactional(rollbackFor = Exception.class)
     public EduWebsiteOfferingRespVO publish(EduWebsiteOfferingPublishReqVO request) {
         access.permission("website", "publish");
-        found(offerings.selectById(request.id()), "网站课程卡片不存在");
+        EduWebsiteOfferingDO current = found(offerings.selectById(request.id()), "网站课程卡片不存在");
+        if (Boolean.TRUE.equals(request.published())) validateCourse(current.getCourseId(), true);
         require(offerings.updatePublished(request.id(), TenantContextHolder.getRequiredTenantId(), request.revision(),
                         request.published(), String.valueOf(getLoginUserId())) == 1,
                 "网站课程卡片已被更新，请刷新后重试发布操作");
         return response(found(offerings.selectById(request.id()), "网站课程卡片不存在"));
     }
 
-    private void validateCourse(Long courseId) {
+    private void validateCourse(Long courseId, boolean requirePublished) {
         if (courseId == null) return;
         EduCourseDO course = found(courses.selectById(courseId), "关联的业务课程不存在");
         require(Objects.equals(course.getTenantId(), TenantContextHolder.getRequiredTenantId()), "关联的业务课程不属于当前租户");
+        if (requirePublished) require("PUBLISHED".equals(course.getStatus()), "请先发布关联的业务课程，再发布网站课程卡片");
     }
 
     private static RuntimeException duplicateSlug() {
