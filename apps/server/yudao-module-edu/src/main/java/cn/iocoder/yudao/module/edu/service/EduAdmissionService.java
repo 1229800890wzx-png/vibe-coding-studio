@@ -85,7 +85,7 @@ public class EduAdmissionService {
         // student lock. Read current committed requests here so queued submits see the winner.
         var pending = clueMapper.selectList(duplicateQuery.orderByDesc(CrmClueDO::getId).last("LIMIT 1 FOR UPDATE"));
         Long id;
-        if (!pending.isEmpty()) id = pending.getFirst().getId();
+        if (!pending.isEmpty()) id = pending.get(0).getId();
         else {
             var request = new CrmClueSaveReqVO().setName(title).setMobile(mobile).setOwnerUserId(ownerId).setSource(90).setRemark(remark);
             id = clues.createClue(request); // Original owner validation, permission creation and operation audit.

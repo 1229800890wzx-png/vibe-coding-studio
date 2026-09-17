@@ -24,20 +24,20 @@ export function useParentSpace() {
   });
   let active = false,
     generation = 0;
-  const identity = () => uni.getStorageSync('token');
+  const identity = () => user.sessionVersion;
   function clear() {
     Object.values(state).forEach((part) => Object.assign(part, resource()));
   }
   async function refresh() {
     const run = ++generation,
-      token = identity();
+      accountSession = identity();
     clear();
     if (!loggedIn.value || !active) return;
-    const valid = () => active && run === generation && loggedIn.value && identity() === token;
+    const valid = () => active && run === generation && loggedIn.value && identity() === accountSession;
     function finish(part) {
       if (!active || run !== generation) return;
       part.loading = false;
-      if (loggedIn.value && identity() !== token) {
+      if (loggedIn.value && identity() !== accountSession) {
         part.data = null;
         part.error = '登录状态已更新，请重新加载';
       }
@@ -99,14 +99,12 @@ export function useParentSpace() {
     active = false;
     generation++;
   });
-  watch(loggedIn, () => {
+  watch([loggedIn, () => user.sessionVersion], () => {
     generation++;
     clear();
-    if (!loggedIn.value) {
-      family.students = [];
-      family.currentId = null;
-      family.loaded = false;
-    }
+    family.students = [];
+    family.currentId = null;
+    family.loaded = false;
     if (loggedIn.value && active) refresh();
   });
   onUnmounted(() => {

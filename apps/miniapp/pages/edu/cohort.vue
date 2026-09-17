@@ -27,7 +27,7 @@
       <view class="card stack">
         <view class="detail-row"
           ><text class="muted">适合年龄</text
-          ><text>{{
+          ><text class="detail-value">{{
             cohort.ageMin != null && cohort.ageMax != null
               ? cohort.ageMin + '–' + cohort.ageMax + ' 岁'
               : '待公布'
@@ -35,17 +35,17 @@
         >
         <view class="detail-row"
           ><text class="muted">授课老师</text
-          ><text class="strong">{{ cohort.teacherName || '待安排' }}</text></view
+          ><text class="strong detail-value">{{ cohort.teacherName || '待安排' }}</text></view
         >
         <view class="detail-row"
           ><text class="muted">上课地点</text
-          ><text>{{
+          ><text class="detail-value">{{
             cohort.mode === 'ONLINE' ? '电脑端在线课堂' : cohort.campusName || '校区待公布'
           }}</text></view
         >
         <view class="detail-row"
           ><text class="muted">班级名额</text
-          ><text
+          ><text class="detail-value"
             >{{ Number.isFinite(cohort.capacity) ? cohort.capacity + ' 人班 · ' : ''
             }}{{
               Number.isFinite(cohort.stock)
@@ -56,7 +56,7 @@
         >
         <view class="detail-row"
           ><text class="muted">班期总价</text
-          ><view class="fee"
+          ><view class="fee detail-value"
             ><text class="price">{{ priceText(cohort.price) }}</text
             ><text class="small muted"
               >每位孩子 · {{ sessions.length ? sessions.length + ' 次课' : '课表待公布' }}</text
@@ -357,7 +357,7 @@
     gap: 12px;
     align-items: start;
   }
-  .detail-row > :last-child {
+  .detail-value {
     text-align: right;
     overflow-wrap: anywhere;
   }
