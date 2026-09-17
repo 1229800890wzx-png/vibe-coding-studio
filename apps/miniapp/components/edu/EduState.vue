@@ -24,9 +24,9 @@
   .state {
     text-align: center;
     padding: 36px 24px;
-  }
-  .state > * + * {
-    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
   }
   .state-icon {
     display: flex;

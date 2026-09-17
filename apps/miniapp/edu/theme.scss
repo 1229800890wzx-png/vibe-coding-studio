@@ -87,9 +87,7 @@ button[disabled] {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-.stack > * + * {
-  margin-top: 12px;
+  row-gap: 12px;
 }
 .muted {
   color: #6e6e73;
@@ -340,10 +338,18 @@ button[disabled] {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  /* #ifdef H5 */
   * {
     animation: none !important;
     transition: none !important;
   }
+  /* #endif */
+  /* #ifndef H5 */
+  page, view, text, image, button, input, textarea, scroll-view, swiper, swiper-item {
+    animation: none !important;
+    transition: none !important;
+  }
+  /* #endif */
 }
 @media (min-width: 720px) {
   .edu-page {
